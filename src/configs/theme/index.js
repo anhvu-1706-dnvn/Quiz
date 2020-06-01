@@ -1,7 +1,8 @@
 const theme = {
   palette: {
     primary: '#ff4a4a',
-    lightPrimary: '#053FFC',
+    lightPrimary: '#81ecec',
+    // lightPrimary: '#053FFC',
     secondary: 'rgba(45, 48, 71, 1)',
     loadingBackgroundColor: '#2c3e51cc',
     color: ['#262626', '#E4E6E9'],

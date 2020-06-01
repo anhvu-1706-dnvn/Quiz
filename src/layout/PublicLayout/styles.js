@@ -11,7 +11,7 @@ const PublicLayoutWrapper = styled.div`
   }
 
   .main-img {
-    background-image: url(https://images.unsplash.com/photo-1464082354059-27db6ce50048?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+    background-image: url(https://previews.123rf.com/images/ashasha/ashasha1904/ashasha190401291/122953956-question-marks-scattered-on-white-background-quiz-doubt-poll-survey-faq-interrogation-query-backgrou.jpg);
     background-color: transparent;
     background-size: cover;
     background-position: center center;
@@ -20,7 +20,7 @@ const PublicLayoutWrapper = styled.div`
   }
   
   .main-content {
-    background-color: white;
+    background-color: none;
     padding: 70px 50px;
     text-align: center;
     min-width: 450px;

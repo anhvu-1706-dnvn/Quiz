@@ -6,23 +6,8 @@ import i18n from 'i18next';
 import { flatMap, map } from 'lodash';
 import PrivateLayout from '../../layout/PrivateLayout';
 import Dashboard from '../../pages/Dashboard';
-import NewProperty from '../../pages/NewProperty';
-import ListProperty from '../../pages/ListProperty';
-import DetailTransaction from '../../pages/DetailTransaction'
-import EmailBox from '../../pages/EmailBox';
-import ListTransaction from '../../pages/ListTransaction';
-import ProcessingTransaction from '../../pages/ListTransaction/ProcessingTransaction';
-import CompletedTransaction from '../../pages/ListTransaction/CompletedTransaction';
-import CanceledTransaction from '../../pages/ListTransaction/CanceledTransaction';
-import ListRealtor from '../../pages/ListRealtor';
-import DetailRealtor from '../../pages/DetailRealtor';
-import Option from '../../pages/Option';
-import ListAdmin from '../../pages/ListAdmin';
-import ListPartner from '../../pages/ListPartner';
-import ListEvent from '../../pages/ListEvent';
-import NewEvent from '../../pages/NewEvent';
-import DetailEvent from '../../pages/DetailEvent';
-import Training from '../../pages/Training';
+import NewTest from '../../pages/NewTest';
+
 
 const routes = [
   {
@@ -32,139 +17,12 @@ const routes = [
     title: i18n.t('dashboard.title'),
   },
   {
-    path: '/projects',
-    component: ListProperty,
+    path: '/create-quizzes',
+    component: NewTest,
     exact: true,
-    title: i18n.t('property.title'),
-    routes: [
-      {
-        path: '/',
-        component: ListProperty,
-        exact: true,
-        title: i18n.t('property.title'),
-      },
-      {
-        path: '/create',
-        component: NewProperty,
-        exact: true,
-        title: i18n.t('property.title'),
-      },
-    ],
+    title: "Tạo mới test",
   },
-  {
-    path: '/transactions',
-    component: ListTransaction,
-    exact: true,
-    title: i18n.t('transaction.title'),
-    routes: [
-      {
-        path: '/',
-        component: ListTransaction,
-        exact: true,
-        title: i18n.t('transaction.title'),
-      },
-      {
-        path: '/:id/show',
-        component: DetailTransaction,
-        exact: true,
-        title: i18n.t('transaction.detail.title'),
-      },
-      {
-        path: '/processing',
-        component: ProcessingTransaction,
-        exact: true,
-        title: i18n.t('transaction.title'),
-      },
-      {
-        path: '/completed',
-        component: CompletedTransaction,
-        exact: true,
-        title: i18n.t('transaction.title'),
-      },
-      {
-        path: '/canceled',
-        component: CanceledTransaction,
-        exact: true,
-        title: i18n.t('transaction.title'),
-      },
-    ],
-  },
-  {
-    path: '/realtors',
-    component: ListRealtor,
-    exact: true,
-    title: i18n.t('realtor.title'),
-    routes: [
-      {
-        path: '/',
-        component: ListRealtor,
-        exact: true,
-        title: i18n.t('realtor.title'),
-      },
-      {
-        path: '/:id',
-        component: DetailRealtor,
-        exact: true,
-        title: i18n.t('realtor.title'),
-      },
-    ],
-  },
-  {
-    path: '/inbox',
-    component: EmailBox,
-    exact: true,
-    title: "Hộp thư",
-  },
-  {
-    path: '/events',
-    component: ListEvent,
-    exact: true,
-    title: "Sự kiện",
-    routes: [
-      {
-        path: '/',
-        component: ListEvent,
-        exact: true,
-        title: "Danh sách sự kiện",
-      },
-      {
-        path: '/create',
-        component: NewEvent,
-        exact: true,
-        title: "Tạo mới sự kiện",
-      },
-      {
-        path: '/:id',
-        component: DetailEvent,
-        exact: true,
-        title: i18n.t('realtor.title'),
-      },
-    ],
-  },
-  {
-    path: '/admins',
-    component: ListAdmin,
-    exact: true,
-    title: "Quản trị viên",
-  },
-  {
-    path: '/partners',
-    component: ListPartner,
-    exact: true,
-    title: "Partner",
-  },
-  {
-    path: '/options',
-    component: Option,
-    exact: true,
-    title: "Cấu hình",
-  },
-  {
-    path: '/trainings',
-    component: Training,
-    exact: true,
-    title: "Đào tạo",
-  },
+  
 ];
 
 const PrivateRoutes = () => (
@@ -198,5 +56,5 @@ const PrivateRoutes = () => (
 PrivateRoutes.propTypes = {};
 
 export default connect(state => ({
-  isAuthenticated: state.staff.isAuthenticated,
+  isAuthenticated: state.user.isAuthenticated,
 }))(PrivateRoutes);

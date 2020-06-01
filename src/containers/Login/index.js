@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { Form, Icon, Button, Checkbox } from "antd";
 import i18n from "i18next";
-import { loginAction } from "../../redux/staff/actions";
+import { loginAction } from "../../redux/user/actions";
 import MaterialInput from "../../components/common/MaterialInput/index";
-import logo from '../../assets/images/logo1.png';
+import Wrapper from "./styles";
+import logo from '../../assets/images/icon.png';
 
 const FormItem = Form.Item;
 
@@ -28,7 +29,7 @@ class Login extends Component {
     }
     const { getFieldDecorator } = form;
     return (
-      <div>
+      <Wrapper>
         <div className="title">
           <img alt='#' src={logo} />
         </div>
@@ -85,7 +86,7 @@ class Login extends Component {
             </Button>
           </div>
         </Form>
-      </div>
+      </Wrapper>
     );
   }
 }

@@ -63,24 +63,22 @@ const PrivateLayoutWrapper = styled.div`
     height: 64px;
     left: 0px;
     top: 0px;
-    background: #0051FF;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 0px;
   }
   .logo-image {
     position: absolute;
     width: auto;
     height: auto;
-    left: 20px;
-    top: 14px;
-    //background: rgba(0, 0, 0, 0.2);
     overflow: hidden;
   }
   .logo-image-full {
     position: absolute;
     width: auto;
     height: auto;
-    left: 45px;
-    top: 14px;
     //background: rgba(0, 0, 0, 0.2);
     overflow: hidden;
   }
@@ -96,8 +94,7 @@ const PrivateLayoutWrapper = styled.div`
     margin: 0 0 0 12px;
   }
   .logo-img  {
-    height: 32px;
-    // width: 32px;
+    height: 60px;
     display: inline-block;
   }
   .logo h2 {
@@ -113,7 +110,7 @@ const PrivateLayoutWrapper = styled.div`
     border-right: 1px solid #e8e8e8;
 
     .sidebarMenu{
-      margin-top: 74px
+      margin-top: 64px;
     }
     .ant-menu {
       border-right: 1px solid #fff;
@@ -128,7 +125,7 @@ const PrivateLayoutWrapper = styled.div`
       }
 
       .ant-menu-submenu-selected {
-        color: ${({ theme }) => theme.palette.lightPrimary};
+        // color: ${({ theme }) => theme.palette.lightPrimary};
       }
     }
     .ant-menu-item {
@@ -137,7 +134,7 @@ const PrivateLayoutWrapper = styled.div`
       
       &.ant-menu-item-selected {
         color: ${({ theme }) => theme.palette.lightPrimary};
-        background: ${({ theme }) => theme.background.light};
+        // background: ${({ theme }) => theme.background.light};
         border-left: solid;
         & > span {
           color: ${({ theme }) => theme.text.lightPrimary};
@@ -147,7 +144,7 @@ const PrivateLayoutWrapper = styled.div`
       
     }
     .ant-menu-item::after {
-      border-right: 3px solid ${({ theme }) => theme.background.light};
+      border-right: none;
     }
   }
   
@@ -169,6 +166,9 @@ const PrivateLayoutWrapper = styled.div`
         width: 100%;
         display: inherit;
         padding-right: 45px;
+      }
+      .create-quiz-button {
+        margin-left: 20px;
       }
     }
     .rightHeader {

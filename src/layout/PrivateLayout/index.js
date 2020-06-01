@@ -2,18 +2,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/named */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import I18n from 'i18next';
-import { push } from 'connected-react-router';
-import { Layout, Menu, Icon, Dropdown, Avatar } from 'antd';
-import { Redirect } from 'react-router-dom';
-import PrivateLayoutWrapper from './styles';
-import SideBarMenu from './SideBarMenu/index';
-import { logout as logoutAction } from '../../redux/staff/actions';
-import logo from '../../assets/images/logo.png';
-import logoFull from '../../assets/images/Group 29@2x - white 1.png'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import I18n from "i18next";
+import { push } from "connected-react-router";
+import { Layout, Menu, Icon, Dropdown, Avatar, Button } from "antd";
+import { Redirect } from "react-router-dom";
+import PrivateLayoutWrapper from "./styles";
+import SideBarMenu from "./SideBarMenu/index";
+import { logout as logoutAction } from "../../redux/user/actions";
+import logo from "../../assets/images/logo.png";
+import logoFull from "../../assets/images/icon.png";
+import { history } from "../../redux/store";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -30,7 +31,7 @@ class PrivateLayout extends Component {
   }
 
   componentDidMount() {
-    this.props.isAuthenticated && push('/login');
+    this.props.isAuthenticated && push("/login");
   }
 
   toggle = () => {
@@ -46,7 +47,7 @@ class PrivateLayout extends Component {
       <PrivateLayoutWrapper>
         <Layout className="windowView">
           <input
-            onChange={() => { }}
+            onChange={() => {}}
             id="collapsedTracker"
             type="checkbox"
             checked={!this.state.collapsed}
@@ -63,9 +64,19 @@ class PrivateLayout extends Component {
             className="sidebar"
           >
             <div className="logo">
-              <div className={this.state.collapsed === true ? "logo-image": "logo-image-full"}>
+              <div
+                className={
+                  this.state.collapsed === true
+                    ? "logo-image"
+                    : "logo-image-full"
+                }
+              >
                 <a href="/">
-                  <img alt='' src={this.state.collapsed === true ? logo: logoFull} className="logo-img" />
+                  <img
+                    alt=""
+                    src={this.state.collapsed === true ? logo : logoFull}
+                    className="logo-img"
+                  />
                 </a>
               </div>
             </div>
@@ -76,16 +87,21 @@ class PrivateLayout extends Component {
               <div className="leftHeader">
                 <Icon
                   className="trigger"
-                  type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                  type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
                   onClick={this.toggle}
-
                 />
-                <div className="title">{I18n.t('appInfo.name')}</div>
+                <Button
+                  className="create-quiz-button"
+                  onClick={() => history.push("/create-quizzes")}
+                >
+                  <Icon type="plus-circle" />
+                  <span>Thêm bộ câu hỏi</span>
+                </Button>
               </div>
               <div className="rightHeader">
                 <Dropdown
                   overlay={() => (
-                    <Menu style={{ minWidth: '120px' }}>
+                    <Menu style={{ minWidth: "120px" }}>
                       {profileMenu.map(menu => (
                         <Menu.Item key={menu.key}>
                           <a href={menu.url}>{menu.text}</a>
@@ -97,11 +113,11 @@ class PrivateLayout extends Component {
                       </Menu.Item>
                     </Menu>
                   )}
-                  trigger={['click']}
+                  trigger={["click"]}
                 >
                   <div>
                     <Avatar size="large" src={avatar} />
-                    {'   '}
+                    {"   "}
                     <span>
                       Hi,
                       {' '}
@@ -113,7 +129,7 @@ class PrivateLayout extends Component {
             </Header>
             <Content className="container">
               <div className="content">{children}</div>
-              <Footer className="footer">{I18n.t('appInfo.footer')}</Footer>
+              <Footer className="footer">{I18n.t("appInfo.footer")}</Footer>
             </Content>
             <Footer className="footerMobile">
               {mobileTabs.map(tab => (
@@ -137,9 +153,9 @@ PrivateLayout.propTypes = {
 
 export default connect(
   state => ({
-    isAuthenticated: state.staff.isAuthenticated,
-    fullName: state.staff.data.fullName,
-    avatar: state.staff.data.avatar,
+    isAuthenticated: state.user.isAuthenticated,
+    fullName: state.user.data.fullName,
+    avatar: state.user.data.avatar,
   }),
   {
     logout: logoutAction,

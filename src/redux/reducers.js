@@ -1,31 +1,13 @@
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
-import { staff } from "./staff/reducer";
-import { property } from "./property/reducer";
-import { city } from "./city/reducer";
-import { propertyType } from "./propertyType/reducer";
-import { transaction } from "./transaction/reducer";
-import { mail } from "./mail/reducer";
-import { realtor } from "./realtor/reducer";
-import { role } from "./role/reducer";
-import { admin } from "./admin/reducer";
-import { partner } from "./partner/reducer";
-import { event } from "./event/reducer";
-import { training } from "./training/reducer";
+import { test } from "./test/reducer";
+import { question } from "./question/reducer";
+import { user } from "./user/reducer";
 
 export default history =>
   combineReducers({
     router: connectRouter(history),
-    staff,
-    property,
-    city,
-    propertyType,
-    transaction,
-    mail,
-    realtor,
-    role,
-    admin,
-    partner,
-    event,
-    training,
+    user,
+    test,
+    question,
   });
