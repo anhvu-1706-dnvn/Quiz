@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Button, Icon, Modal } from "antd";
-import { Wrapper } from "./styles";
-import QuestionEditor from "./QuestionEditor";
+import React, { Component } from 'react';
+import { Button, Icon, Modal } from 'antd';
+import { Wrapper } from './styles';
+import QuestionEditor from './components/QuestionEditor';
 // import PageTitle from '../../../components/common/PageTitle/index';
 
 export default class CreateQuiz extends Component {
@@ -13,14 +13,14 @@ export default class CreateQuiz extends Component {
     });
   };
 
-  handleOk = e => {
+  handleOk = (e) => {
     console.log(e);
     this.setState({
       visible: false,
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     console.log(e);
     this.setState({
       visible: false,
@@ -47,12 +47,12 @@ export default class CreateQuiz extends Component {
         <Modal
           visible={this.state.visible}
           onOk={this.handleOk}
-          okText={(
+          okText={
             <div>
               <Icon type="save" />
               <span> Save</span>
             </div>
-          )}
+          }
           onCancel={this.handleCancel}
         >
           <QuestionEditor />

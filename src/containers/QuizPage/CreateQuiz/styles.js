@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   .question-header {
@@ -29,7 +29,8 @@ export const Wrapper = styled.div`
         margin-right: auto;
       }
 
-      .new-question, .save-draft {
+      .new-question,
+      .save-draft {
         font-size: 16px;
         color: #8854c0;
         border-radius: 4px;
@@ -38,6 +39,15 @@ export const Wrapper = styled.div`
         border: none;
         outline: none;
         padding: 6px 8px;
+      }
+    }
+  }
+  .questions-body {
+    .questionType-panel {
+      display: flex;
+      justify-content: center;
+      flex-flow: wrap;
+      padding: 20px 0;
       }
     }
   }

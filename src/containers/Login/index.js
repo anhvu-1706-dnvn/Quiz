@@ -7,12 +7,12 @@ import i18n from "i18next";
 import { loginAction } from "../../redux/user/actions";
 import MaterialInput from "../../components/common/MaterialInput/index";
 import Wrapper from "./styles";
-import logo from '../../assets/images/icon.png';
+import logo from "../../assets/images/icon.png";
 
 const FormItem = Form.Item;
 
 class Login extends Component {
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <Wrapper>
         <div className="title">
-          <img alt='#' src={logo} />
+          <img alt="#" src={logo} />
         </div>
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           <FormItem>
@@ -48,7 +48,7 @@ class Login extends Component {
                 prefix={
                   <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
-              />,
+              />
             )}
           </FormItem>
           <FormItem>
@@ -66,7 +66,7 @@ class Login extends Component {
                   <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="password"
-              />,
+              />
             )}
           </FormItem>
           <div className="sub-action-div">
@@ -82,7 +82,7 @@ class Login extends Component {
               className="login-form-button"
               loading={this.props.isLoading}
             >
-              {this.props.isLoading ? '' : i18n.t("login.loginBtn")}
+              {this.props.isLoading ? "" : i18n.t("login.loginBtn")}
             </Button>
           </div>
         </Form>
@@ -96,13 +96,15 @@ Login.propTypes = {
   login: PropTypes.func,
   isAuthenticated: PropTypes.bool,
 };
-const mapStateToProps = state => ({
-  isAuthenticated: state.staff.isAuthenticated,
-  isLoading: state.staff.isShowLoading,
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.user.isAuthenticated,
+  isLoading: state.user.isShowLoading,
 });
-const mapDispatchToProps = dispatch => ({
-  login: params => {
+const mapDispatchToProps = (dispatch) => ({
+  login: (params) => {
     dispatch(loginAction(params));
   },
 });
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login)));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login))
+);

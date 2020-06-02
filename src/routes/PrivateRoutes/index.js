@@ -6,8 +6,7 @@ import i18n from 'i18next';
 import { flatMap, map } from 'lodash';
 import PrivateLayout from '../../layout/PrivateLayout';
 import Dashboard from '../../pages/Dashboard';
-import NewTest from '../../pages/NewTest';
-
+import CreateQuizz from '../../pages/CreateQuizz';
 
 const routes = [
   {
@@ -18,19 +17,18 @@ const routes = [
   },
   {
     path: '/create-quizzes',
-    component: NewTest,
+    component: CreateQuizz,
     exact: true,
-    title: "Tạo mới test",
+    title: 'Tạo mới test',
   },
-  
 ];
 
 const PrivateRoutes = () => (
   <Switch>
     {map(
-      flatMap(routes, route => {
+      flatMap(routes, (route) => {
         if (route.routes) {
-          return map(route.routes, subRoute => ({
+          return map(route.routes, (subRoute) => ({
             ...subRoute,
             path: route.path + subRoute.path,
             exact: subRoute.path === '/',
@@ -38,23 +36,23 @@ const PrivateRoutes = () => (
         }
         return route;
       }),
-      route => (
+      (route) => (
         <Route
           {...route}
-          component={e => (
+          component={(e) => (
             <PrivateLayout>
               <route.component {...e} />
             </PrivateLayout>
           )}
           key={route.path}
         />
-      ),
+      )
     )}
   </Switch>
 );
 
 PrivateRoutes.propTypes = {};
 
-export default connect(state => ({
+export default connect((state) => ({
   isAuthenticated: state.user.isAuthenticated,
 }))(PrivateRoutes);

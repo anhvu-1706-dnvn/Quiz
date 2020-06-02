@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import { Button, Icon, Modal } from "antd";
-import { Wrapper } from "./styles";
-import QuestionEditor from "./QuestionEditor";
+/* eslint-disable react/jsx-wrap-multilines */
+import React, { Component } from 'react';
+import { Button, Icon, Modal } from 'antd';
+import { Wrapper } from './styles';
+import QuestionEditor from './QuestionEditor';
+import QuestionType from '../../../components/quizz/create_quizz/QuestionType';
 // import PageTitle from '../../../components/common/PageTitle/index';
 
 export default class CreateQuiz extends Component {
@@ -13,14 +15,14 @@ export default class CreateQuiz extends Component {
     });
   };
 
-  handleOk = e => {
+  handleOk = (e) => {
     console.log(e);
     this.setState({
       visible: false,
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     console.log(e);
     this.setState({
       visible: false,
@@ -42,17 +44,27 @@ export default class CreateQuiz extends Component {
             </Button>
           </div>
         </div>
-        <div className="questions-body" />
+        <div className="questions-body">
+          <div className="questionType-panel">
+            <QuestionType name="multiple choice" iconType="save" color="red" />
+            <QuestionType name="checkbox" iconType="save" color="red" />
+            <QuestionType
+              name="fill in the blank"
+              iconType="save"
+              color="red"
+            />
+          </div>
+        </div>
 
         <Modal
           visible={this.state.visible}
           onOk={this.handleOk}
-          okText={(
+          okText={
             <div>
               <Icon type="save" />
               <span> Save</span>
             </div>
-          )}
+          }
           onCancel={this.handleCancel}
         >
           <QuestionEditor />

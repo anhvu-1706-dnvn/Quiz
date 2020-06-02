@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import { Card, Input, Select, Icon, Button } from 'antd';
-import { Wrapper } from './styles'
-import Editor from '../../../../components/common/Editor'
+import React, { Component } from 'react';
+import { Select, Icon, Button } from 'antd';
+import { Wrapper } from './styles';
+import Editor from '../../../../../../components/common/Editor';
 
-const {Option} = Select;
+const { Option } = Select;
 export default class QuestionEditor extends Component {
-
   handleClick = () => {
     console.log('ABC');
-  }
+  };
 
- 
   render() {
     const QuestionItem = (
       <div className="options">
@@ -26,12 +24,12 @@ export default class QuestionEditor extends Component {
           </div>
         </div>
       </div>
-   )
-   const QuestionList = [];
-      for (let i = 0; i < 2; i+=1) {
-        QuestionList.push(QuestionItem)
-      }
-   
+    );
+    const QuestionList = [];
+    for (let i = 0; i < 2; i += 1) {
+      QuestionList.push(QuestionItem);
+    }
+
     return (
       <Wrapper>
         <div className="header">
@@ -74,12 +72,9 @@ export default class QuestionEditor extends Component {
             </div>
           </div>
           {QuestionList}
-        
         </div>
         <div className="footer" />
       </Wrapper>
-    )
+    );
   }
 }
-
-
