@@ -3,7 +3,7 @@ import { CaretRightOutlined, CopyrightCircleFilled } from '@ant-design/icons';
 import { Tag } from 'antd';
 import Wrapper from './styles';
 
-export default function QuizzItem() {
+export default function QuizzBar() {
   return (
     <Wrapper>
       <div className="content-wrapper">

@@ -1,5 +1,5 @@
 import React from 'react';
-import QuizzItem from '../../components/quizz/my_quizz/QuizzItem';
+import QuizzItem from '../../components/quizz/item/QuizzItem';
 import OptionBar from '../../components/quizz/my_quizz/OptionBar';
 import Wrapper from './styles';
 
