@@ -5,6 +5,7 @@ import { Wrapper } from './styles';
 import QuestionEditor from './QuestionEditor';
 import QuestionType from '../../../components/quizz/create_quizz/QuestionType';
 // import PageTitle from '../../../components/common/PageTitle/index';
+import QuestionDetail from '../../Quiz/QuestionDetail';
 
 export default class CreateQuiz extends Component {
   state = { visible: false };
@@ -53,6 +54,10 @@ export default class CreateQuiz extends Component {
               iconType="save"
               color="red"
             />
+          </div>
+          <div>
+            <QuestionDetail />
+            <QuestionDetail />
           </div>
         </div>
 

@@ -53,7 +53,7 @@ export default function CreateQuizz() {
           <Col xs={24} lg={14}>
             <CreateQuiz />
           </Col>
-          <Col xs={0} lg={10}>
+          <Col xs={0} lg={10} className="scroll-vertical">
             <QuizInfo />
           </Col>
         </Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditFilled } from '@ant-design/icons';
+import { EditFilled, TranslationOutlined } from '@ant-design/icons';
 import { Icon, Progress, Checkbox } from 'antd';
 import { Wrapper } from './styles';
 
@@ -20,33 +20,29 @@ export default function index() {
       </div>
       <div className="quiz-info-brief-wrapper">
         <div className="item">
-          <Icon type="save" className="icon" />
+          <Icon type="eye" className="icon" />
           Public
         </div>
         <div className="item">
-          <Icon type="save" className="icon" />
+          <TranslationOutlined className="icon" />
           English
         </div>
         <div className="item">
-          <Icon type="save" className="icon" />
+          <Icon type="clock-circle" className="icon" />
           30 secs
         </div>
       </div>
       <div className="quiz-info-detail-wrapper">
         <div className="item">
-          <Icon type="save" className="icon" />
-          Add grades
-        </div>
-        <div className="item">
-          <Icon type="save" className="icon" />
+          <Icon type="robot" className="icon" />
           Mathematics
         </div>
         <div className="item">
-          <Icon type="save" className="icon" />
-          Align quiz to Standards
+          <Icon type="profile" className="icon" />
+          Add a description
         </div>
         <div className="item">
-          <Icon type="save" className="icon" />
+          <Icon type="upload" className="icon" />
           Import from spreadsheet
         </div>
       </div>
@@ -62,7 +58,7 @@ export default function index() {
             Pick a relevant quiz name
           </Checkbox>
           <Checkbox className="checkbox-item">Add a quiz image</Checkbox>
-          <Checkbox className="checkbox-item">Add grades</Checkbox>
+          <Checkbox className="checkbox-item">Add a description</Checkbox>
           <Checkbox className="checkbox-item">
             Add at least 4 questions
           </Checkbox>

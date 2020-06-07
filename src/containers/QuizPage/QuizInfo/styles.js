@@ -3,6 +3,14 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   padding-top: 10px;
   padding-left: 60px;
+  overflow-y: auto;
+  max-height: 100vh;
+  position: fixed;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .quiz-info-image-wrapper {
     display: flex;
     flex-direction: column;
@@ -34,9 +42,12 @@ export const Wrapper = styled.div`
   .quiz-info-brief-wrapper {
     display: flex;
     margin-top: 5px;
+
     .item {
       margin-right: 20px;
       font-size: 12px;
+      color: red;
+
       .icon {
         margin-right: 5px;
       }
@@ -47,6 +58,7 @@ export const Wrapper = styled.div`
     .item {
       margin-bottom: 10px;
       font-size: 16px;
+      cursor: pointer;
       .icon {
         margin-right: 8px;
       }
