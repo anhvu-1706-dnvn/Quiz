@@ -1,4 +1,4 @@
-const checkIfErrorOccurs = res => ({
+const checkIfErrorOccurs = (res) => ({
   code: res.status,
   res,
 });
@@ -9,7 +9,7 @@ async function customFetch(path, headerOptions) {
   const normalFetch = fetch(path, headerOptions);
   const res = await timeoutPromise(
     TIME_OUT,
-    normalFetch.then(checkIfErrorOccurs).catch(checkIfErrorOccurs),
+    normalFetch.then(checkIfErrorOccurs).catch(checkIfErrorOccurs)
   );
   if (!res.code) {
     const error = {
@@ -57,14 +57,14 @@ export const timeoutPromise = (ms, promise) =>
       reject(new Error('Request time out! Please try again.'));
     }, ms);
     promise.then(
-      res => {
+      (res) => {
         clearTimeout(timeoutId);
         resolve(res);
       },
-      err => {
+      (err) => {
         clearTimeout(timeoutId);
         reject(err);
-      },
+      }
     );
   });
 
@@ -123,8 +123,8 @@ function requestWrapper(method) {
 export function getQueryString(params) {
   const esc = encodeURIComponent;
   return Object.keys(params)
-    .filter(k => params[k] || params[k] === 0)
-    .map(k => `${esc(k)}=${esc(params[k])}`)
+    .filter((k) => params[k] || params[k] === 0)
+    .map((k) => `${esc(k)}=${esc(params[k])}`)
     .join('&');
 }
 

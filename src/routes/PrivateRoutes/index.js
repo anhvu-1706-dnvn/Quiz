@@ -12,12 +12,12 @@ import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
 
 const routes = [
-  {
-    path: '/',
-    component: Dashboard,
-    exact: true,
-    title: i18n.t('dashboard.title'),
-  },
+  // {
+  //   path: '/',
+  //   component: Dashboard,
+  //   exact: true,
+  //   title: i18n.t('dashboard.title'),
+  // },
   {
     path: '/create-quizzes',
     component: CreateQuizz,
@@ -31,7 +31,7 @@ const routes = [
     title: 'My quizzes',
   },
   {
-    path: '/find-quizz',
+    path: '/',
     component: FindQuizz,
     exact: true,
     title: 'Find a quizz',

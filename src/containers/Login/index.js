@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
-import { Form, Icon, Button, Checkbox } from "antd";
-import i18n from "i18next";
-import { loginAction } from "../../redux/user/actions";
-import MaterialInput from "../../components/common/MaterialInput/index";
-import Wrapper from "./styles";
-import logo from "../../assets/images/icon.png";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
+import { Form, Icon, Button, Checkbox } from 'antd';
+import i18n from 'i18next';
+import { loginAction } from '../../redux/user/actions';
+import MaterialInput from '../../components/common/MaterialInput/index';
+import Wrapper from './styles';
+import logo from '../../assets/images/logoFull.png';
 
 const FormItem = Form.Item;
 
@@ -35,42 +35,42 @@ class Login extends Component {
         </div>
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator("email", {
+            {getFieldDecorator('email', {
               rules: [
                 {
                   required: true,
-                  message: i18n.t("input.email.validateMsg.required"),
+                  message: i18n.t('input.email.validateMsg.required'),
                 },
               ],
             })(
               <MaterialInput
-                placeholder={i18n.t("input.email.placeholder")}
+                placeholder={i18n.t('input.email.placeholder')}
                 prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
               />
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("password", {
+            {getFieldDecorator('password', {
               rules: [
                 {
                   required: true,
-                  message: i18n.t("input.password.validateMsg.required"),
+                  message: i18n.t('input.password.validateMsg.required'),
                 },
               ],
             })(
               <MaterialInput
-                placeholder={i18n.t("input.password.placeholder")}
+                placeholder={i18n.t('input.password.placeholder')}
                 prefix={
-                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 type="password"
               />
             )}
           </FormItem>
           <div className="sub-action-div">
-            <Checkbox>{i18n.t("login.rememberMe")}</Checkbox>
+            <Checkbox>{i18n.t('login.rememberMe')}</Checkbox>
             {/* <a className="login-form-forgot" href="/forgot-password">
               {i18n.t("forgotPassword.title")}
             </a> */}
@@ -82,7 +82,7 @@ class Login extends Component {
               className="login-form-button"
               loading={this.props.isLoading}
             >
-              {this.props.isLoading ? "" : i18n.t("login.loginBtn")}
+              {this.props.isLoading ? '' : i18n.t('login.loginBtn')}
             </Button>
           </div>
         </Form>

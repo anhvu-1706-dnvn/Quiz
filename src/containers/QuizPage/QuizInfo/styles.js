@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../configs/theme';
 
 export const Wrapper = styled.div`
   padding-top: 10px;
@@ -46,7 +47,7 @@ export const Wrapper = styled.div`
     .item {
       margin-right: 20px;
       font-size: 12px;
-      color: red;
+      color: ${theme.palette.primary};
 
       .icon {
         margin-right: 5px;
@@ -87,6 +88,17 @@ export const Wrapper = styled.div`
       flex-direction: column;
       .checkbox-item {
         margin-bottom: 15px;
+      }
+
+      .checkbox-item {
+        .ant-checkbox-checked {
+          background-color: #00c985 !important;
+
+          .ant-checkbox-inner {
+            background-color: #00c985 !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+          }
+        }
       }
     }
   }

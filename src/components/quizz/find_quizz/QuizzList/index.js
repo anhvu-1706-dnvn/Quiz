@@ -2,6 +2,7 @@ import React from 'react';
 import { Tag } from 'antd';
 import QuizzCard from '../../item/QuizzCard';
 import { history } from '../../../../redux/store';
+import theme from '../../../../configs/theme';
 import Wrapper from './styles';
 
 export default function QuizzList(props) {
@@ -12,12 +13,15 @@ export default function QuizzList(props) {
     <Wrapper>
       <div className="list-header">
         <span className="title">{props.nameList}</span>
-        <Tag color="red" className="tag" onClick={handleClickSeeMoreBtn}>
+        <Tag
+          color={theme.palette.lightestPrimary}
+          className="tag"
+          onClick={handleClickSeeMoreBtn}
+        >
           See more >
         </Tag>
       </div>
       <div className="list-content">
-        <QuizzCard />
         <QuizzCard />
         <QuizzCard />
         <QuizzCard />

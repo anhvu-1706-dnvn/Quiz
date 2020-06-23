@@ -50,7 +50,7 @@ export default function index() {
         <span className="title">Quiz quality score</span>
         <Progress
           percent={25}
-          strokeColor="red"
+          strokeColor="#F5A623"
           className="quiz-quality-score-progress"
         />
         <div className="item-wrapper">

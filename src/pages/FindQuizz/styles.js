@@ -15,7 +15,7 @@ export default styled.div`
     }
 
     .search-bar {
-      width: 700px;
+      max-width: 850px;
       height: 60px;
       background-color: #fff;
       border-radius: 4px;

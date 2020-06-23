@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../configs/theme';
 
 export const Wrapper = styled.div`
 
@@ -22,6 +23,13 @@ export const Wrapper = styled.div`
       box-sizing: border-box;
       position: absolute;
       top: 0px;
+      
+      .icon-plus {
+        color: ${theme.palette.primary}
+      }
+      span {
+        color: ${theme.palette.primary}
+      }
 
       .editor-title {
         font-size: 16px;

@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col, Modal, Input } from 'antd';
-import Wrapper from './styles';
 import CreateQuiz from '../../containers/QuizPage/CreateQuiz';
 import QuizInfo from '../../containers/QuizPage/QuizInfo';
 import TagSubject from '../../components/quizz/create_quizz/TagSubject';
 import { history } from '../../redux/store';
+import { getListTagsAction } from '../../redux/tag/action';
+import Wrapper from './styles';
 
 export default function CreateQuizz() {
   const [visible, setVisible] = useState(true);
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.tag);
+  useEffect(() => {
+    dispatch(getListTagsAction(20, 0));
+  }, [dispatch]);
 
   const handleOk = () => {
     setVisible(false);
@@ -17,6 +25,7 @@ export default function CreateQuizz() {
     setVisible(false);
     history.push('/');
   };
+
   return (
     <Wrapper>
       <Modal
@@ -26,26 +35,19 @@ export default function CreateQuizz() {
         onCancel={handleCancel}
         maskClosable={false}
         closable={false}
+        className="modal-create-quizz"
       >
         <Wrapper>
-          <h2>Tạo 1 bộ câu hỏi</h2>
-          <h4>1. Tên bộ câu hỏi</h4>
+          <h2>Create a quiz</h2>
+          <h4>1. Name this quiz</h4>
           <Input />
           <br />
           <br />
-          <h4>2. Chọn chủ đề liên quan</h4>
-          <TagSubject nameSubject="Mathematics" />
-          <TagSubject nameSubject="English" />
-          <TagSubject nameSubject="Physics" />
-          <TagSubject nameSubject="Chemistry" />
-          <TagSubject nameSubject="Biology" />
-          <TagSubject nameSubject="Science" />
-          <TagSubject nameSubject="Computers" />
-          <TagSubject nameSubject="Geography" />
-          <TagSubject nameSubject="World Languages" />
-          <TagSubject nameSubject="History" />
-          <TagSubject nameSubject="Social Studies" />
-          <TagSubject nameSubject="Physical Ed" />
+          <h4>2. Choose relevant subjects</h4>
+          {data.tags.length > 0 &&
+            data.tags.map((e) => (
+              <TagSubject nameSubject={e.name} key={e.id} />
+            ))}
         </Wrapper>
       </Modal>
       {!visible && (

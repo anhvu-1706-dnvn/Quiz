@@ -78,3 +78,7 @@
   background: black;
   color: white !important;
 }
+
+.modal-create-quizz .ant-modal-content {
+  height: 360px !important;
+}

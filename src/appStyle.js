@@ -11,9 +11,10 @@ const AppWrapper = styled.div`
   }
   .gradientBackground {
     background-image: ${({ theme }) =>
-    `linear-gradient(90deg, ${theme.palette.lightPrimary}, ${theme.palette.primary})`};
+      `linear-gradient(90deg, ${theme.palette.lightPrimary}, ${theme.palette.primary})`};
   }
-  .ant-input:focus, .ant-input:hover  {
+  .ant-input:focus,
+  .ant-input:hover {
     border-color: ${({ theme }) => `${theme.palette.lightPrimary} !important`};
   }
   .ant-table-tbody > tr > td {
@@ -21,7 +22,29 @@ const AppWrapper = styled.div`
     color: ${({ theme }) => theme.palette.color[0]};
   }
   .ant-layout-footer {
-    background: #FFFFFF;
+    background: #ffffff;
+  }
+
+  .ant-menu-item-selected {
+    background-color: ${({ theme }) =>
+      theme.palette.lightestPrimary} !important;
+  }
+
+  .ant-btn-primary {
+    background-color: ${({ theme }) => theme.palette.primary} !important;
+    border-color: ${({ theme }) => theme.palette.primary} !important;
+  }
+
+  // .ant-select-selection {
+  //   &:hover {
+  //     border-color: ${({ theme }) => theme.palette.lightPrimary} !important;
+  //   }
+  //   &:focus {
+  //     border-color: ${({ theme }) => theme.palette.lightPrimary} !important;
+  //   }
+  //   &:active {
+  //     border-color: ${({ theme }) => theme.palette.lightPrimary} !important;
+  //   }
   }
 `;
 

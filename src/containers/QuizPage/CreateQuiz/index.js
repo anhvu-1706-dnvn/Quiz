@@ -37,12 +37,12 @@ export default class CreateQuiz extends Component {
           <div className="questions-header-inner">
             <div className="editor-title">Quiz Editor</div>
             <Button className="new-question" onClick={this.showModal}>
-              <Icon type="plus-circle" />
-              <span>Tạo câu hỏi</span>
+              <Icon type="plus-circle" className="icon-plus" />
+              <span>New question</span>
             </Button>
-            <Button className="save-draft">
-              <span>Lưu nháp</span>
-            </Button>
+            {/* <Button className="save-draft">
+              <span>Save draft</span>
+            </Button> */}
           </div>
         </div>
         <div className="questions-body">

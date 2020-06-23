@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../../configs/theme';
 
 export default styled.div`
   margin-top: 40px;
@@ -7,7 +8,9 @@ export default styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+    max-width: 1071px;
+    margin: 0 auto 8px;
 
     .title {
       font-size: 24px;
@@ -21,9 +24,12 @@ export default styled.div`
       padding: 5px 20px;
       font-weight: 600;
       cursor: pointer;
+      margin: 0;
+      color: ${theme.palette.primary};
+      border: 1px solid ${theme.palette.primary};
 
       &:hover {
-        background-color: #ffdcd9;
+        background-color: ${theme.palette.lightPrimary} !important;
       }
     }
   }
@@ -31,7 +37,7 @@ export default styled.div`
   .list-content {
     display: flex;
     align-items: center;
-    max-width: 1118px;
+    max-width: 1071px;
     padding: 8px 0 16px;
     overflow-x: scroll;
     margin: 0 auto 24px;

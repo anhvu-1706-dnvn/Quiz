@@ -4,16 +4,16 @@ import { findLast } from 'lodash';
 import { history } from '../../../redux/store';
 
 const sidebarMenu = [
-  {
-    key: 'dashboard',
-    text: 'Dashboard',
-    url: '/',
-    icon: 'dashboard',
-  },
+  // {
+  //   key: 'dashboard',
+  //   text: 'Dashboard',
+  //   url: '/',
+  //   icon: 'dashboard',
+  // },
   {
     key: 'find-a-quizz',
     text: 'Find a quizz',
-    url: '/find-quizz',
+    url: '/',
     icon: 'search',
   },
   {
@@ -48,6 +48,7 @@ export default class SideBarMenu extends Component {
   }
 
   render() {
+    console.log(this.state.defaultSelectedKeys);
     return (
       <Menu
         mode="inline"
@@ -60,13 +61,6 @@ export default class SideBarMenu extends Component {
         location={this.props.children}
         className="sidebarMenu"
       >
-        {/* <Menu.Item key="dashboard" onClick={() => history.push("/")}>
-          <span>
-            <Icon type="dashboard" />
-            <span>Dashboard</span>
-          </span>
-        </Menu.Item> */}
-
         {sidebarMenu.map((el) => (
           <Menu.Item key={el.key} onClick={() => history.push(el.url)}>
             <span>

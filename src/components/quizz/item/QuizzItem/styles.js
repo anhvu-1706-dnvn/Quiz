@@ -39,5 +39,6 @@ export default styled.div`
     height: fit-content;
     margin-top: 15px;
     margin-right: 15px;
+    font-size: 10px;
   }
 `;

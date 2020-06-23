@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../configs/theme';
 
 export const TagSubjectWrapper = styled.div`
   display: inline-block;
@@ -11,7 +12,7 @@ export const TagSubjectWrapper = styled.div`
   margin-bottom: 8px;
   cursor: pointer;
   &:hover {
-    background-color: #ff9090;
+    background-color: ${theme.palette.primary};
     color: white;
   }
 `;
