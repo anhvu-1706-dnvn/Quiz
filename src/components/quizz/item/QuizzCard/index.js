@@ -1,7 +1,7 @@
 import React from 'react';
 import Wrapper from './styles';
 
-export default function QuizzCard() {
+export default function QuizzCard(props) {
   return (
     <Wrapper>
       <div className="card-header">
@@ -15,7 +15,7 @@ export default function QuizzCard() {
           <div className="card-stat">3.7k plays</div>
         </div>
       </div>
-      <div className="content-wrapper">Parallel and Perpendicular</div>
+      <div className="content-wrapper">{props.name}</div>
     </Wrapper>
   );
 }

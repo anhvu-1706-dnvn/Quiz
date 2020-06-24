@@ -1,10 +1,14 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
+import moment from 'moment';
 import {
   TagTypes,
   getListTagsSuccessAction,
   getListTagsFailureAction,
+  getOneTagSuccessAction,
+  getOneTagFailureAction,
 } from './action';
-import { getListTags } from '../../api/modules/tag';
+import { getListTags, getOne } from '../../api/modules/tag';
+import { apiWrapper } from '../../utils/reduxUtils';
 
 function* getListTagsSaga({ limit, offset, filter, orderBy }) {
   try {
@@ -31,4 +35,39 @@ function* getListTagsSaga({ limit, offset, filter, orderBy }) {
   }
 }
 
-export default [takeEvery(TagTypes.GET_LIST_TAGS, getListTagsSaga)];
+function* getOneTagSaga({ id }) {
+  try {
+    const response = yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: false,
+        errorDescription: 'Error',
+      },
+      getOne,
+      id
+    );
+    //console.log(response);
+
+    const data = {
+      id: response.id,
+      name: response.name,
+      tests: response.tests,
+      createdAt: response.createdAt,
+      updatedAt: response.updatedAt,
+      deletedAt: response.updatedAt,
+
+      happenAt: moment(response.happenAt).format('L'),
+    };
+    // console.log(data);
+
+    yield put(getOneTagSuccessAction(data));
+  } catch (error) {
+    yield put(getOneTagFailureAction(error));
+  }
+}
+
+export default [
+  takeEvery(TagTypes.GET_LIST_TAGS, getListTagsSaga),
+  takeEvery(TagTypes.GET_ONE_TAG, getOneTagSaga),
+];

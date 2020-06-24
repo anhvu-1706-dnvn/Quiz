@@ -43,7 +43,6 @@ class PrivateLayout extends Component {
   render() {
     const { children, logout, isAuthenticated, fullName, avatar } = this.props;
     const path = window.location.pathname;
-    console.log(path);
 
     if (!isAuthenticated) return <Redirect to="/login" />;
     return (

@@ -1,4 +1,4 @@
-import { takeEvery, put } from "redux-saga/effects";
+import { takeEvery, put } from 'redux-saga/effects';
 import {
   RoleTypes,
   getListRoleSuccessAction,
@@ -7,9 +7,9 @@ import {
   createOneRoleFailureAction,
   updateOneRoleSuccessAction,
   updateOneRoleFailureAction,
-} from "./actions";
+} from './actions';
 // import {data} from './tempData'
-import { getRoles } from "../../api/modules/role";
+import { getRoles } from '../../api/modules/role';
 
 function* getListRole({ limit, offset }) {
   try {
@@ -17,24 +17,23 @@ function* getListRole({ limit, offset }) {
       limit = 50;
     }
     if (offset === undefined) {
-      offset = 0
+      offset = 0;
     }
-    const fields = `["id", "name"]`
-    const {results, total} = yield getRoles({ limit, offset, fields });
+    const fields = `["id", "name"]`;
+    const { results, total } = yield getRoles({ limit, offset, fields });
     yield put(getListRoleSuccessAction(results, total, limit, offset));
   } catch (error) {
     yield put(getListRoleFailureAction(error));
   }
 }
 
-function* createOneRole({ payload}) {
+function* createOneRole({ payload }) {
   try {
     // eslint-disable-next-line no-console
     console.log(payload);
-    yield put (createOneRoleSuccessAction());
-    
+    yield put(createOneRoleSuccessAction());
   } catch (error) {
-    yield put (createOneRoleFailureAction());
+    yield put(createOneRoleFailureAction());
   }
 }
 
@@ -44,10 +43,9 @@ function* updateOneRole({ id, payload }) {
     console.log(id);
     // eslint-disable-next-line no-console
     console.log(payload);
-    yield put (updateOneRoleSuccessAction());
-    
+    yield put(updateOneRoleSuccessAction());
   } catch (error) {
-    yield put (updateOneRoleFailureAction());
+    yield put(updateOneRoleFailureAction());
   }
 }
 
@@ -55,5 +53,4 @@ export default [
   takeEvery(RoleTypes.GET_LIST_ROLE, getListRole),
   takeEvery(RoleTypes.CREATE_ONE_ROLE, createOneRole),
   takeEvery(RoleTypes.UPDATE_ONE_ROLE, updateOneRole),
-
 ];

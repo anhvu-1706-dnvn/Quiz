@@ -48,7 +48,6 @@ export default class SideBarMenu extends Component {
   }
 
   render() {
-    console.log(this.state.defaultSelectedKeys);
     return (
       <Menu
         mode="inline"

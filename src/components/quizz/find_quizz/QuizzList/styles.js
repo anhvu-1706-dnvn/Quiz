@@ -18,7 +18,7 @@ export default styled.div`
       font-weight: 600;
     }
 
-    .tag {
+    .btn-see-more {
       height: fit-content;
       font-size: 16px;
       padding: 5px 20px;
@@ -27,6 +27,7 @@ export default styled.div`
       margin: 0;
       color: ${theme.palette.primary};
       border: 1px solid ${theme.palette.primary};
+      background-color: ${theme.palette.lightestPrimary};
 
       &:hover {
         background-color: ${theme.palette.lightPrimary} !important;

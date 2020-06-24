@@ -60,10 +60,10 @@ export default styled.div`
       display: flex;
       width: 100%;
       margin-bottom: 40px;
-      justify-content: space-between;
-      div {
-        margin-right: 0;
-      }
+      // justify-content: space-between;
+      // div {
+      //   margin-right: 0;
+      // }
     }
   }
 `;
