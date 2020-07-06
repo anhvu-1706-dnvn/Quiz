@@ -11,7 +11,7 @@ export default styled.div`
   align-items: center;
   text-align: center;
   color: white;
-  background-color: ${theme.palette.primary};
+  background-color: ${theme.palette.error};
 
   .main {
     padding: 20px;

@@ -1,23 +1,29 @@
-import { makeReducerCreator } from '../../utils/reduxUtils';
-import { UserTypes } from './actions';
+import { makeReducerCreator } from "../../utils/reduxUtils";
+import { UserTypes } from "./actions";
 
 // Setup inintial state for app
 export const initialState = {
-  isAuthenticated: !!localStorage.getItem('sessionToken'),
+  // isAuthenticated: !!localStorage.getItem('sessionToken'),
+  // data: {
+  //   fullName: localStorage.getItem('fullName') || '',
+  //   id: localStorage.getItem('id'),
+  //   avatar: localStorage.getItem('avatar') || '',
+  // },
+  isAuthenticated: true,
   data: {
-    fullName: localStorage.getItem('fullName') || '',
-    id: localStorage.getItem('id'),
-    avatar: localStorage.getItem('avatar') || '',
+    fullName: "hieu",
+    id: 1,
+    avatar: "default.jpg",
   },
-  roles: '',
+  roles: "",
   isShowLoading: false,
   loginError: false,
   loginSuccess: false,
 };
 // End setup
 
-const loginSuccess = (state, {respone}) => {
-  const {data} = state;
+const loginSuccess = (state, { respone }) => {
+  const { data } = state;
   data.fullName = respone.fullName;
   data.id = respone.id;
   data.avatar = respone.avatar;
@@ -29,9 +35,10 @@ const loginSuccess = (state, {respone}) => {
     isAuthenticated: true,
     loginError: false,
     loginSuccess: true,
-}};
+  };
+};
 
-const loginFail = (state, {error}) => ({
+const loginFail = (state, { error }) => ({
   ...state,
   isShowLoading: false,
   isAuthenticated: false,
@@ -48,7 +55,7 @@ const logout = () => ({
 const loginLoading = (state) => ({
   ...state,
   isShowLoading: true,
-})
+});
 export const user = makeReducerCreator(initialState, {
   [UserTypes.LOGIN_USER_SUCCESS]: loginSuccess,
   [UserTypes.LOGIN_USER_FAIL]: loginFail,

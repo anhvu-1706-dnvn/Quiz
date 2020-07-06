@@ -1,11 +1,14 @@
 const theme = {
   palette: {
-    primary: '#ff4a4a',
-    lightPrimary: '#81ecec',
-    // lightPrimary: '#053FFC',
+    primary: '#0072B9',
+    lightPrimary: '#ceeefb',
+    lightestPrimary: '#eefaff',
+    boldPrimary: '#00588D',
+    boldestPrimary: '#003e63',
     secondary: 'rgba(45, 48, 71, 1)',
     loadingBackgroundColor: '#2c3e51cc',
     color: ['#262626', '#E4E6E9'],
+    error: '#ff4a4a',
   },
   fonts: {
     primary: 'Roboto',
@@ -27,7 +30,6 @@ const theme = {
     input: '#efeff0',
     disabled: '#969696',
     light: '#c2efff',
-
   },
   text: {
     primary: '#1f2933',

@@ -20,21 +20,39 @@ const PrivateLayoutWrapper = styled.div`
   .content {
     padding: 34px 20px;
     flex: 1;
-    ${'' /* @media only screen and (max-width: 430px) {
+    ${
+      '' /* @media only screen and (max-width: 430px) {
       padding-top: 80px;
-    } */}
+    } */
+    }
   }
   .trigger {
     font-size: 20px;
     line-height: 64px;
     cursor: pointer;
     transition: color 0.3s;
+    color: #fff;
 
     &:hover {
       color: ${({ theme }) => theme.palette.lightPrimary};
     }
     @media only screen and (max-width: 430px) {
       color: ${({ theme }) => theme.palette.primary};
+    }
+  }
+
+  .sidebar-btn-create-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+    color: ${({ theme }) => theme.palette.primary};
+    .create-quiz-button {
+      color: ${({ theme }) => theme.palette.primary};
+      border: 1px solid #E5E5E5;
+      &:hover {
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+      }
     }
   }
 
@@ -59,7 +77,7 @@ const PrivateLayoutWrapper = styled.div`
   
   .logo {
     position: absolute;
-    width: 200px;
+    width: 100%;
     height: 64px;
     left: 0px;
     top: 0px;
@@ -94,7 +112,7 @@ const PrivateLayoutWrapper = styled.div`
     margin: 0 0 0 12px;
   }
   .logo-img  {
-    height: 60px;
+    height: 40px;
     display: inline-block;
   }
   .logo h2 {
@@ -110,7 +128,7 @@ const PrivateLayoutWrapper = styled.div`
     border-right: 1px solid #e8e8e8;
 
     .sidebarMenu{
-      margin-top: 64px;
+      margin-top: 30px;
     }
     .ant-menu {
       border-right: 1px solid #fff;
@@ -133,7 +151,7 @@ const PrivateLayoutWrapper = styled.div`
       
       
       &.ant-menu-item-selected {
-        color: ${({ theme }) => theme.palette.lightPrimary};
+        color: ${({ theme }) => theme.palette.primary};
         // background: ${({ theme }) => theme.background.light};
         border-left: solid;
         & > span {
@@ -152,7 +170,7 @@ const PrivateLayoutWrapper = styled.div`
   .header {
     position: 'fixed';
     z-index: 1;
-    background: #fff;
+    background: #00588D;
     padding: 0 24px;
     display: flex;
     justify-content: space-between;
@@ -160,6 +178,53 @@ const PrivateLayoutWrapper = styled.div`
     border-bottom: 1px solid rgba(0,0,0,0.1);
     @media only screen and (max-width: 430px) {
       display: inherit;
+    }
+
+    .btn-section {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 21%;
+      .btn-exit {
+        min-width: 84px;
+        background-color: #00639f;
+        margin-right: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        padding: 0 12px;
+        height: 44px;
+        font-size: 16px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+        &:hover {
+          background-color: ${({ theme }) => theme.palette.primary};
+        }
+        
+      }
+      .btn-done {
+        min-width: 120px;
+        text-align: center;
+        background-color: #FFFFFF;
+        color: #292A3A;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        padding: 0 12px;
+        height: 44px;
+        font-size: 16px;
+        text-transform: uppercase;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          box-shadow: 0 1px 2px rgba(0,0,0,0.45);
+        }
+      }
     }
     .leftHeader {
       @media only screen and (max-width: 430px) {
@@ -169,10 +234,18 @@ const PrivateLayoutWrapper = styled.div`
       }
       .create-quiz-button {
         margin-left: 20px;
+        color: white;
+        background-color: ${({ theme }) => theme.palette.boldPrimary}
+        border-color: ${({ theme }) => theme.palette.boldPrimary}
+        &:hover {
+          background-color: ${({ theme }) => theme.palette.boldestPrimary}
+          border-color: ${({ theme }) => theme.palette.boldestPrimary}
+        }
       }
     }
     .rightHeader {
       cursor: pointer;
+      color: #fff;
       @media only screen and (max-width: 430px) {
         display: none;
       }
@@ -197,9 +270,11 @@ const PrivateLayoutWrapper = styled.div`
         font-size: 24px;
       }
     }
-    ${'' /* @media only screen and (max-width: 430px) {
+    ${
+      '' /* @media only screen and (max-width: 430px) {
       margin-top: -80px;
-    } */}
+    } */
+    }
   }
 
   .mainContent {

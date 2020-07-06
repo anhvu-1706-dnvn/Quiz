@@ -1,8 +1,11 @@
-import React, { Component } from "react";
-import { Button, Icon, Modal } from "antd";
-import { Wrapper } from "./styles";
-import QuestionEditor from "./QuestionEditor";
+/* eslint-disable react/jsx-wrap-multilines */
+import React, { Component } from 'react';
+import { Button, Icon, Modal } from 'antd';
+import { Wrapper } from './styles';
+import QuestionEditor from './QuestionEditor';
+import QuestionType from '../../../components/quizz/create_quizz/QuestionType';
 // import PageTitle from '../../../components/common/PageTitle/index';
+import QuestionDetail from '../../Quiz/QuestionDetail';
 
 export default class CreateQuiz extends Component {
   state = { visible: false };
@@ -13,14 +16,14 @@ export default class CreateQuiz extends Component {
     });
   };
 
-  handleOk = e => {
+  handleOk = (e) => {
     console.log(e);
     this.setState({
       visible: false,
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     console.log(e);
     this.setState({
       visible: false,
@@ -34,25 +37,39 @@ export default class CreateQuiz extends Component {
           <div className="questions-header-inner">
             <div className="editor-title">Quiz Editor</div>
             <Button className="new-question" onClick={this.showModal}>
-              <Icon type="plus-circle" />
-              <span>Tạo câu hỏi</span>
+              <Icon type="plus-circle" className="icon-plus" />
+              <span>New question</span>
             </Button>
-            <Button className="save-draft">
-              <span>Lưu nháp</span>
-            </Button>
+            {/* <Button className="save-draft">
+              <span>Save draft</span>
+            </Button> */}
           </div>
         </div>
-        <div className="questions-body" />
+        <div className="questions-body">
+          <div className="questionType-panel">
+            <QuestionType name="multiple choice" iconType="save" color="red" />
+            <QuestionType name="checkbox" iconType="save" color="red" />
+            <QuestionType
+              name="fill in the blank"
+              iconType="save"
+              color="red"
+            />
+          </div>
+          <div>
+            <QuestionDetail />
+            <QuestionDetail />
+          </div>
+        </div>
 
         <Modal
           visible={this.state.visible}
           onOk={this.handleOk}
-          okText={(
+          okText={
             <div>
               <Icon type="save" />
               <span> Save</span>
             </div>
-          )}
+          }
           onCancel={this.handleCancel}
         >
           <QuestionEditor />
