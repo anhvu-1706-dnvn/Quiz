@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tag } from 'antd';
+// import { Tag } from 'antd';
 import QuizzCard from '../../item/QuizzCard';
-import { history } from '../../../../redux/store';
-import theme from '../../../../configs/theme';
+// import { history } from '../../../../redux/store';
+// import theme from '../../../../configs/theme';
 
 import Wrapper from './styles';
 
@@ -23,11 +23,14 @@ export default function QuizzList(props) {
         </Link>
       </div>
       <div className="list-content">
+        {props.test &&
+          props.test.length > 0 &&
+          props.test.map((e) => <QuizzCard name={e.name} key={e.id} />)}
+
+        {/* <QuizzCard />
         <QuizzCard />
         <QuizzCard />
-        <QuizzCard />
-        <QuizzCard />
-        <QuizzCard />
+        <QuizzCard /> */}
       </div>
     </Wrapper>
   );

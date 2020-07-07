@@ -12,6 +12,22 @@ export const Wrapper = styled.div`
     display: none;
   }
 
+  .edit-quiz-info-modal-body {
+    .scroll-vertical {
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+    .title {
+      display: flex;
+      margin-bottom: 10px;
+
+      .error {
+        margin-left: 4px;
+        color: ${theme.palette.error};
+      }
+    }
+  }
+
   .quiz-info-image-wrapper {
     display: flex;
     flex-direction: column;
@@ -29,7 +45,7 @@ export const Wrapper = styled.div`
       margin-top: 10px;
     }
     &:hover {
-      background-color: #fff0f0;
+      background-color: ${theme.palette.lightestPrimary};
     }
   }
   .quiz-info-name-wrapper {
