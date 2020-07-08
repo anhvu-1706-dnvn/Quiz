@@ -34,18 +34,6 @@ const AppWrapper = styled.div`
     background-color: ${({ theme }) => theme.palette.primary} !important;
     border-color: ${({ theme }) => theme.palette.primary} !important;
   }
-
-  // .ant-select-selection {
-  //   &:hover {
-  //     border-color: ${({ theme }) => theme.palette.lightPrimary} !important;
-  //   }
-  //   &:focus {
-  //     border-color: ${({ theme }) => theme.palette.lightPrimary} !important;
-  //   }
-  //   &:active {
-  //     border-color: ${({ theme }) => theme.palette.lightPrimary} !important;
-  //   }
-  }
 `;
 
 export default AppWrapper;

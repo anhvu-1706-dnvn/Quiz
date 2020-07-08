@@ -11,23 +11,6 @@ export const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  .edit-quiz-info-modal-body {
-    .scroll-vertical {
-      overflow-y: auto;
-      max-height: 100vh;
-    }
-    .title {
-      display: flex;
-      margin-bottom: 10px;
-
-      .error {
-        margin-left: 4px;
-        color: ${theme.palette.error};
-      }
-    }
-  }
-
   .quiz-info-image-wrapper {
     display: flex;
     flex-direction: column;
@@ -64,6 +47,7 @@ export const Wrapper = styled.div`
       margin-right: 20px;
       font-size: 12px;
       color: ${theme.palette.primary};
+      cursor: pointer;
 
       .icon {
         margin-right: 5px;
@@ -76,6 +60,11 @@ export const Wrapper = styled.div`
       margin-bottom: 10px;
       font-size: 16px;
       cursor: pointer;
+
+      &:hover {
+        text-decoration: underline !important;
+      }
+
       .icon {
         margin-right: 8px;
       }

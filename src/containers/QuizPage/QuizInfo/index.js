@@ -1,18 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { EditFilled, TranslationOutlined } from '@ant-design/icons';
-import { Modal, Input, Icon, Progress, Checkbox } from 'antd';
+import {
+  EditFilled,
+  TranslationOutlined,
+  TagOutlined,
+  InboxOutlined,
+  EyeOutlined,
+  EyeInvisibleOutlined,
+} from '@ant-design/icons';
+import {
+  Modal,
+  Input,
+  Icon,
+  Progress,
+  Checkbox,
+  Popover,
+  Upload,
+  Select,
+} from 'antd';
 import TagSubject from '../../../components/quizz/create_quizz/TagSubject';
 import { getListTagsAction } from '../../../redux/tag/action';
-import { getOneTestAction } from '../../../redux/test/actions';
+import {
+  getOneTestAction,
+  updateOneTestAction,
+} from '../../../redux/test/actions';
 import { Wrapper } from './styles';
 
+const delayTime = 800;
+const { Dragger } = Upload;
+const { TextArea } = Input;
+const { Option } = Select;
+// const propsUploadImage = {
+//   name: 'file',
+//   multiple: true,
+//   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+//   onChange(info) {
+//     const { status } = info.file;
+//     if (status !== 'uploading') {
+//       console.log(info.file, info.fileList);
+//     }
+//     if (status === 'done') {
+//       message.success(`${info.file.name} file uploaded successfully.`);
+//     } else if (status === 'error') {
+//       message.error(`${info.file.name} file upload failed.`);
+//     }
+//   },
+// };
 export default function QuizInfo(props) {
-  const [visible, setVisible] = useState(false);
+  const [visibleModalNameSubject, setVisibleModalNameSubject] = useState(false);
+  const [visibleModalOtherInfor, setVisibleModalOtherInfor] = useState(false);
   const [errorSubjectMessage, setErrorSubjectMessage] = useState('');
   const [chosenTag, setChosenTag] = useState([]);
   const [errorNameMessage, setErrorNameMessage] = useState('');
   const [nameQuiz, setNameQuiz] = useState('');
+  const [loadingSuccess, setLoadingSuccess] = useState(false);
   const dispatch = useDispatch();
 
   const tagState = useSelector((state) => state.tag);
@@ -22,17 +63,79 @@ export default function QuizInfo(props) {
     dispatch(getListTagsAction(20, 0));
     //dispatch(getOneTestAction(props.id));
     dispatch(getOneTestAction(52));
-    setNameQuiz(currentTest.name);
-  }, [dispatch]);
+    setTimeout(() => {
+      setLoadingSuccess(true);
+      setNameQuiz(currentTest.name);
+      currentTest.tags && setChosenTag(currentTest.tags.map((e) => e.id));
+    }, delayTime);
+  }, [dispatch, loadingSuccess]);
 
-  console.log(nameQuiz);
-
-  const handleCancel = () => {
-    setVisible(false);
+  const handleChooseTag = (id) => {
+    setErrorSubjectMessage('');
+    let newChosenTag = [...chosenTag];
+    if (newChosenTag.indexOf(id) === -1) {
+      if (newChosenTag.length === 3) {
+        setErrorSubjectMessage('maximum 3 subjects');
+        newChosenTag = [newChosenTag[1], newChosenTag[2], id];
+      } else {
+        setErrorSubjectMessage('');
+        newChosenTag.push(id);
+      }
+    } else {
+      setErrorSubjectMessage('');
+      const index = newChosenTag.indexOf(id);
+      newChosenTag = [
+        ...newChosenTag.slice(0, index),
+        ...newChosenTag.slice(index + 1),
+      ];
+    }
+    setChosenTag(newChosenTag);
   };
 
-  const handleOk = () => {
-    setVisible(false);
+  const handleCancelModalNameSubject = () => {
+    setVisibleModalNameSubject(false);
+    if (errorNameMessage !== '') {
+      setErrorNameMessage('');
+    }
+    if (errorSubjectMessage !== '') {
+      setErrorSubjectMessage('');
+    }
+    setNameQuiz(currentTest.name);
+    setChosenTag(currentTest.tags.map((e) => e.id));
+  };
+
+  const handleOkModalNameSubject = () => {
+    if (chosenTag.length === 0) {
+      setErrorSubjectMessage('Please select one or more subjects');
+    }
+    if (nameQuiz.length === 0) {
+      setErrorNameMessage('Please enter a quiz name');
+    }
+    if (chosenTag.length > 0 && nameQuiz.length > 0) {
+      dispatch(
+        updateOneTestAction(52, {
+          userId: 1,
+          name: nameQuiz,
+          tagIds: chosenTag,
+        })
+      );
+      dispatch(getOneTestAction(52));
+      setVisibleModalNameSubject(false);
+      if (errorNameMessage !== '') {
+        setErrorNameMessage('');
+      }
+      if (errorSubjectMessage !== '') {
+        setErrorSubjectMessage('');
+      }
+    }
+  };
+
+  const handleCancelModalOtherInfor = () => {
+    setVisibleModalOtherInfor(false);
+  };
+
+  const handleOkModalOtherInfor = () => {
+    setVisibleModalOtherInfor(false);
   };
 
   const handleChangeNameQuiz = (e) => {
@@ -43,10 +146,57 @@ export default function QuizInfo(props) {
   return (
     <Wrapper>
       <Modal
-        visible={visible}
-        onOk={handleOk}
+        visible={visibleModalOtherInfor}
+        onOk={handleOkModalOtherInfor}
         okText={<div>Next</div>}
-        onCancel={handleCancel}
+        onCancel={handleCancelModalOtherInfor}
+        maskClosable={false}
+        closable={false}
+        className="modal-edit-more-infor-quizz"
+      >
+        <div className="main-title">Quiz details</div>
+        <div className="item-quiz-detail">
+          <span className="item-title">1. Add a title image</span>
+          {/* <Dragger {...propsUploadImage}> */}
+          <Dragger style={{ marginTop: '10px' }}>
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined style={{ color: '#000' }} />
+            </p>
+            <p className="ant-upload-hint">
+              Drags and drop or click here to upload
+            </p>
+          </Dragger>
+        </div>
+        <div className="item-quiz-detail">
+          <span className="item-title">2. Add a description</span>
+          <TextArea style={{ marginTop: '10px' }} />
+        </div>
+        <div className="item-quiz-detail">
+          <span className="item-title">3. Who can see this quiz ?</span>
+          <Select
+            defaultValue="public"
+            style={{ width: '100%', marginTop: '10px' }}
+            className="test-details-select"
+          >
+            <Option value="public">
+              <EyeOutlined className="icon" style={{ marginRight: '10px' }} />
+              Public, visible to everyone
+            </Option>
+            <Option value="private">
+              <EyeInvisibleOutlined
+                className="icon"
+                style={{ marginRight: '10px' }}
+              />
+              Private, visible to you
+            </Option>
+          </Select>
+        </div>
+      </Modal>
+      <Modal
+        visible={visibleModalNameSubject}
+        onOk={handleOkModalNameSubject}
+        okText={<div>Next</div>}
+        onCancel={handleCancelModalNameSubject}
         maskClosable={false}
         closable={false}
         className="modal-create-quizz"
@@ -73,13 +223,20 @@ export default function QuizInfo(props) {
               <TagSubject
                 nameSubject={e.name}
                 key={e.id}
-                // onClick={() => handleChooseTag(e.id)}
-                enabled={chosenTag.indexOf(e.id) >= 0}
+                onClick={() => handleChooseTag(e.id)}
+                enabled={
+                  chosenTag &&
+                  chosenTag.length > 0 &&
+                  chosenTag.indexOf(e.id) >= 0
+                }
               />
             ))}
         </div>
       </Modal>
-      <div className="quiz-info-image-wrapper">
+      <div
+        className="quiz-info-image-wrapper"
+        onClick={() => setVisibleModalOtherInfor(true)}
+      >
         <img
           src="https://picsum.photos/200/300"
           alt="quizz-img"
@@ -89,45 +246,64 @@ export default function QuizInfo(props) {
       </div>
       <div
         className="quiz-info-name-wrapper"
-        onClick={() => {
-          setVisible(true);
-        }}
+        onClick={() => setVisibleModalNameSubject(true)}
       >
         <span className="quiz-info-name">{currentTest.name}</span>
         <EditFilled style={{ color: '#00C985' }} />
       </div>
       <div className="quiz-info-brief-wrapper">
-        <div className="item">
+        <Popover
+          content={
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontWeight: 'bold' }}>
+                Public:{' '}
+                <span style={{ fontWeight: 'normal' }}>
+                  Visible to everyone
+                </span>
+              </span>
+              <span style={{ fontWeight: 'bold' }}>
+                Private:{' '}
+                <span style={{ fontWeight: 'normal' }}>Visible to you</span>
+              </span>
+            </div>
+          }
+          className="item"
+        >
           <Icon type="eye" className="icon" />
           Public
-        </div>
+        </Popover>
         <div className="item">
           <TranslationOutlined className="icon" />
           English
         </div>
-        <div className="item">
+        <Popover
+          content={<div>Default time for all questions</div>}
+          className="item"
+        >
           <Icon type="clock-circle" className="icon" />
           30 secs
-        </div>
+        </Popover>
       </div>
       <div className="quiz-info-detail-wrapper">
         {currentTest.tags &&
           currentTest.tags.length > 0 &&
           currentTest.tags.map((e) => (
-            <div className="item" key={e.id}>
-              <Icon type="robot" className="icon" />
+            <div
+              className="item"
+              key={e.id}
+              onClick={() => {
+                setVisibleModalNameSubject(true);
+              }}
+            >
+              <TagOutlined className="icon" />
               {e.name}
             </div>
           ))}
 
-        <div className="item">
+        <div className="item" onClick={() => setVisibleModalOtherInfor(true)}>
           <Icon type="profile" className="icon" />
           Add a description
         </div>
-        {/* <div className="item">
-          <Icon type="upload" className="icon" />
-          Import from spreadsheet
-        </div> */}
       </div>
       <div className="quiz-info-quality-score-wrapper">
         <span className="title">Quiz quality score</span>

@@ -76,7 +76,7 @@ export default function CreateQuizz() {
       <Modal
         visible={visible}
         onOk={handleOk}
-        okText={<div>Next</div>}
+        okText={<div>Save</div>}
         onCancel={handleCancel}
         maskClosable={false}
         closable={false}

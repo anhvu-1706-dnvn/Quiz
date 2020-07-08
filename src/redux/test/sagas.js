@@ -89,17 +89,18 @@ function* createOneTest({ payload }) {
 
 function* updateOneTest({ id, payload }) {
   try {
-    payload = {
-      name: payload.name,
-      code: payload.code,
-      isVisible: payload.status,
-    };
+    // payload = {
+    //   name: payload.name,
+    //   code: payload.code,
+    //   isVisible: payload.status,
+    // };
+    delete payload.key;
     yield call(
       apiWrapper,
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: 'Edited Successfully',
+        successDescription: 'Updated Successfully',
         errorDescription: 'Error',
       },
       putApi,
@@ -107,7 +108,7 @@ function* updateOneTest({ id, payload }) {
       id,
       payload
     );
-    yield put(updateOneTestSuccessAction());
+    yield put(updateOneTestSuccessAction(id));
   } catch (error) {
     yield put(updateOneTestFailureAction());
   }
