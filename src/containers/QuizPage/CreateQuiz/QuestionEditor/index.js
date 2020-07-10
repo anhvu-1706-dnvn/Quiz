@@ -35,12 +35,21 @@ export default function QuestionEditor(props) {
 
   const handleChangeContentAnswer = (id, value) => {
     const newAnswerList = [...answerList];
-    newAnswerList.map((e) => {
-      if (e.id === id) {
-        e.content = value;
-      }
-      return e;
-    });
+    newAnswerList[newAnswerList.findIndex((e) => e.id === id)].content = value;
+    // newAnswerList.map((e) => {
+    //   if (e.id === id) {
+    //     e.content = value;
+    //   }
+    //   return e;
+    // });
+    setAnswerList(newAnswerList);
+  };
+
+  const handleChangeStatusAnswer = (id, status) => {
+    const newAnswerList = [...answerList];
+    newAnswerList[
+      newAnswerList.findIndex((e) => e.id === id)
+    ].isCorrect = status;
     setAnswerList(newAnswerList);
   };
 
@@ -70,7 +79,7 @@ export default function QuestionEditor(props) {
   return (
     <Wrapper>
       <div className="header">
-        <div className="title">Question 1</div>
+        <div className="title">Question {props.index}</div>
         <div className="question-type-select">
           <Select className="type" value={props.type.toString()}>
             <Option value="1">Multiple Choice</Option>
@@ -96,7 +105,11 @@ export default function QuestionEditor(props) {
                 disabled={e.isDisabled}
                 handleDeleteAnswer={() => handleDeleteAnswer(e.id)}
                 handleChangeContentAnswer={handleChangeContentAnswer}
+                handleChangeStatusAnswer={() =>
+                  handleChangeStatusAnswer(e.id, !e.isCorrect)
+                }
                 content={e.content}
+                isCorrect={e.isCorrect}
               />
             )
         )}

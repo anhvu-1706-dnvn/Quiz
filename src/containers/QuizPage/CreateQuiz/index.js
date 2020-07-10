@@ -17,6 +17,7 @@ export default function CreateQuiz() {
   const dispatch = useDispatch();
 
   const questions = useSelector((state) => state.question.questions);
+  const total = useSelector((state) => state.question.total);
 
   useEffect(() => {
     dispatch(
@@ -127,18 +128,12 @@ export default function CreateQuiz() {
 
       <Modal
         visible={visible}
-        // onOk={handleOk}
-        // okText={
-        //   <div>
-        //     <Icon type="save" />
-        //     <span> Save</span>
-        //   </div>
-        // }
         footer={null}
         onCancel={handleCancel}
         maskClosable={false}
       >
         <QuestionEditor
+          index={total + 1}
           type={questionType}
           handleOk={handleOk}
           handleCancel={handleCancel}

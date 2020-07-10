@@ -8,10 +8,16 @@ export default function AnswerOption(props) {
 
   // const handleChange = (e) => setContent(e.target.value);
 
+  const classNameOfOptionState = props.isCorrect
+    ? 'option-state  correct'
+    : 'option-state';
   return (
     <Wrapper>
       <div className="option">
-        <div className="option-state">
+        <div
+          className={classNameOfOptionState}
+          onClick={props.handleChangeStatusAnswer}
+        >
           <Icon type="check" />
         </div>
         <div className="option-inner">

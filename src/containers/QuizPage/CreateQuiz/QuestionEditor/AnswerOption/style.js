@@ -23,6 +23,11 @@ export const Wrapper = styled.div`
       align-self: flex-end;
       margin-bottom: 7px;
     }
+
+    .correct {
+      background-color: #00c985 !important;
+    }
+
     .option-inner {
       width: 100%;
       margin-right: 13px;
