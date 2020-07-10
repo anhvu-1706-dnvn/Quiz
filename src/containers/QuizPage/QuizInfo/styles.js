@@ -56,6 +56,17 @@ export const Wrapper = styled.div`
   }
   .quiz-info-detail-wrapper {
     margin-top: 30px;
+    .item-description {
+      display: flex;
+
+      .icon-description {
+        margin-top: 4px;
+      }
+
+      .description {
+        max-width: 200px;
+      }
+    }
     .item {
       margin-bottom: 10px;
       font-size: 16px;

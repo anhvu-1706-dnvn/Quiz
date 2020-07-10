@@ -46,7 +46,7 @@ export const QuestionTypeWrapper = styled.div`
     justify-content: center;
     align-items: center;
     color: #fff;
-    background-color: red;
+    background-color: ${(props) => props.backgroundColor};
     font-size: 24px;
   }
 

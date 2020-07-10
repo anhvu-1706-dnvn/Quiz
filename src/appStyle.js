@@ -29,11 +29,6 @@ const AppWrapper = styled.div`
     background-color: ${({ theme }) =>
       theme.palette.lightestPrimary} !important;
   }
-
-  .ant-btn-primary {
-    background-color: ${({ theme }) => theme.palette.primary} !important;
-    border-color: ${({ theme }) => theme.palette.primary} !important;
-  }
 `;
 
 export default AppWrapper;

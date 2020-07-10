@@ -6,11 +6,12 @@ import {
   InfoCircleOutlined,
 } from '@ant-design/icons';
 import { Divider, Select, Popover } from 'antd';
+import ReactHtmlParser from 'react-html-parser';
 import QuestionItem from '../../../components/quizz/question/Item';
 import Wrapper from './styles';
 
 const { Option } = Select;
-export default function QuestionDetail() {
+export default function QuestionDetail(props) {
   return (
     <Wrapper>
       <div className="question-detail-header">
@@ -20,7 +21,7 @@ export default function QuestionDetail() {
           </div>
         </Popover>
 
-        <div className="title">Question 1</div>
+        <div className="title">Question {props.index}</div>
         <div className="btn-bar">
           <button type="button">
             <EditFilled className="icon" />
@@ -40,26 +41,30 @@ export default function QuestionDetail() {
       </div>
       <div className="question-detail-body">
         <div className="wrapper">
-          <div className="query">Abcd</div>
+          <div className="query">{ReactHtmlParser(props.title)}</div>
           <Divider orientation="left">answer choices</Divider>
-          <QuestionItem correct />
-          <QuestionItem />
-          <QuestionItem />
-          <QuestionItem />
+          {props.answers &&
+            props.answers.map((e) =>
+              e.isCorrect ? (
+                <QuestionItem
+                  content={ReactHtmlParser(e.content)}
+                  correct
+                  key={e.id}
+                />
+              ) : (
+                <QuestionItem content={ReactHtmlParser(e.content)} key={e.id} />
+              )
+            )}
         </div>
       </div>
       <div className="question-detail-footer">
-        <Select defaultValue="3" className="select">
-          <Option value="0">5 seconds</Option>
-          <Option value="1">10 seconds</Option>
-          <Option value="2">20 seconds</Option>
-          <Option value="3">30 seconds</Option>
-          <Option value="4">45 seconds</Option>
-          <Option value="5">60 seconds</Option>
-          <Option value="6">2 minutes</Option>
-          <Option value="7">3 minutes</Option>
-          <Option value="8">5 minutes</Option>
-          <Option value="9">15 minutes</Option>
+        <Select value={props.time.toString()} className="select">
+          <Option value="5">5 seconds</Option>
+          <Option value="10">10 seconds</Option>
+          <Option value="20">20 seconds</Option>
+          <Option value="30">30 seconds</Option>
+          <Option value="45">45 seconds</Option>
+          <Option value="60">60 seconds</Option>
         </Select>
       </div>
     </Wrapper>

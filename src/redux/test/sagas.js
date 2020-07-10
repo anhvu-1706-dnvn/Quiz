@@ -132,11 +132,10 @@ function* getOne({ id }) {
     const data = {
       id: response.id,
       name: response.name,
-      content: response.name,
       tags: response.tags,
-      locationDescription: response.locationDescription,
-      happenAt: moment(response.happenAt).format('L'),
-      isVisible: response.isVisible,
+      description: response.description,
+      // happenAt: moment(response.happenAt).format('L'),
+      isPublic: !response.isDraft,
     };
     // console.log(data);
 

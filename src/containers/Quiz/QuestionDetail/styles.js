@@ -33,6 +33,7 @@ export default styled.div`
       display: inline-block;
       line-height: 26px;
       vertical-align: middle;
+      margin: 0;
     }
 
     .btn-bar {

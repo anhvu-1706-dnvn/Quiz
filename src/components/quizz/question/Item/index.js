@@ -7,7 +7,7 @@ export default function QuestionItem(props) {
       <div
         className={props.correct ? 'option-marker true' : 'option-marker false'}
       />
-      <div className="option-text">defdef</div>
+      <div className="option-text">{props.content}</div>
     </Wrapper>
   );
 }

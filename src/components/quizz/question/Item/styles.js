@@ -5,6 +5,9 @@ export default styled.div`
   width: 50%;
   margin-bottom: 12px;
 
+  p {
+    margin: 0;
+  }
   .option-marker {
     margin-right: 8px;
     height: 20px;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   .header {
@@ -65,11 +65,23 @@ export const Wrapper = styled.div`
           .ant-btn:hover {
             border: 1px solid #d9d9d9;
             color: #dd4b39;
-
           }
-          
         }
       }
+    }
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+
+    .select {
+      width: 26% !important;
+    }
+
+    .btn-area {
+      width: 36%;
+      display: flex;
+      justify-content: space-between;
     }
   }
 `;

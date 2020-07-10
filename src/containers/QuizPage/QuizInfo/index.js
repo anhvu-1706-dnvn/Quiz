@@ -54,21 +54,27 @@ export default function QuizInfo(props) {
   const [errorNameMessage, setErrorNameMessage] = useState('');
   const [nameQuiz, setNameQuiz] = useState('');
   const [loadingSuccess, setLoadingSuccess] = useState(false);
+  const [quizStatus, setQuizStatus] = useState(false);
+  const [quizDescription, setQuizDescription] = useState(false);
   const dispatch = useDispatch();
 
   const tagState = useSelector((state) => state.tag);
   const currentTest = useSelector((state) => state.test.currentTest);
 
   useEffect(() => {
-    dispatch(getListTagsAction(20, 0));
+    dispatch(getListTagsAction(50, 0));
     //dispatch(getOneTestAction(props.id));
     dispatch(getOneTestAction(52));
     setTimeout(() => {
       setLoadingSuccess(true);
       setNameQuiz(currentTest.name);
       currentTest.tags && setChosenTag(currentTest.tags.map((e) => e.id));
+      setQuizStatus(currentTest.isPublic);
+      setQuizDescription(currentTest.description);
     }, delayTime);
   }, [dispatch, loadingSuccess]);
+
+  // console.log(currentTest);
 
   const handleChooseTag = (id) => {
     setErrorSubjectMessage('');
@@ -135,6 +141,14 @@ export default function QuizInfo(props) {
   };
 
   const handleOkModalOtherInfor = () => {
+    dispatch(
+      updateOneTestAction(52, {
+        userId: 1,
+        description: quizDescription,
+        isDraft: !quizStatus,
+      })
+    );
+    dispatch(getOneTestAction(52));
     setVisibleModalOtherInfor(false);
   };
 
@@ -143,12 +157,27 @@ export default function QuizInfo(props) {
     if (e.target.value.length > 0) setErrorNameMessage('');
   };
 
+  const handleChangeStatusQuiz = async (status) => {
+    await dispatch(
+      updateOneTestAction(52, {
+        userId: 1,
+        isDraft: !status,
+      })
+    );
+    await dispatch(getOneTestAction(52));
+    setQuizStatus(status);
+  };
+
+  let percent = 25;
+
+  if (currentTest.description) percent += 25;
+
   return (
     <Wrapper>
       <Modal
         visible={visibleModalOtherInfor}
         onOk={handleOkModalOtherInfor}
-        okText={<div>Next</div>}
+        okText={<div>Save</div>}
         onCancel={handleCancelModalOtherInfor}
         maskClosable={false}
         closable={false}
@@ -168,15 +197,20 @@ export default function QuizInfo(props) {
           </Dragger>
         </div>
         <div className="item-quiz-detail">
-          <span className="item-title">2. Add a description</span>
-          <TextArea style={{ marginTop: '10px' }} />
+          <span className="item-title">2. Description</span>
+          <TextArea
+            style={{ marginTop: '10px' }}
+            value={quizDescription}
+            onChange={(e) => setQuizDescription(e.target.value)}
+          />
         </div>
         <div className="item-quiz-detail">
           <span className="item-title">3. Who can see this quiz ?</span>
           <Select
-            defaultValue="public"
+            value={quizStatus ? 'public' : 'private'}
             style={{ width: '100%', marginTop: '10px' }}
             className="test-details-select"
+            onChange={(e) => setQuizStatus(e === 'public')}
           >
             <Option value="public">
               <EyeOutlined className="icon" style={{ marginRight: '10px' }} />
@@ -195,7 +229,7 @@ export default function QuizInfo(props) {
       <Modal
         visible={visibleModalNameSubject}
         onOk={handleOkModalNameSubject}
-        okText={<div>Next</div>}
+        okText={<div>Save</div>}
         onCancel={handleCancelModalNameSubject}
         maskClosable={false}
         closable={false}
@@ -269,8 +303,17 @@ export default function QuizInfo(props) {
           }
           className="item"
         >
-          <Icon type="eye" className="icon" />
-          Public
+          {currentTest.isPublic ? (
+            <div onClick={() => handleChangeStatusQuiz(false)}>
+              <EyeOutlined type="eye" className="icon" />
+              Public
+            </div>
+          ) : (
+            <div onClick={() => handleChangeStatusQuiz(true)}>
+              <EyeInvisibleOutlined type="eye" className="icon" />
+              Private
+            </div>
+          )}
         </Popover>
         <div className="item">
           <TranslationOutlined className="icon" />
@@ -299,16 +342,25 @@ export default function QuizInfo(props) {
               {e.name}
             </div>
           ))}
-
-        <div className="item" onClick={() => setVisibleModalOtherInfor(true)}>
-          <Icon type="profile" className="icon" />
-          Add a description
-        </div>
+        {currentTest.description && currentTest.description === '' ? (
+          <div className="item" onClick={() => setVisibleModalOtherInfor(true)}>
+            <Icon type="profile" className="icon" />
+            Add a description
+          </div>
+        ) : (
+          <div
+            className="item item-description"
+            onClick={() => setVisibleModalOtherInfor(true)}
+          >
+            <Icon type="profile" className="icon icon-description" />
+            <div className="description">{currentTest.description}</div>
+          </div>
+        )}
       </div>
       <div className="quiz-info-quality-score-wrapper">
         <span className="title">Quiz quality score</span>
         <Progress
-          percent={25}
+          percent={percent}
           strokeColor="#F5A623"
           className="quiz-quality-score-progress"
         />
@@ -316,8 +368,19 @@ export default function QuizInfo(props) {
           <Checkbox checked className="checkbox-item">
             Pick a relevant quiz name
           </Checkbox>
-          <Checkbox className="checkbox-item">Add a quiz image</Checkbox>
-          <Checkbox className="checkbox-item">Add a description</Checkbox>
+          <Checkbox className="checkbox-item" checked={false}>
+            Add a quiz image
+          </Checkbox>
+          {currentTest.description ? (
+            <Checkbox className="checkbox-item" checked>
+              Add a description
+            </Checkbox>
+          ) : (
+            <Checkbox className="checkbox-item" checked={false}>
+              Add a description
+            </Checkbox>
+          )}
+
           <Checkbox className="checkbox-item">
             Add at least 4 questions
           </Checkbox>

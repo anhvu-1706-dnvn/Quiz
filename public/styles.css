@@ -102,3 +102,8 @@
 .modal-edit-more-infor-quizz .item-quiz-detail {
   margin-bottom: 20px;
 }
+
+.ant-btn-primary {
+  background-color: #00c985 !important;
+  border-color: #00c985 !important;
+}
