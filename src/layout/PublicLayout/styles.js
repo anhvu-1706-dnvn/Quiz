@@ -7,18 +7,19 @@ const PublicLayoutWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items:center  
+    align-items: center;
   }
 
   .main-img {
     background-image: url(https://previews.123rf.com/images/ashasha/ashasha1904/ashasha190401291/122953956-question-marks-scattered-on-white-background-quiz-doubt-poll-survey-faq-interrogation-query-backgrou.jpg);
+    //background-image: url('../../assets/images/login-background.jpg');
     background-color: transparent;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     height: 100vh;
   }
-  
+
   .main-content {
     background-color: none;
     padding: 70px 50px;

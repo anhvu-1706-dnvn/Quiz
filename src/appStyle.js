@@ -29,6 +29,9 @@ const AppWrapper = styled.div`
     background-color: ${({ theme }) =>
       theme.palette.lightestPrimary} !important;
   }
+  .ant-divider {
+    position: static !important;
+  }
 `;
 
 export default AppWrapper;

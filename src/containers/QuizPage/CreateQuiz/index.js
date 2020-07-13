@@ -121,6 +121,7 @@ export default function CreateQuiz() {
                 title={e.content}
                 answers={e.answers}
                 time={e.time}
+                id={e.id}
               />
             ))}
         </div>

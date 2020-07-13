@@ -1,7 +1,7 @@
 const theme = {
   palette: {
     primary: '#0072B9',
-    lightPrimary: '#003e63',
+    lightPrimary: '#aadeff',
     lightestPrimary: '#eefaff',
     boldPrimary: '#00588D',
     boldestPrimary: '#003e63',

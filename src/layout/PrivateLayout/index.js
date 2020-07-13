@@ -119,7 +119,14 @@ class PrivateLayout extends Component {
                   >
                     Exit
                   </Button>
-                  <Button className="btn-done">Done</Button>
+                  <Button
+                    className="btn-done"
+                    onClick={() => {
+                      history.push('/');
+                    }}
+                  >
+                    Done
+                  </Button>
                 </div>
                 <div className="rightHeader">
                   <Dropdown
@@ -173,7 +180,7 @@ class PrivateLayout extends Component {
                         ))}
                         <Menu.Divider />
                         <Menu.Item onClick={logout} key="logout">
-                          Đăng xuất
+                          Log out
                         </Menu.Item>
                       </Menu>
                     )}

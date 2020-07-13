@@ -82,7 +82,7 @@ export default function CreateQuizz() {
         closable={false}
         className="modal-create-quizz"
       >
-        <Wrapper>
+        <div>
           <h2>Create a quiz</h2>
           <div className="title">
             1. Name this quiz
@@ -108,18 +108,20 @@ export default function CreateQuizz() {
                 enabled={chosenTag.indexOf(e.id) >= 0}
               />
             ))}
-        </Wrapper>
+        </div>
       </Modal>
       {/* {!visible && Object.keys(testState.currentTest).length > 0 && ( */}
       {!visible && (
-        <Row type="flex" justify="center">
-          <Col xs={24} lg={14}>
-            <CreateQuiz />
-          </Col>
-          <Col xs={0} lg={10} className="scroll-vertical">
-            <QuizInfo id={testState.currentTest.id} name={nameQuiz} />
-          </Col>
-        </Row>
+        <div className="create-quiz-content-wrapper">
+          <Row type="flex" justify="center">
+            <Col xs={24} lg={14}>
+              <CreateQuiz />
+            </Col>
+            <Col xs={0} lg={10} className="scroll-vertical">
+              <QuizInfo id={testState.currentTest.id} name={nameQuiz} />
+            </Col>
+          </Row>
+        </div>
       )}
     </Wrapper>
   );

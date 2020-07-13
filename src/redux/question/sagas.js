@@ -100,20 +100,20 @@ function* createOneQuestion({ payload }) {
 
 function* updateOneQuestion({ id, payload }) {
   try {
-    // console.log(id);
-    // console.log(payload);
+    // delete payload.key;
     payload = {
-      name: payload.name,
-      code: payload.code,
-      isVisible: payload.status,
+      testId: payload.testId,
+      answers: payload.answers,
+      content: payload.content,
+      time: payload.time,
     };
     yield call(
       apiWrapper,
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: 'Sửa thành công',
-        errorDescription: 'Có lỗi xảy ra',
+        successDescription: 'Edited Successfully',
+        errorDescription: 'Error',
       },
       putApi,
       'questions',

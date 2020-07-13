@@ -11,7 +11,7 @@ const ERROR_CODE = [401];
 
 export function makeConstantCreator(...params) {
   const constant = {};
-  _.each(params, param => {
+  _.each(params, (param) => {
     constant[param] = param;
   });
   return constant;
@@ -21,7 +21,7 @@ export const makeActionCreator = (type, params = null) => ({ type, ...params });
 
 export const makeReducerCreator = (initialState = null, handlers = {}) => (
   state = initialState,
-  action,
+  action
 ) => {
   if (!action && !action.type) return state;
   const handler = handlers[action.type];
@@ -46,10 +46,11 @@ export function* apiWrapper(
   } catch (err) {
     notification.destroy();
     console.log(err);
-    
+
     notification.error({
       message: I18n.t('error.title'),
-      description: config.errorDescription ||I18n.t('error.description')|| err.message,
+      description:
+        config.errorDescription || I18n.t('error.description') || err.message,
     });
     yield fork(checkError, err);
     throw new Error(err);
@@ -57,7 +58,7 @@ export function* apiWrapper(
 }
 
 export function* checkError(res) {
-  const staff = yield select(state => state.staff);
+  const staff = yield select((state) => state.staff);
   if (res.code === 401 && staff.isAuthenticated) {
     console.log('System failed ~~');
   }

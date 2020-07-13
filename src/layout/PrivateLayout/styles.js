@@ -181,10 +181,10 @@ const PrivateLayoutWrapper = styled.div`
     }
 
     .btn-section {
+      width: 56%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      width: 21%;
       .btn-exit {
         min-width: 84px;
         background-color: #00639f;

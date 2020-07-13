@@ -7,20 +7,37 @@ import Editor from '../../../../components/common/Editor';
 
 const { Option } = Select;
 export default function QuestionEditor(props) {
-  const [answerList, setAnswerList] = useState([
-    { id: 1, content: '', isCorrect: false, isDisabled: true },
-    { id: 2, content: '', isCorrect: false, isDisabled: true },
-  ]);
+  let data = [];
+  if (props.answerList) {
+    data = [...props.answerList];
+    data.map((e, index) => {
+      e.key = index + 1;
+      if (e.key <= 2) e.isDisabled = true;
+      else e.isDisabled = false;
+      return e;
+    });
+  }
 
-  const [title, setTitle] = useState('');
-  const [time, setTime] = useState('30');
+  const [answerList, setAnswerList] = useState(
+    data.length > 0
+      ? data
+      : [
+          { key: 1, content: '', isCorrect: false, isDisabled: true },
+          { key: 2, content: '', isCorrect: false, isDisabled: true },
+        ]
+  );
+
+  const [title, setTitle] = useState(props.title || '');
+  const [time, setTime] = useState(
+    (props.time && props.time.toString()) || '30'
+  );
 
   // console.log(answerList);
   const handleAddAnswer = () => {
     const newAnswerList = [
       ...answerList,
       {
-        id: answerList.length + 1,
+        key: answerList.length + 1,
         content: '',
         isCorrect: false,
         isDisabled: false,
@@ -33,31 +50,27 @@ export default function QuestionEditor(props) {
     setTitle(value);
   };
 
-  const handleChangeContentAnswer = (id, value) => {
+  const handleChangeContentAnswer = (key, value) => {
     const newAnswerList = [...answerList];
-    newAnswerList[newAnswerList.findIndex((e) => e.id === id)].content = value;
-    // newAnswerList.map((e) => {
-    //   if (e.id === id) {
-    //     e.content = value;
-    //   }
-    //   return e;
-    // });
+    newAnswerList[
+      newAnswerList.findIndex((e) => e.key === key)
+    ].content = value;
     setAnswerList(newAnswerList);
   };
 
-  const handleChangeStatusAnswer = (id, status) => {
+  const handleChangeStatusAnswer = (key, status) => {
     const newAnswerList = [...answerList];
     newAnswerList[
-      newAnswerList.findIndex((e) => e.id === id)
+      newAnswerList.findIndex((e) => e.key === key)
     ].isCorrect = status;
     setAnswerList(newAnswerList);
   };
 
-  const handleDeleteAnswer = (id) => {
-    const indexId = answerList.findIndex((e) => e.id === id);
+  const handleDeleteAnswer = (key) => {
+    const indexId = answerList.findIndex((e) => e.key === key);
     const newAnswerList = [
       ...answerList.slice(0, indexId),
-      { id, content: null, isCorrect: false, isDisabled: false },
+      { key, content: null, isCorrect: false, isDisabled: false },
       ...answerList.slice(indexId + 1),
     ];
 
@@ -65,23 +78,24 @@ export default function QuestionEditor(props) {
   };
 
   const handleSubmit = () => {
-    setTime('30');
-    setTitle('');
-    setAnswerList([
-      { id: 1, content: '', isCorrect: false, isDisabled: true },
-      { id: 2, content: '', isCorrect: false, isDisabled: true },
-    ]);
+    if (data.length === 0) {
+      setAnswerList([
+        { key: 1, content: '', isCorrect: false, isDisabled: true },
+        { key: 2, content: '', isCorrect: false, isDisabled: true },
+      ]);
+      setTime('30');
+      setTitle('');
+    }
+
     props.handleOk({ answerList, title, time });
   };
-
-  console.log(answerList);
 
   return (
     <Wrapper>
       <div className="header">
         <div className="title">Question {props.index}</div>
         <div className="question-type-select">
-          <Select className="type" value={props.type.toString()}>
+          <Select className="type" value={props.type && props.type.toString()}>
             <Option value="1">Multiple Choice</Option>
             <Option value="2">Checkbox</Option>
             <Option value="3">Fill in the blank</Option>
@@ -100,13 +114,13 @@ export default function QuestionEditor(props) {
           (e) =>
             e.content !== null && (
               <AnswerOption
-                key={e.id}
-                id={e.id}
+                key={e.key}
+                id={e.key}
                 disabled={e.isDisabled}
-                handleDeleteAnswer={() => handleDeleteAnswer(e.id)}
+                handleDeleteAnswer={() => handleDeleteAnswer(e.key)}
                 handleChangeContentAnswer={handleChangeContentAnswer}
                 handleChangeStatusAnswer={() =>
-                  handleChangeStatusAnswer(e.id, !e.isCorrect)
+                  handleChangeStatusAnswer(e.key, !e.isCorrect)
                 }
                 content={e.content}
                 isCorrect={e.isCorrect}
