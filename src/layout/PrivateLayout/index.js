@@ -139,7 +139,7 @@ class PrivateLayout extends Component {
                         ))}
                         <Menu.Divider />
                         <Menu.Item onClick={logout} key="logout">
-                          Đăng xuất
+                          Log out
                         </Menu.Item>
                       </Menu>
                     )}
@@ -170,6 +170,12 @@ class PrivateLayout extends Component {
                   </Button>
                 </div>
                 <div className="rightHeader">
+                  <Button
+                    className="btn-join"
+                    onClick={() => history.push('/join')}
+                  >
+                    Join a game
+                  </Button>
                   <Dropdown
                     overlay={() => (
                       <Menu style={{ minWidth: '120px' }}>

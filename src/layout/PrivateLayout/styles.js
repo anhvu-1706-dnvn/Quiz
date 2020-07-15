@@ -249,6 +249,20 @@ const PrivateLayoutWrapper = styled.div`
       @media only screen and (max-width: 430px) {
         display: none;
       }
+      display: flex;
+      align-items: center;
+
+      .btn-join {
+        margin-right: 30px
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 4px;
+        color: #fff;
+        border: none;
+
+        &:hover {
+          background-color: rgba(255,255,255,0.1);
+        }
+      }
     }
     .title {
       display: none;
