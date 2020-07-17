@@ -3,6 +3,7 @@ import theme from '../../configs/theme';
 
 export const JoinGameContainerWrapper = styled.div`
   margin-top: 30px;
+  width: 1071px;
 
   .enter-code-section {
     background-color: #fff;
