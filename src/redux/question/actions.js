@@ -23,12 +23,14 @@ export const QuestionTypes = makeConstantCreator(
 );
 
 // List question
-export const getListQuestionByTestAction = (
-  id,
-  { limit, offset, filter, orderBy, fields }
-) =>
+export const getListQuestionByTestAction = ({
+  limit,
+  offset,
+  filter,
+  orderBy,
+  fields,
+}) =>
   makeActionCreator(QuestionTypes.GET_LIST_QUESTION_BY_TEST, {
-    id,
     limit,
     offset,
     filter,

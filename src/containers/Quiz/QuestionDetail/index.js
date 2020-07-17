@@ -1,18 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   EditFilled,
   CopyFilled,
   DeleteFilled,
   InfoCircleOutlined,
 } from '@ant-design/icons';
-import { Divider, Select, Popover } from 'antd';
+import { Divider, Popover, Input, Modal } from 'antd';
+import ReactHtmlParser from 'react-html-parser';
 import QuestionItem from '../../../components/quizz/question/Item';
+import QuestionEditor from '../../QuizPage/CreateQuiz/QuestionEditor';
+import { updateOneQuestionAction } from '../../../redux/question/actions';
 import Wrapper from './styles';
 
-const { Option } = Select;
-export default function QuestionDetail() {
+export default function QuestionDetail(props) {
+  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOk = async (payload) => {
+    let answerList = [];
+    const id = payload.answerList[0].questionId;
+    payload.answerList.map((e) => {
+      if (e.content !== null) {
+        const newItem = {
+          id: e.id,
+          content: e.content,
+          isCorrect: e.isCorrect,
+        };
+        answerList = [...answerList, newItem];
+      }
+      return e;
+    });
+    await dispatch(
+      updateOneQuestionAction(id, {
+        testId: 51,
+        answers: answerList,
+        content: payload.title,
+        time: Number(payload.time),
+      })
+    );
+    setVisible(false);
+  };
   return (
     <Wrapper>
+      <Modal
+        visible={visible}
+        footer={null}
+        onCancel={handleCancel}
+        maskClosable={false}
+      >
+        <QuestionEditor
+          index={props.index}
+          type={1}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+          title={props.title}
+          time={props.time}
+          answerList={props.answers}
+        />
+      </Modal>
       <div className="question-detail-header">
         <Popover content={<div>Multiple Choice</div>}>
           <div className="question-type-icon">
@@ -20,9 +70,9 @@ export default function QuestionDetail() {
           </div>
         </Popover>
 
-        <div className="title">Question 1</div>
+        <div className="title">Question {props.index}</div>
         <div className="btn-bar">
-          <button type="button">
+          <button type="button" onClick={() => setVisible(true)}>
             <EditFilled className="icon" />
             Edit
           </button>
@@ -40,27 +90,24 @@ export default function QuestionDetail() {
       </div>
       <div className="question-detail-body">
         <div className="wrapper">
-          <div className="query">Abcd</div>
+          <div className="query">{ReactHtmlParser(props.title)}</div>
           <Divider orientation="left">answer choices</Divider>
-          <QuestionItem correct />
-          <QuestionItem />
-          <QuestionItem />
-          <QuestionItem />
+          {props.answers &&
+            props.answers.map((e) =>
+              e.isCorrect ? (
+                <QuestionItem
+                  content={ReactHtmlParser(e.content)}
+                  correct
+                  key={e.id}
+                />
+              ) : (
+                <QuestionItem content={ReactHtmlParser(e.content)} key={e.id} />
+              )
+            )}
         </div>
       </div>
       <div className="question-detail-footer">
-        <Select defaultValue="3" className="select">
-          <Option value="0">5 seconds</Option>
-          <Option value="1">10 seconds</Option>
-          <Option value="2">20 seconds</Option>
-          <Option value="3">30 seconds</Option>
-          <Option value="4">45 seconds</Option>
-          <Option value="5">60 seconds</Option>
-          <Option value="6">2 minutes</Option>
-          <Option value="7">3 minutes</Option>
-          <Option value="8">5 minutes</Option>
-          <Option value="9">15 minutes</Option>
-        </Select>
+        <Input value={`${props.time} seconds`} className="select" disabled />
       </div>
     </Wrapper>
   );

@@ -33,6 +33,7 @@ export default styled.div`
       display: inline-block;
       line-height: 26px;
       vertical-align: middle;
+      margin: 0;
     }
 
     .btn-bar {
@@ -90,7 +91,10 @@ export default styled.div`
 
     .select {
       margin: 12px;
-      width: 140px;
+      width: 100px;
+      background-color: #fff !important;
+      color: #000 !important;
+      position: static !important;
     }
   }
 `;

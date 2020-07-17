@@ -1,80 +1,145 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Icon, Modal } from 'antd';
-import { Wrapper } from './styles';
 import QuestionEditor from './QuestionEditor';
 import QuestionType from '../../../components/quizz/create_quizz/QuestionType';
-// import PageTitle from '../../../components/common/PageTitle/index';
 import QuestionDetail from '../../Quiz/QuestionDetail';
+import {
+  getListQuestionByTestAction,
+  createOneQuestionAction,
+} from '../../../redux/question/actions';
+import { Wrapper } from './styles';
 
-export default class CreateQuiz extends Component {
-  state = { visible: false };
+export default function CreateQuiz() {
+  const [visible, setVisible] = useState(false);
+  const [questionType, setQuestionType] = useState(1);
+  const dispatch = useDispatch();
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
+  const questions = useSelector((state) => state.question.questions);
+  const total = useSelector((state) => state.question.total);
+
+  useEffect(() => {
+    dispatch(
+      getListQuestionByTestAction({
+        limit: 50,
+        offset: 0,
+        filter: JSON.stringify({ testId: 51 }),
+        orderBy: 'id',
+      })
+    );
+  }, [dispatch]);
+  // console.log(questions);
+  const showModal = () => {
+    setVisible(true);
   };
 
-  handleOk = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
+  const handleOk = async (payload) => {
+    let answerList = [];
+    payload.answerList.map((e) => {
+      if (e.content !== null) {
+        const newItem = {
+          content: e.content,
+          isCorrect: e.isCorrect,
+        };
+        answerList = [...answerList, newItem];
+      }
+      return e;
     });
+    await dispatch(
+      createOneQuestionAction({
+        testId: 51,
+        answers: answerList,
+        content: payload.title,
+        time: Number(payload.time),
+      })
+    );
+    await dispatch(
+      getListQuestionByTestAction({
+        limit: 50,
+        offset: 0,
+        filter: JSON.stringify({ testId: 51 }),
+        orderBy: 'id',
+      })
+    );
+    setVisible(false);
   };
 
-  handleCancel = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
+  const handleCancel = () => {
+    setVisible(false);
   };
 
-  render() {
-    return (
-      <Wrapper>
-        <div className="question-header">
-          <div className="questions-header-inner">
-            <div className="editor-title">Quiz Editor</div>
-            <Button className="new-question" onClick={this.showModal}>
-              <Icon type="plus-circle" className="icon-plus" />
-              <span>New question</span>
-            </Button>
-            {/* <Button className="save-draft">
+  const handleClickQuestionType = (value) => {
+    setQuestionType(value);
+    showModal();
+  };
+
+  return (
+    <Wrapper>
+      <div className="question-header">
+        <div className="questions-header-inner">
+          <div className="editor-title">Quiz Editor</div>
+          <Button className="new-question" onClick={showModal}>
+            <Icon type="plus-circle" className="icon-plus" />
+            <span>New question</span>
+          </Button>
+          {/* <Button className="save-draft">
               <span>Save draft</span>
             </Button> */}
-          </div>
         </div>
-        <div className="questions-body">
+      </div>
+      <div className="questions-body">
+        {questions && questions.length === 0 && (
           <div className="questionType-panel">
-            <QuestionType name="multiple choice" iconType="save" color="red" />
-            <QuestionType name="checkbox" iconType="save" color="red" />
+            <QuestionType
+              name="multiple choice"
+              iconType="info-circle"
+              backgroundColor="#B8336A"
+              onClick={() => handleClickQuestionType(1)}
+            />
+            <QuestionType
+              name="checkbox"
+              iconType="check-circle"
+              backgroundColor="#26949E"
+              onClick={() => handleClickQuestionType(2)}
+            />
             <QuestionType
               name="fill in the blank"
-              iconType="save"
-              color="red"
+              iconType="minus-circle"
+              backgroundColor="#D79928"
+              onClick={() => handleClickQuestionType(3)}
             />
           </div>
-          <div>
-            <QuestionDetail />
-            <QuestionDetail />
-          </div>
-        </div>
+        )}
 
-        <Modal
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          okText={
-            <div>
-              <Icon type="save" />
-              <span> Save</span>
-            </div>
-          }
-          onCancel={this.handleCancel}
-        >
-          <QuestionEditor />
-        </Modal>
-      </Wrapper>
-    );
-  }
+        <div>
+          {questions &&
+            questions.map((e, index) => (
+              <QuestionDetail
+                key={e.id}
+                index={index + 1}
+                title={e.content}
+                answers={e.answers}
+                time={e.time}
+                id={e.id}
+              />
+            ))}
+        </div>
+      </div>
+
+      <Modal
+        visible={visible}
+        footer={null}
+        onCancel={handleCancel}
+        maskClosable={false}
+      >
+        <QuestionEditor
+          index={total + 1}
+          type={questionType}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        />
+      </Modal>
+    </Wrapper>
+  );
 }

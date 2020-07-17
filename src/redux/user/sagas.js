@@ -1,16 +1,17 @@
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeEvery, put, call } from 'redux-saga/effects';
 import {
   UserTypes,
   loginSuccessAction,
   loginFailureAction,
-} from "./actions";
-import { staffLoginApi } from "../../api/modules/staff";
-import { apiWrapper } from "../../utils/reduxUtils";
+  registerSuccessAction,
+  registerFailureAction,
+  verifySuccessAction,
+  verifyFailureAction,
+} from './actions';
+import { loginApi, registerApi, verifyApi } from '../../api/modules/auth';
+import { apiWrapper } from '../../utils/reduxUtils';
 
-
-function* loginSaga({
-  params,
-}) {
+function* loginSaga({ params }) {
   try {
     const response = yield call(
       apiWrapper,
@@ -18,25 +19,60 @@ function* loginSaga({
         isShowLoading: true,
         isShowSucceedNoti: false,
       },
-      staffLoginApi,
-      params,
+      loginApi,
+      params
     );
     if (response.token) {
-      localStorage.setItem("sessionToken", response.token);
-      localStorage.setItem("fullName", response.fullName)
-      localStorage.setItem("id", response.id);
-      localStorage.setItem("avatar", response.avatar);
+      localStorage.setItem('sessionToken', response.token);
+      localStorage.setItem('fullName', response.fullName);
+      //localStorage.setItem('id', response.id);
+      //localStorage.setItem('avatar', response.avatar);
+      localStorage.setItem('role', response.role.name);
       yield put(loginSuccessAction(response));
     } else {
       yield put(loginFailureAction(response));
     }
   } catch (error) {
-    yield put(loginFailureAction(error));    
+    yield put(loginFailureAction(error));
+  }
+}
+
+function* registerSaga({ params }) {
+  try {
+    const response = yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: false,
+      },
+      registerApi,
+      params
+    );
+    yield put(registerSuccessAction(response));
+  } catch (error) {
+    yield put(registerFailureAction(error));
+  }
+}
+
+function* verifySaga({ params }) {
+  try {
+    const response = yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: false,
+      },
+      verifyApi,
+      params
+    );
+    yield put(verifySuccessAction(response));
+  } catch (error) {
+    yield put(verifyFailureAction(error));
   }
 }
 
 function logoutSaga() {
-  if (localStorage.getItem("sessionToken")) {
+  if (localStorage.getItem('sessionToken')) {
     localStorage.clear('sessionToken');
     localStorage.clear('fullName');
     localStorage.clear('id');
@@ -44,5 +80,7 @@ function logoutSaga() {
 }
 export default [
   takeEvery(UserTypes.LOGIN, loginSaga),
+  takeEvery(UserTypes.REGISTER, registerSaga),
+  takeEvery(UserTypes.VERIFY, verifySaga),
   takeEvery(UserTypes.LOGOUT, logoutSaga),
 ];

@@ -9,12 +9,30 @@ import Wrapper from './styles';
 
 export default function QuizzesByTag(props) {
   const dispatch = useDispatch();
-
   const data = useSelector((state) => state.tag.currentTag);
   useEffect(() => {
     dispatch(getOneTagAction(props.location.state));
   }, [dispatch]);
-  console.log(data);
+
+  const handleGenerateListCard = () => {
+    const result = [];
+    const limit = 5;
+    let offset = 0;
+    while (limit * (offset + 1) <= Math.ceil(data.tests.length / 5) * 5) {
+      const testPerRow = [
+        ...data.tests.slice(limit * offset, limit * (offset + 1)),
+      ];
+      result.push(
+        <div className="list-card-row" key={offset}>
+          {testPerRow.map((e) => (
+            <QuizzCard name={e.name} key={e.id} />
+          ))}
+        </div>
+      );
+      offset += 1;
+    }
+    return result;
+  };
   return (
     <Wrapper>
       <div className="quizz-tag-header">
@@ -37,32 +55,7 @@ export default function QuizzesByTag(props) {
         </div>
       </div>
       <div className="list-card-container">
-        <div className="list-card-row">
-          {Object.keys(data).length > 0 &&
-            data.tests.map((e) => <QuizzCard name={e.name} />)}
-        </div>
-
-        {/* <div className="list-card-row">
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-        </div>
-        <div className="list-card-row">
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-        </div>
-        <div className="list-card-row">
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-          <QuizzCard />
-        </div> */}
+        {Object.keys(data).length > 0 && handleGenerateListCard()}
         <Button>Load More</Button>
       </div>
     </Wrapper>

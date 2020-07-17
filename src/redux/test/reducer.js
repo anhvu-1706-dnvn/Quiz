@@ -1,6 +1,5 @@
-import { makeReducerCreator } from "../../utils/reduxUtils";
-import { TestTypes } from "./actions";
-
+import { makeReducerCreator } from '../../utils/reduxUtils';
+import { TestTypes } from './actions';
 
 // Setup inintial state for test
 export const initialState = {
@@ -25,7 +24,7 @@ export const initialState = {
 // End setup
 
 // LIST TEST
-const getListTest = state => ({
+const getListTest = (state) => ({
   ...state,
   loading: true,
 });
@@ -33,7 +32,7 @@ const getListTest = state => ({
 const getListTestSuccess = (state, { data, total, limit, offset }) => ({
   ...state,
   tests: data,
-  limit, 
+  limit,
   offset,
   total,
   loading: false,
@@ -41,7 +40,7 @@ const getListTestSuccess = (state, { data, total, limit, offset }) => ({
   listTestFailure: false,
 });
 
-const getListTestFailure = state => ({
+const getListTestFailure = (state) => ({
   ...state,
   loading: false,
   listTestSuccess: false,
@@ -49,56 +48,56 @@ const getListTestFailure = state => ({
 });
 
 // ---------------------------------------
-const createOneTestSuccess = state => {
-
+const createOneTestSuccess = (state, { data }) => {
   return {
     ...state,
-    loading:false,
+    loading: false,
     createTestFailure: false,
     createTestSuccess: true,
-  }
-} 
+    currentTest: data,
+  };
+};
 
-const createOneTestFailure = state => ({
+const createOneTestFailure = (state) => ({
   ...state,
-  loading:false,
+  loading: false,
   createTestFailure: false,
   createTestSuccess: true,
-})
+});
 // -----------------------------------------
-const updateOneTest = (state, {id, payload}) => {
+const updateOneTest = (state, { id, payload }) => {
   const testList = [...state.tests];
-  payload.key = id
-  const index = testList.findIndex(e => e.id ===id);
+  payload.key = id;
+  const index = testList.findIndex((e) => e.id === id);
   testList[index] = payload;
   return {
     ...state,
-    tests:testList,
-  }
-}
-const updateOneTestSuccess = state => ({
+    tests: testList,
+  };
+};
+const updateOneTestSuccess = (state) => ({
   ...state,
-  loading:false,
+  loading: false,
   updateTestFailure: false,
   updateTestSuccess: true,
-})
-const updateOneTestFailure = state => ({
+});
+const updateOneTestFailure = (state) => ({
   ...state,
-  loading:false,
+  loading: false,
   updateTestFailure: false,
   updateTestSuccess: true,
-})
+});
 
 // -----------------------------------------
-const getOneTestSuccess =(state, {data}) => ({
+const getOneTestSuccess = (state, { data }) => ({
   ...state,
   currentTest: data,
-  loading:false,
-})
-const getOneTestFailure =(state) => ({
+  loading: false,
+});
+const getOneTestFailure = (state) => ({
   ...state,
-  loading:false,
-})
+  loading: false,
+});
 
 // -----------------------------------------
 // UPLOAD IMAGE
@@ -109,31 +108,33 @@ const uploadImageSuccess = (state, { fileUrl }) => {
   };
 };
 
-const uploadImageFailure = state => ({
+const uploadImageFailure = (state) => ({
   ...state,
   loading: false,
 });
 
 const removeImage = (state) => ({
   ...state,
-  testImage:null,
-})
+  testImage: null,
+});
 // --------------------------------------------------
 // GET REGISTRATIONS BY TEST
-const getRegistrations = state => ({
+const getRegistrations = (state) => ({
   ...state,
   loading: true,
-})
-const getRegistrationsSuccess = (state,{data, total, limit, offset} )=> ({
+});
+const getRegistrationsSuccess = (state, { data, total, limit, offset }) => ({
   ...state,
   registrations: data,
-  total, limit, offset,
+  total,
+  limit,
+  offset,
   loading: false,
-})
-const getRegistrationsFailure = state => ({
-  ...state,  
+});
+const getRegistrationsFailure = (state) => ({
+  ...state,
   loading: false,
-})
+});
 
 export const test = makeReducerCreator(initialState, {
   [TestTypes.GET_LIST_TEST]: getListTest,
@@ -158,4 +159,4 @@ export const test = makeReducerCreator(initialState, {
   [TestTypes.GET_REGISTRATIONS_BY_TEST]: getRegistrations,
   [TestTypes.GET_REGISTRATIONS_BY_TEST_SUCCESS]: getRegistrationsSuccess,
   [TestTypes.GET_REGISTRATIONS_BY_TEST_FAILURE]: getRegistrationsFailure,
-})
+});

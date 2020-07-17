@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.div`
   .title {
@@ -15,10 +15,11 @@ export default styled.div`
   .sub-action-div {
     display: flex;
     justify-content: space-between;
-    margin: 25px 0;
+    margin: 12px 0px 0px 0px;
   }
 
   .action-div {
+    margin-top: 20px;
     & button {
       width: 100%;
     }

@@ -1,6 +1,14 @@
 import React from 'react';
-import { TagSubjectWrapper } from './styles';
+import { TagSubjectWrapperDisabled, TagSubjectWrapperEnabled } from './styles';
 
 export default function TagSubject(props) {
-  return <TagSubjectWrapper>{props.nameSubject}</TagSubjectWrapper>;
+  return props.enabled ? (
+    <TagSubjectWrapperEnabled onClick={props.onClick}>
+      {props.nameSubject}
+    </TagSubjectWrapperEnabled>
+  ) : (
+    <TagSubjectWrapperDisabled onClick={props.onClick}>
+      {props.nameSubject}
+    </TagSubjectWrapperDisabled>
+  );
 }

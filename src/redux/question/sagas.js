@@ -1,5 +1,5 @@
-import { takeEvery, put, call } from "redux-saga/effects";
-import moment from "moment";
+import { takeEvery, put, call } from 'redux-saga/effects';
+import moment from 'moment';
 import {
   QuestionTypes,
   getListQuestionByTestSuccessAction,
@@ -10,12 +10,17 @@ import {
   updateOneQuestionFailureAction,
   getOneQuestionSuccessAction,
   getOneQuestionFailureAction,
-} from "./actions";
+} from './actions';
 // import {data} from './tempData'
-import { putApi, postApi, getDataByIdApi } from "../../api/common/crud";
-import { apiWrapper } from "../../utils/reduxUtils";
+import {
+  putApi,
+  postApi,
+  getAllApi,
+  getDataByIdApi,
+} from '../../api/common/crud';
+import { apiWrapper } from '../../utils/reduxUtils';
 
-function* getListQuestion({id, limit, offset, filter, orderBy, fields }) {
+function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
   try {
     if (limit === undefined) {
       limit = 50;
@@ -23,9 +28,12 @@ function* getListQuestion({id, limit, offset, filter, orderBy, fields }) {
     if (offset === undefined) {
       offset = 0;
     }
-    if (fields === undefined) {
-      fields = `["id", "name"]`;
-    }
+    // if (fields === undefined) {
+    //   fields = `["id", "name"]`;
+    // }
+    // if (orderBy == undefined) {
+    //   orderBy = '-id';
+    // }
     // console.log(
     //   limit, offset, filter , orderBy, fields,
     // );
@@ -35,24 +43,32 @@ function* getListQuestion({id, limit, offset, filter, orderBy, fields }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: false,
-        errorDescription: "Có lỗi xảy ra",
+        errorDescription: 'Error',
       },
-      getDataByIdApi,
-      "questions",
-      id,
+      getAllApi,
+      'questions',
       {
-        limit, offset, filter, orderBy, fields, 
-      },
+        limit,
+        offset,
+        filter,
+        orderBy,
+        fields,
+      }
     );
     // console.log(results);
 
-    const data = results.map(e => ({
-      name: e.name,
+    const data = results.map((e) => ({
+      //name: e.name,
       id: e.id,
-      key: e.id,
-      status: e.isVisible,
-      happenAt: moment(e.happenAt).format("L"),
-      locationDescription: e.locationDescription,
+      content: e.content,
+      time: e.time,
+      score: e.score,
+      minimumScore: e.minimumScore,
+      answers: e.answers,
+      //key: e.id,
+      // status: e.isVisible,
+      // happenAt: moment(e.happenAt).format('L'),
+      // locationDescription: e.locationDescription,
     }));
     // console.log(data);
 
@@ -69,12 +85,12 @@ function* createOneQuestion({ payload }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: "Thêm thành công",
-        errorDescription: "Có lỗi xảy ra",
+        successDescription: 'Added Successfully',
+        errorDescription: 'Error',
       },
       postApi,
-      "questions",
-      payload,
+      'questions',
+      payload
     );
     yield put(createOneQuestionSuccessAction());
   } catch (error) {
@@ -84,25 +100,25 @@ function* createOneQuestion({ payload }) {
 
 function* updateOneQuestion({ id, payload }) {
   try {
-    // console.log(id);
-    // console.log(payload);
+    // delete payload.key;
     payload = {
-      name: payload.name,
-      code: payload.code,
-      isVisible: payload.status,
+      testId: payload.testId,
+      answers: payload.answers,
+      content: payload.content,
+      time: payload.time,
     };
     yield call(
       apiWrapper,
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: "Sửa thành công",
-        errorDescription: "Có lỗi xảy ra",
+        successDescription: 'Edited Successfully',
+        errorDescription: 'Error',
       },
       putApi,
-      "questions",
+      'questions',
       id,
-      payload,
+      payload
     );
     yield put(updateOneQuestionSuccessAction());
   } catch (error) {
@@ -117,11 +133,11 @@ function* getOne({ id }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: false,
-        errorDescription: "Có lỗi xảy ra",
+        errorDescription: 'Có lỗi xảy ra',
       },
       getDataByIdApi,
-      "questions",
-      id,
+      'questions',
+      id
     );
     // console.log(response);
 
@@ -130,7 +146,7 @@ function* getOne({ id }) {
       name: response.name,
       content: response.name,
       locationDescription: response.locationDescription,
-      happenAt: moment(response.happenAt).format("L"),
+      happenAt: moment(response.happenAt).format('L'),
       isVisible: response.isVisible,
     };
     // console.log(data);

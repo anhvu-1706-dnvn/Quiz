@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import "react-quill/dist/quill.core.css";
-import QuillEditorWrapper from "./styles";
+import React, { Component } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.core.css';
+import QuillEditorWrapper from './styles';
 
 export default class Editor extends Component {
   constructor(props) {
     super(props);
     this.isChangeState = false;
-    this.state = { 
-      value: " ",
+    this.state = {
+      value: ' ',
       focused: false,
     };
 
     this.quillModules = {
       toolbar: {
         container: [
-          ["bold", "italic", "underline"], // toggled buttons
+          ['bold', 'italic', 'underline'], // toggled buttons
           [{ color: [] }],
-          ["code-block"],
-          [{ script: "sub" }, { script: "super" }], // superscript/subscript
+          ['code-block'],
+          [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
           [{ background: [] }], // dropdown with defaults from theme
         ],
       },
@@ -29,39 +29,37 @@ export default class Editor extends Component {
   handleChange = (value) => {
     this.isChangeState = true;
     this.setState({ value });
-    // this.props.onChange(value);
-  }
+    this.props.handleChangeContentAnswer &&
+      this.props.handleChangeContentAnswer(this.props.id, value);
+    this.props.handleChangeTitle && this.props.handleChangeTitle(value);
+    this.isChangeState = false;
+  };
 
   onFocus = () => {
-    console.log('Here');
-    
     this.setState({
       focused: true,
-    })
-  }
+    });
+  };
 
-  onBlur =() => {
-    console.log('Here2');
-
+  onBlur = () => {
     this.setState({
       focused: false,
-    })
-  }
+    });
+  };
 
   render() {
     const { label, placeholder, content } = this.props;
-
     let value;
     if (this.isChangeState) {
       value = this.state.value;
     } else if (content) {
       value = content;
     } else {
-      value = "";
+      value = '';
     }
 
     const options = {
-      theme: "snow",
+      theme: 'snow',
       formats: Editor.formats,
       placeholder,
       value,
@@ -69,15 +67,16 @@ export default class Editor extends Component {
       modules: this.quillModules,
     };
 
-    const isFocus = this.state.focused ? 'focus': ""
+    const isFocus = this.state.focused ? 'focus' : '';
     return (
       <QuillEditorWrapper>
         <label>{label}</label>
         <ReactQuill
-          {...options} 
+          {...options}
           className={isFocus}
-          onFocus={this.onFocus} 
-          onBlur={this.onBlur} />
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+        />
       </QuillEditorWrapper>
     );
   }
