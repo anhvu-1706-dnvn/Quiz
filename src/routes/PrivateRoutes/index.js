@@ -9,6 +9,7 @@ import MyQuizz from '../../pages/MyQuizz';
 import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
 import JoinGame from '../../pages/Game/Join';
+import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
 
 const routes = [
@@ -47,6 +48,13 @@ const routes = [
     component: JoinGame,
     exact: true,
     title: 'Join a game',
+    isUsePublicLayout: true,
+  },
+  {
+    path: '/entrance',
+    component: EntranceGame,
+    exact: true,
+    title: 'Entrance to play a game',
     isUsePublicLayout: true,
   },
   {
