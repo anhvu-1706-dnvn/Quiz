@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import i18n from 'i18next';
+// import i18n from 'i18next';
 
 import { flatMap, map } from 'lodash';
 import PrivateLayout from '../../layout/PrivateLayout';
-import Dashboard from '../../pages/Dashboard';
+// import Dashboard from '../../pages/Dashboard';
 import CreateQuizz from '../../pages/CreateQuizz';
 import MyQuizz from '../../pages/MyQuizz';
 import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
+import AdminDashboard from '../../pages/AdminDashboard';
+import RoomStatistic from '../../pages/RoomStatistic';
 
 const routes = [
   // {
@@ -42,6 +44,21 @@ const routes = [
     exact: true,
     title: 'Quizz By Tag',
   },
+
+
+  // ------------------- Admin Routes ---------------------
+  {
+    path: '/admin',
+    component: AdminDashboard,
+    exact: true,
+    title: 'Admin Dashboard',
+  },
+  {
+    path: '/admin/rooms/:id',
+    component: RoomStatistic,
+    exact: true,
+    title: 'Admin Dashboard',
+  },
 ];
 
 const PrivateRoutes = () => (
@@ -67,7 +84,7 @@ const PrivateRoutes = () => (
           )}
           key={route.path}
         />
-      )
+      ),
     )}
   </Switch>
 );

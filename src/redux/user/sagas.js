@@ -4,7 +4,7 @@ import {
   loginSuccessAction,
   loginFailureAction,
 } from "./actions";
-import { staffLoginApi } from "../../api/modules/staff";
+import { loginApi } from "../../api/modules/auth";
 import { apiWrapper } from "../../utils/reduxUtils";
 
 
@@ -18,7 +18,7 @@ function* loginSaga({
         isShowLoading: true,
         isShowSucceedNoti: false,
       },
-      staffLoginApi,
+      loginApi,
       params,
     );
     if (response.token) {
