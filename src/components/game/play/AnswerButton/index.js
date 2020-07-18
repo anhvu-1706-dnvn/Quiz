@@ -1,8 +1,10 @@
 import React from 'react';
-import Wrapper from './style';
+import Wrapper from './styles';
 
 export default function AnswerButton(props) {
   return (
-    <Wrapper backgroundColor={props.backgroundColor}>{props.content}</Wrapper>
+    <Wrapper backgroundColor={props.backgroundColor} onClick={props.onClick}>
+      {props.content}
+    </Wrapper>
   );
 }

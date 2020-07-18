@@ -29,6 +29,9 @@ export const JoinGameContainerWrapper = styled.div`
       }
 
       .btn-join {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: ${theme.palette.primary};
         color: white;
         border: none;
@@ -79,5 +82,107 @@ export const PlayGameContainerWrapper = styled.div`
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 18px;
+  }
+`;
+
+export const RankingContainerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 93vh;
+  .rank-section {
+    width: 500px;
+    border-radius: 16px;
+    color: white;
+
+    .header-rank-table {
+      width: 700px;
+      display: flex;
+      justify-content: flex-start;
+      font-weight: lighter;
+
+      .first-title {
+        margin-left: 20px;
+      }
+
+      .second-title {
+        margin-left: 90px;
+      }
+
+      .third-title {
+        margin-left: auto;
+        margin-right: 20px;
+      }
+    }
+
+    .content-rank-table {
+      .divider {
+        height: 10px;
+        width: 4px;
+        background: hsla(0, 0%, 100%, 0.15);
+        margin-bottom: 5px;
+        margin-left: 140px;
+      }
+    }
+  }
+`;
+
+export const EntranceContainerWrapper = styled.div`
+  color: #fff;
+  font-size: 20px;
+  padding: 24px;
+  border-radius: 16px;
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.08),
+    hsla(0, 0%, 100%, 0.04)
+  );
+  .title {
+    display: flex;
+    margin-bottom: 30px;
+
+    .test-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+
+    .infor {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .name {
+        font-size: 32px;
+      }
+
+      .total-question {
+        font-size: 20px;
+        color: #adadad;
+      }
+    }
+  }
+  .creator-section {
+    margin-bottom: 40px;
+  }
+  .btn-start {
+    width: 100%;
+    background-color: rgb(0, 201, 133);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 70px;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #01af74;
+      color: #fff;
+    }
   }
 `;
