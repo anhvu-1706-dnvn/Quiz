@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { takeEvery, put, call } from "redux-saga/effects";
 import moment from "moment";
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
 import {
   StatisticTypes,
   getOverallStatisticSuccessAction,

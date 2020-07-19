@@ -28,6 +28,7 @@ export default styled.div`
       color: ${theme.palette.primary};
       border: 1px solid ${theme.palette.primary};
       background-color: ${theme.palette.lightestPrimary};
+      border-radius: 4px;
 
       &:hover {
         background-color: ${theme.palette.lightPrimary} !important;

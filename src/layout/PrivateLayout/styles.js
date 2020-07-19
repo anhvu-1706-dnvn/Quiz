@@ -181,10 +181,10 @@ const PrivateLayoutWrapper = styled.div`
     }
 
     .btn-section {
+      width: 56%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      width: 21%;
       .btn-exit {
         min-width: 84px;
         background-color: #00639f;
@@ -248,6 +248,20 @@ const PrivateLayoutWrapper = styled.div`
       color: #fff;
       @media only screen and (max-width: 430px) {
         display: none;
+      }
+      display: flex;
+      align-items: center;
+
+      .btn-join {
+        margin-right: 30px
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 4px;
+        color: #fff;
+        border: none;
+
+        &:hover {
+          background-color: rgba(255,255,255,0.1);
+        }
       }
     }
     .title {

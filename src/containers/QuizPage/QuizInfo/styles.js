@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
   .quiz-info-image-wrapper {
     display: flex;
     flex-direction: column;
@@ -29,7 +28,7 @@ export const Wrapper = styled.div`
       margin-top: 10px;
     }
     &:hover {
-      background-color: #fff0f0;
+      background-color: ${theme.palette.lightestPrimary};
     }
   }
   .quiz-info-name-wrapper {
@@ -48,6 +47,7 @@ export const Wrapper = styled.div`
       margin-right: 20px;
       font-size: 12px;
       color: ${theme.palette.primary};
+      cursor: pointer;
 
       .icon {
         margin-right: 5px;
@@ -56,10 +56,26 @@ export const Wrapper = styled.div`
   }
   .quiz-info-detail-wrapper {
     margin-top: 30px;
+    .item-description {
+      display: flex;
+
+      .icon-description {
+        margin-top: 4px;
+      }
+
+      .description {
+        max-width: 200px;
+      }
+    }
     .item {
       margin-bottom: 10px;
       font-size: 16px;
       cursor: pointer;
+
+      &:hover {
+        text-decoration: underline !important;
+      }
+
       .icon {
         margin-right: 8px;
       }

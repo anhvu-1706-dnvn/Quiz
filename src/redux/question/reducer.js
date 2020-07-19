@@ -1,6 +1,6 @@
-import { makeReducerCreator } from "../../utils/reduxUtils";
-import { QuestionTypes } from "./actions";
-import { mongoObjectId } from "../../utils/textProcessor";
+import { makeReducerCreator } from '../../utils/reduxUtils';
+import { QuestionTypes } from './actions';
+import { mongoObjectId } from '../../utils/textProcessor';
 
 // Setup inintial state for question
 export const initialState = {
@@ -21,9 +21,8 @@ export const initialState = {
   currentQuestion: {},
   questionImage: null,
 
-
   // One question info
-  questionContent: null, 
+  questionContent: null,
   optionList: [
     {
       id: mongoObjectId(),
@@ -40,15 +39,18 @@ export const initialState = {
 // End setup
 
 // LIST QUESTION
-const getListQuestionByTest = state => ({
+const getListQuestionByTest = (state) => ({
   ...state,
   loading: true,
 });
 
-const getListQuestionByTestSuccess = (state, { data, total, limit, offset }) => ({
+const getListQuestionByTestSuccess = (
+  state,
+  { data, total, limit, offset },
+) => ({
   ...state,
   questions: data,
-  limit, 
+  limit,
   offset,
   total,
   loading: false,
@@ -56,7 +58,7 @@ const getListQuestionByTestSuccess = (state, { data, total, limit, offset }) => 
   listQuestionFailure: false,
 });
 
-const getListQuestionByTestFailure = state => ({
+const getListQuestionByTestFailure = (state) => ({
   ...state,
   loading: false,
   listQuestionSuccess: false,
@@ -64,58 +66,59 @@ const getListQuestionByTestFailure = state => ({
 });
 
 // ---------------------------------------
-const createOneQuestionSuccess = state => {
-
+const createOneQuestionSuccess = (state) => {
   return {
     ...state,
-    loading:false,
+    loading: false,
     createQuestionFailure: false,
     createQuestionSuccess: true,
-  }
-} 
+  };
+};
 
-const createOneQuestionFailure = state => ({
+const createOneQuestionFailure = (state) => ({
   ...state,
-  loading:false,
+  loading: false,
   createQuestionFailure: false,
   createQuestionSuccess: true,
-})
+});
 // -----------------------------------------
-const updateOneQuestion = (state, {id, payload}) => {
+const updateOneQuestion = (state, { id, payload }) => {
   const questionList = [...state.questions];
-  payload.key = id
-  const index = questionList.findIndex(e => e.id ===id);
-  questionList[index] = payload;
+  payload.key = id;
+  const index = questionList.findIndex((e) => e.id === id);
+  questionList[index].answers = payload.answers;
+  questionList[index].content = payload.content;
+  questionList[index].time = payload.time;
   return {
     ...state,
-    questions:questionList,
-  }
-}
-const updateOneQuestionSuccess = state => ({
+    questions: questionList,
+  };
+};
+const updateOneQuestionSuccess = (state) => ({
   ...state,
-  loading:false,
+  loading: false,
   updateQuestionFailure: false,
   updateQuestionSuccess: true,
-})
-const updateOneQuestionFailure = state => ({
+});
+const updateOneQuestionFailure = (state) => ({
   ...state,
-  loading:false,
+  loading: false,
   updateQuestionFailure: false,
   updateQuestionSuccess: true,
-})
+});
 
 // -----------------------------------------
-const getOneQuestionSuccess = (state, {data}) => ({
+const getOneQuestionSuccess = (state, { data }) => ({
   ...state,
   currentQuestion: data,
   questionContent: data.content,
   optionList: data.options,
   loading: false,
-})
-const getOneQuestionFailure =(state) => ({
+});
+const getOneQuestionFailure = (state) => ({
   ...state,
-  loading:false,
-})
+  loading: false,
+});
 
 // -----------------------------------------
 // UPLOAD IMAGE
@@ -126,17 +129,16 @@ const uploadImageSuccess = (state, { fileUrl }) => {
   };
 };
 
-const uploadImageFailure = state => ({
+const uploadImageFailure = (state) => ({
   ...state,
   loading: false,
 });
 
 const removeImage = (state) => ({
   ...state,
-  questionImage:null,
-})
+  questionImage: null,
+});
 // --------------------------------------------------
-
 
 export const question = makeReducerCreator(initialState, {
   [QuestionTypes.GET_LIST_QUESTION_BY_TEST]: getListQuestionByTest,
@@ -157,5 +159,4 @@ export const question = makeReducerCreator(initialState, {
   [QuestionTypes.UPLOAD_IMAGE_FAILURE]: uploadImageFailure,
 
   [QuestionTypes.REMOVE_IMAGE]: removeImage,
-
-})
+});

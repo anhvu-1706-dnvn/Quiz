@@ -82,3 +82,28 @@
 .modal-create-quizz .ant-modal-content {
   height: 360px !important;
 }
+
+.edit-quiz-info-modal-body .title {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.title .error {
+  margin-left: 4px;
+  color: #ff4a4a;
+}
+
+.modal-edit-more-infor-quizz .main-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-edit-more-infor-quizz .item-quiz-detail {
+  margin-bottom: 20px;
+}
+
+.ant-btn-primary {
+  background-color: #00c985 !important;
+  border-color: #00c985 !important;
+}

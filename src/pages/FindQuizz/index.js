@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import QuizzList from '../../components/quizz/find_quizz/QuizzList';
-import { getListTagsAction } from '../../redux/tag/action';
+import { getListTagWithTestAction } from '../../redux/tag/action';
 import Wrapper from './styles';
 
 const { Search } = Input;
@@ -11,7 +11,7 @@ export default function FindQuizz() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.tag);
   useEffect(() => {
-    dispatch(getListTagsAction(9, 0));
+    dispatch(getListTagWithTestAction());
   }, [dispatch]);
 
   return (
@@ -26,7 +26,7 @@ export default function FindQuizz() {
       </div>
       {data.tags.length > 0 &&
         data.tags.map((e) => (
-          <QuizzList key={e.id} id={e.id} nameList={e.name} />
+          <QuizzList key={e.id} id={e.id} nameList={e.name} test={e.test} />
         ))}
     </Wrapper>
   );

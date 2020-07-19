@@ -10,7 +10,11 @@ export const Wrapper = styled.div`
     justify-content: center;
     height: 64px;
     box-sizing: border-box;
-    postion: relative;
+    position: fixed;
+    width: 582px;
+    top: 56px;
+    background-color: #Fff;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
 
     .questions-header-inner {
       display: flex;
@@ -52,6 +56,8 @@ export const Wrapper = styled.div`
     }
   }
   .questions-body {
+    margin-top: 60px;
+
     .questionType-panel {
       display: flex;
       justify-content: center;

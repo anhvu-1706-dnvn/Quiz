@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '../../../configs/theme';
 
-export const TagSubjectWrapper = styled.div`
+export const TagSubjectWrapperDisabled = styled.div`
   display: inline-block;
   padding: 5px 12px;
   background-color: #f2f2f2;
@@ -12,9 +12,21 @@ export const TagSubjectWrapper = styled.div`
   margin-bottom: 8px;
   cursor: pointer;
   &:hover {
-    background-color: ${theme.palette.primary};
+    background-color: #008ee7;
     color: white;
   }
+`;
+
+export const TagSubjectWrapperEnabled = styled.div`
+  display: inline-block;
+  padding: 5px 12px;
+  background-color: ${theme.palette.primary};
+  border-radius: 28px;
+  font-size: 12px;
+  color: #fff;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  cursor: pointer;
 `;
 
 export const QuestionTypeWrapper = styled.div`
@@ -34,7 +46,7 @@ export const QuestionTypeWrapper = styled.div`
     justify-content: center;
     align-items: center;
     color: #fff;
-    background-color: red;
+    background-color: ${(props) => props.backgroundColor};
     font-size: 24px;
   }
 

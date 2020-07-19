@@ -6,8 +6,10 @@ import {
   getListTagsFailureAction,
   getOneTagSuccessAction,
   getOneTagFailureAction,
+  getListTagWithTestSuccessAction,
+  getListTagWithTestFailureAction,
 } from './action';
-import { getListTags, getOne } from '../../api/modules/tag';
+import { getListTags, getOne, getListTagAndTest } from '../../api/modules/tag';
 import { apiWrapper } from '../../utils/reduxUtils';
 
 function* getListTagsSaga({ limit, offset, filter, orderBy }) {
@@ -45,9 +47,8 @@ function* getOneTagSaga({ id }) {
         errorDescription: 'Error',
       },
       getOne,
-      id
+      id,
     );
-    //console.log(response);
 
     const data = {
       id: response.id,
@@ -59,7 +60,6 @@ function* getOneTagSaga({ id }) {
 
       happenAt: moment(response.happenAt).format('L'),
     };
-    // console.log(data);
 
     yield put(getOneTagSuccessAction(data));
   } catch (error) {
@@ -67,7 +67,34 @@ function* getOneTagSaga({ id }) {
   }
 }
 
+function* getListTagWithTestSaga({ limit, offset, filter, orderBy }) {
+  try {
+    if (limit === undefined) {
+      limit = 10;
+    }
+    if (offset === undefined) {
+      offset = 0;
+    }
+    const { results, total } = yield getListTagAndTest({
+      limit,
+      offset,
+      filter,
+      orderBy,
+    });
+    const data = results.map((e) => ({
+      key: e.id,
+      id: e.id,
+      name: e.name,
+      test: e.tests,
+    }));
+    yield put(getListTagWithTestSuccessAction(data, total, limit, offset));
+  } catch (error) {
+    yield put(getListTagWithTestFailureAction(error));
+  }
+}
+
 export default [
   takeEvery(TagTypes.GET_LIST_TAGS, getListTagsSaga),
   takeEvery(TagTypes.GET_ONE_TAG, getOneTagSaga),
+  takeEvery(TagTypes.GET_LIST_TAG_WITH_TEST, getListTagWithTestSaga),
 ];

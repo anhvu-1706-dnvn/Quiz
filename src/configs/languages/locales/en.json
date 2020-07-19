@@ -43,7 +43,15 @@
     "email": {
       "placeholder": "Email",
       "validateMsg": {
-        "required": "Please input your email!"
+        "required": "Please input your E-mail!",
+        "format": "The input is not valid E-mail!"
+      }
+    },
+    "phone": {
+      "placeholder": "Phone Number",
+      "validateMsg": {
+        "required": "Please input your phone number!",
+        "format": "The input is not valid phone number!"
       }
     }
   },
@@ -58,15 +66,21 @@
   "login": {
     "title": "Login",
     "rememberMe": "Remember me",
-    "loginBtn": "Log in",
+    "loginBtn": "Login",
     "yourEmail": "Your Email",
     "resetPassword": "Reset password",
-    "password": "Password"
+    "password": "Password",
+    "signUp": "Sign up here"
   },
 
   "register": {
     "title": "Register",
-    "registerBtn": "Register"
+    "registerBtn": "Sign up",
+    "logIn": "Log in here"
+  },
+
+  "verify": {
+    "verifyBtn": "Verify"
   },
 
   "forgotPassword": {
@@ -94,23 +108,21 @@
   },
 
   "user": {
-    "list":{
-      "title":"List User"
+    "list": {
+      "title": "List User"
     }
   },
   "calendar": {
     "title": "Calendar",
-    "event":
-    {
+    "event": {
       "create": "Create event",
       "update": "Update event",
       "delete": "Delete event",
       "title": "Set title",
       "description": "Set description",
       "save": "Save",
-      "cancel":"Cancel"
+      "cancel": "Cancel"
     }
-    
   },
 
   "button": {

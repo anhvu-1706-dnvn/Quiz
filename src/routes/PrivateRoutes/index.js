@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-// import i18n from 'i18next';
-
 import { flatMap, map } from 'lodash';
 import PrivateLayout from '../../layout/PrivateLayout';
 // import Dashboard from '../../pages/Dashboard';
@@ -12,6 +10,8 @@ import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
 import AdminDashboard from '../../pages/AdminDashboard';
 import RoomStatistic from '../../pages/RoomStatistic';
+import JoinGame from '../../pages/Game/Join';
+import PlayGame from '../../pages/Game/Play';
 
 const routes = [
   // {
@@ -44,7 +44,20 @@ const routes = [
     exact: true,
     title: 'Quizz By Tag',
   },
-
+  {
+    path: '/join',
+    component: JoinGame,
+    exact: true,
+    title: 'Join a game',
+    isUsePublicLayout: true,
+  },
+  {
+    path: '/play',
+    component: PlayGame,
+    exact: true,
+    title: 'Play a game',
+    isUsePublicLayout: true,
+  },
 
   // ------------------- Admin Routes ---------------------
   {
@@ -74,17 +87,24 @@ const PrivateRoutes = () => (
         }
         return route;
       }),
-      (route) => (
-        <Route
-          {...route}
-          component={(e) => (
-            <PrivateLayout>
-              <route.component {...e} />
-            </PrivateLayout>
-          )}
-          key={route.path}
-        />
-      ),
+      (route) =>
+        route.isUsePublicLayout ? (
+          <Route
+            {...route}
+            component={(e) => <route.component {...e} />}
+            key={route.path}
+          />
+        ) : (
+          <Route
+            {...route}
+            component={(e) => (
+              <PrivateLayout>
+                <route.component {...e} />
+              </PrivateLayout>
+            )}
+            key={route.path}
+          />
+        ),
     )}
   </Switch>
 );

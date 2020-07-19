@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 import { Form, Icon, Button, Checkbox } from 'antd';
 import i18n from 'i18next';
-import { loginAction } from '../../redux/user/actions';
-import MaterialInput from '../../components/common/MaterialInput/index';
-import Wrapper from './styles';
-import logo from '../../assets/images/logoFull.png';
+import { loginAction } from '../../../redux/user/actions';
+import MaterialInput from '../../../components/common/MaterialInput/index';
+import Wrapper from '../styles';
+import logo from '../../../assets/images/logoFull.png';
 
 const FormItem = Form.Item;
 
@@ -33,6 +33,7 @@ class Login extends Component {
         <div className="title">
           <img alt="#" src={logo} />
         </div>
+        <br />
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('email', {
@@ -41,6 +42,10 @@ class Login extends Component {
                   required: true,
                   message: i18n.t('input.email.validateMsg.required'),
                 },
+                {
+                  type: 'email',
+                  message: i18n.t('input.email.validateMsg.format'),
+                },
               ],
             })(
               <MaterialInput
@@ -48,7 +53,7 @@ class Login extends Component {
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -66,7 +71,7 @@ class Login extends Component {
                   <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 type="password"
-              />
+              />,
             )}
           </FormItem>
           <div className="sub-action-div">
@@ -84,6 +89,13 @@ class Login extends Component {
             >
               {this.props.isLoading ? '' : i18n.t('login.loginBtn')}
             </Button>
+          </div>
+          <br />
+          <div to="#" className="action-link">
+            Don't have an account?
+            <Link to="/register" className="sign-up-link">
+              {i18n.t('login.signUp')}
+            </Link>
           </div>
         </Form>
       </Wrapper>
@@ -106,5 +118,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login))
+  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login)),
 );
