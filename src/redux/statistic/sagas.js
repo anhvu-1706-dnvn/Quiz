@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { takeEvery, put, call } from "redux-saga/effects";
 import moment from "moment";
-// import * as _ from 'lodash'
+import * as _ from 'lodash'
 import {
   StatisticTypes,
   getOverallStatisticSuccessAction,
@@ -84,22 +84,18 @@ function * getRoomStatisticDetailInfo({roomId}) {
       roomId,
     )
     const roomDetail = {}
-
-    console.log(response);
     roomDetail.test = {...response.room.test}
     roomDetail.questions = [...response.questions]
+    roomDetail.totalParticipant = response.room.totalParticipant
+    roomDetail.creator = {...response.room.creator}
+    roomDetail.scores = _.countBy([...response.sessions.map(e=> e.score)])
     // roomDetail.scores = _.countBy([...response.sessions.map(e=> e.score)])
-    // roomDetail.scores = _.countBy([...response.sessions.map(e=> e.score)])
-    
-  
     roomDetail.userRanking = [...response.sessions.map(e => ({
       fullName: e.user.fullName,
       score: e.score,
       time: moment(e.updatedAt).diff(moment(e.createdAt),'seconds'),
       key: e.id,
     }))]
-    // console.log('TOP ', topUserScores);
-    
     yield put(getRoomStatisticDetailSuccessAction(roomDetail));
   } catch (error) {
     console.log(error);

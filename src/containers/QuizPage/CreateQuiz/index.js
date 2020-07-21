@@ -19,12 +19,14 @@ export default function CreateQuiz() {
   const questions = useSelector((state) => state.question.questions);
   const total = useSelector((state) => state.question.total);
 
+  const testId = 1;
+
   useEffect(() => {
     dispatch(
       getListQuestionByTestAction({
         limit: 50,
         offset: 0,
-        filter: JSON.stringify({ testId: 51 }),
+        filter: JSON.stringify({ testId }),
         orderBy: 'id',
       }),
     );
@@ -48,7 +50,7 @@ export default function CreateQuiz() {
     });
     await dispatch(
       createOneQuestionAction({
-        testId: 51,
+        testId: testId,
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
@@ -58,7 +60,7 @@ export default function CreateQuiz() {
       getListQuestionByTestAction({
         limit: 50,
         offset: 0,
-        filter: JSON.stringify({ testId: 51 }),
+        filter: JSON.stringify({ testId }),
         orderBy: 'id',
       }),
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Col, Row, Table } from 'antd'
 import { connect } from "react-redux";
-import Chart from 'react-apexcharts'
 import Wrapper from './styles'
 import * as StatisticAction from '../../../redux/statistic/actions'
 
@@ -15,12 +14,13 @@ class UserRanking extends Component {
         title: 'Full name',
         dataIndex: 'fullName',
         key: 'fullName',
-        
       },
       {
         title: 'Score',
         dataIndex: 'score',
         key: 'score',
+        sorter: (a, b) => a.score - b.score,
+        sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Time',
@@ -28,6 +28,8 @@ class UserRanking extends Component {
         width: '30%',
         key: 'time',
         render: (text) => `${text} s`,
+        sorter: (a, b) => a.time - b.time,
+         sortDirections: ['descend', 'ascend'],
       },
     ];
   }
@@ -37,10 +39,9 @@ class UserRanking extends Component {
     return (
       <Wrapper>
         <Card
-          title=" User ranking"
+          title={` User ranking (${roomDetail?.totalParticipant} members)`}
         >
           <Table columns={this.columns} dataSource={roomDetail?.userRanking} />
-
         </Card>
       </Wrapper>
     )

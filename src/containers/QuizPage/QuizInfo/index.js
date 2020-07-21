@@ -61,10 +61,12 @@ export default function QuizInfo(props) {
   const tagState = useSelector((state) => state.tag);
   const currentTest = useSelector((state) => state.test.currentTest);
 
+  const testId = 1;
+
   useEffect(() => {
     dispatch(getListTagsAction(50, 0));
     // dispatch(getOneTestAction(props.id));
-    dispatch(getOneTestAction(52));
+    dispatch(getOneTestAction(testId));
     setTimeout(() => {
       setLoadingSuccess(true);
       setNameQuiz(currentTest.name);
@@ -119,13 +121,13 @@ export default function QuizInfo(props) {
     }
     if (chosenTag.length > 0 && nameQuiz.length > 0) {
       dispatch(
-        updateOneTestAction(52, {
+        updateOneTestAction(testId, {
           userId: 1,
           name: nameQuiz,
           tagIds: chosenTag,
         }),
       );
-      dispatch(getOneTestAction(52));
+      dispatch(getOneTestAction(testId));
       setVisibleModalNameSubject(false);
       if (errorNameMessage !== '') {
         setErrorNameMessage('');
@@ -142,13 +144,13 @@ export default function QuizInfo(props) {
 
   const handleOkModalOtherInfor = () => {
     dispatch(
-      updateOneTestAction(52, {
+      updateOneTestAction(testId, {
         userId: 1,
         description: quizDescription,
         isDraft: !quizStatus,
       }),
     );
-    dispatch(getOneTestAction(52));
+    dispatch(getOneTestAction(testId));
     setVisibleModalOtherInfor(false);
   };
 
@@ -159,12 +161,12 @@ export default function QuizInfo(props) {
 
   const handleChangeStatusQuiz = async (status) => {
     await dispatch(
-      updateOneTestAction(52, {
+      updateOneTestAction(testId, {
         userId: 1,
         isDraft: !status,
       }),
     );
-    await dispatch(getOneTestAction(52));
+    await dispatch(getOneTestAction(testId));
     setQuizStatus(status);
   };
 

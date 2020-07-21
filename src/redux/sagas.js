@@ -5,7 +5,15 @@ import questionSaga from './question/sagas';
 import testSaga from './test/sagas';
 import tagSaga from './tag/sagas';
 import statisticSaga from './statistic/sagas';
+import roomSaga from './room/sagas';
 
 export default function* root() {
-  yield all([...userSaga, ...questionSaga, ...testSaga, ...tagSaga, ...statisticSaga]);
+  yield all([
+    ...userSaga,
+    ...questionSaga,
+    ...testSaga,
+    ...tagSaga,
+    ...roomSaga,
+    ...statisticSaga,
+  ]);
 }

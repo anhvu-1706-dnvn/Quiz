@@ -5,6 +5,7 @@ import { question } from './question/reducer';
 import { user } from './user/reducer';
 import { tag } from './tag/reducer';
 import { statistic } from './statistic/reducer';
+import { room } from './room/reducer';
 
 export default (history) =>
   combineReducers({
@@ -14,4 +15,5 @@ export default (history) =>
     question,
     tag,
     statistic,
+    room,
   });

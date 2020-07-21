@@ -1,51 +1,40 @@
-import React from 'react';
-import { Layout, Input, Button, Icon } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Layout } from 'antd';
 import PlayGameContainter from '../../../containers/Game/Play';
+import { getListQuestionByTestAction } from '../../../redux/question/actions';
+import Header from '../Header';
 import { PlayGamePageWrapper } from '../styles';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
-export default function PlayGamePage() {
+export default function PlayGamePage(props) {
+  const dispatch = useDispatch();
+  const testId = 1;
+
+  const [isShowLeaderBoard, setIsShowLeaderBoard] = useState(false);
+
+  useEffect(() => {
+    if (isShowLeaderBoard) {
+      setTimeout(() => {
+        setIsShowLeaderBoard(false);
+      }, 5000);
+    }
+  });
+
+  const handleChooseAnswer = (id) => {
+    if (id === 1) setIsShowLeaderBoard(true);
+  };
+
   return (
     <PlayGamePageWrapper>
       <Layout className="play-layout">
-        <Header className="header">
-          <div className="left-section">
-            <Button className="btn-pause">
-              <Icon type="pause" />
-            </Button>
-            <div className="infor-wrapper">
-              <span>8/12</span>
-            </div>
-            <div className="infor-wrapper">
-              <span>
-                Streak:
-                <Icon type="fire" theme="filled" className="icon" />
-                3
-              </span>
-            </div>
-          </div>
-          <div className="right-section">
-            <div className="infor-wrapper">
-              <span>
-                <Icon type="golden" theme="filled" className="rank-icon icon" />
-                18th
-              </span>
-            </div>
-            <div className="infor-wrapper">
-              <span>
-                <Icon
-                  type="dollar-circle"
-                  theme="filled"
-                  className="score-icon icon"
-                />
-                990
-              </span>
-            </div>
-          </div>
-        </Header>
+        <Header isShowLeaderBoard={isShowLeaderBoard} />
         <Content className="content">
-          <PlayGameContainter />
+          <PlayGameContainter
+            isShowLeaderBoard={isShowLeaderBoard}
+            handleChooseAnswer={handleChooseAnswer}
+          />
         </Content>
       </Layout>
     </PlayGamePageWrapper>
