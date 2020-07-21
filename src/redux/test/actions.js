@@ -19,7 +19,7 @@ export const TestTypes = makeConstantCreator(
 
   'UPLOAD_IMAGE_SUCCESS',
   'UPLOAD_IMAGE_FAILURE',
-  'REMOVE_IMAGE'
+  'REMOVE_IMAGE',
 );
 
 // List test

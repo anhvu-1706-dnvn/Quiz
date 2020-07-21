@@ -46,7 +46,7 @@ const getListQuestionByTest = (state) => ({
 
 const getListQuestionByTestSuccess = (
   state,
-  { data, total, limit, offset }
+  { data, total, limit, offset },
 ) => ({
   ...state,
   questions: data,

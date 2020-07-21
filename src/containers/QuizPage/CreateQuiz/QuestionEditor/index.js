@@ -24,12 +24,12 @@ export default function QuestionEditor(props) {
       : [
           { key: 1, content: '', isCorrect: false, isDisabled: true },
           { key: 2, content: '', isCorrect: false, isDisabled: true },
-        ]
+        ],
   );
 
   const [title, setTitle] = useState(props.title || '');
   const [time, setTime] = useState(
-    (props.time && props.time.toString()) || '30'
+    (props.time && props.time.toString()) || '30',
   );
 
   // console.log(answerList);
@@ -93,7 +93,10 @@ export default function QuestionEditor(props) {
   return (
     <Wrapper>
       <div className="header">
-        <div className="title">Question {props.index}</div>
+        <div className="title">
+          Question
+          {props.index}
+        </div>
         <div className="question-type-select">
           <Select className="type" value={props.type && props.type.toString()}>
             <Option value="1">Multiple Choice</Option>
@@ -120,12 +123,11 @@ export default function QuestionEditor(props) {
                 handleDeleteAnswer={() => handleDeleteAnswer(e.key)}
                 handleChangeContentAnswer={handleChangeContentAnswer}
                 handleChangeStatusAnswer={() =>
-                  handleChangeStatusAnswer(e.key, !e.isCorrect)
-                }
+                  handleChangeStatusAnswer(e.key, !e.isCorrect)}
                 content={e.content}
                 isCorrect={e.isCorrect}
               />
-            )
+            ),
         )}
       </div>
       <Button onClick={handleAddAnswer}>Add answer option</Button>

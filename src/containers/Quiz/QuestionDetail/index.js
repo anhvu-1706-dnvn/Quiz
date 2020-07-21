@@ -41,7 +41,7 @@ export default function QuestionDetail(props) {
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
-      })
+      }),
     );
     setVisible(false);
   };
@@ -70,7 +70,10 @@ export default function QuestionDetail(props) {
           </div>
         </Popover>
 
-        <div className="title">Question {props.index}</div>
+        <div className="title">
+          Question
+          {props.index}
+        </div>
         <div className="btn-bar">
           <button type="button" onClick={() => setVisible(true)}>
             <EditFilled className="icon" />
@@ -102,7 +105,7 @@ export default function QuestionDetail(props) {
                 />
               ) : (
                 <QuestionItem content={ReactHtmlParser(e.content)} key={e.id} />
-              )
+              ),
             )}
         </div>
       </div>

@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { flatMap, map } from 'lodash';
 import PrivateLayout from '../../layout/PrivateLayout';
-import Dashboard from '../../pages/Dashboard';
+// import Dashboard from '../../pages/Dashboard';
 import CreateQuizz from '../../pages/CreateQuizz';
 import MyQuizz from '../../pages/MyQuizz';
 import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
+import AdminDashboard from '../../pages/AdminDashboard';
+import RoomStatistic from '../../pages/RoomStatistic';
 import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
@@ -64,6 +66,20 @@ const routes = [
     title: 'Play a game',
     isUsePublicLayout: true,
   },
+
+  // ------------------- Admin Routes ---------------------
+  {
+    path: '/admin',
+    component: AdminDashboard,
+    exact: true,
+    title: 'Admin Dashboard',
+  },
+  {
+    path: '/admin/rooms/:id',
+    component: RoomStatistic,
+    exact: true,
+    title: 'Admin Dashboard',
+  },
 ];
 
 const PrivateRoutes = () => (
@@ -96,7 +112,7 @@ const PrivateRoutes = () => (
             )}
             key={route.path}
           />
-        )
+        ),
     )}
   </Switch>
 );

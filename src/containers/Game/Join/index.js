@@ -8,7 +8,7 @@ import { getListTagWithTestAction } from '../../../redux/tag/action';
 import { history } from '../../../redux/store';
 import { JoinGameContainerWrapper } from '../styles';
 
-//const socket = io('http://02b58e6b5a3d.ngrok.io/room');
+// const socket = io('http://02b58e6b5a3d.ngrok.io/room');
 
 export default function JoinGameContainer() {
   const [code, setCode] = useState('');
@@ -25,7 +25,7 @@ export default function JoinGameContainer() {
   };
 
   const handleClickJoinBtn = () => {
-    //socket.emit('joinRoom', code);
+    // socket.emit('joinRoom', code);
     // history.push('/entrance');
   };
 

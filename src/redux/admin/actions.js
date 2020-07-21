@@ -11,7 +11,7 @@ export const AdminTypes = makeConstantCreator(
 
   'CREATE_ADMIN',
   'CREATE_ADMIN_SUCCESS',
-  'CREATE_ADMIN_FAILURE'
+  'CREATE_ADMIN_FAILURE',
 );
 
 // Get list admin

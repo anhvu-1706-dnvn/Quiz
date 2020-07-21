@@ -33,7 +33,7 @@ export default function CreateQuizz() {
     }
     if (chosenTag.length > 0 && nameQuiz.length > 0) {
       dispatch(
-        createOneTestAction({ userId: 1, name: nameQuiz, tagIds: chosenTag })
+        createOneTestAction({ userId: 1, name: nameQuiz, tagIds: chosenTag }),
       );
       setVisible(false);
     }
@@ -87,7 +87,11 @@ export default function CreateQuizz() {
           <div className="title">
             1. Name this quiz
             {errorNameMessage.length > 0 && (
-              <div className="error">({errorNameMessage})</div>
+              <div className="error">
+                (
+                {errorNameMessage}
+                )
+              </div>
             )}
           </div>
           <Input value={nameQuiz} onChange={handleChangeNameQuiz} />
@@ -96,7 +100,11 @@ export default function CreateQuizz() {
           <div className="title">
             2. Choose relevant subjects
             {errorSubjectMessage.length > 0 && (
-              <div className="error">({errorSubjectMessage})</div>
+              <div className="error">
+                (
+                {errorSubjectMessage}
+                )
+              </div>
             )}
           </div>
           {tagState.tags.length > 0 &&

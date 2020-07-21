@@ -11,7 +11,7 @@ export const UserTypes = makeConstantCreator(
   'VERIFY_USER_FAIL',
   'VERIFY_USER_SUCCESS',
   'LOGOUT',
-  'GET_CURRENT_USER'
+  'GET_CURRENT_USER',
 );
 
 // Login

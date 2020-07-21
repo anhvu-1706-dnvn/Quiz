@@ -43,7 +43,7 @@ function* getListTest({ id, limit, offset, filter, orderBy, fields }) {
         filter,
         orderBy,
         fields,
-      }
+      },
     );
 
     // console.log(results);
@@ -76,7 +76,7 @@ function* createOneTest({ payload }) {
       },
       postApi,
       'tests',
-      payload
+      payload,
     );
     const data = {
       id: response.id,
@@ -106,7 +106,7 @@ function* updateOneTest({ id, payload }) {
       putApi,
       'tests',
       id,
-      payload
+      payload,
     );
     yield put(updateOneTestSuccessAction(id));
   } catch (error) {
@@ -125,7 +125,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'tests',
-      id
+      id,
     );
     // console.log(response);
 

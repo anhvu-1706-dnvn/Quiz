@@ -99,9 +99,9 @@ class InputAddition extends Component {
               <h3>
                 {I18n.t(header)}
                 {' '}
-(
+                (
                 {index + 1}
-)
+                )
                 <span style={{ width: 40, paddingLeft: 10 }}>
                   {formDatas.length > 1 ? (
                     <Icon

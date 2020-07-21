@@ -21,7 +21,7 @@ export const makeActionCreator = (type, params = null) => ({ type, ...params });
 
 export const makeReducerCreator = (initialState = null, handlers = {}) => (
   state = initialState,
-  action
+  action,
 ) => {
   if (!action && !action.type) return state;
   const handler = handlers[action.type];

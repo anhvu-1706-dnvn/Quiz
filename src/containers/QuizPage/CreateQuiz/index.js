@@ -28,7 +28,7 @@ export default function CreateQuiz() {
         offset: 0,
         filter: JSON.stringify({ testId }),
         orderBy: 'id',
-      })
+      }),
     );
   }, [dispatch]);
   // console.log(questions);
@@ -54,7 +54,7 @@ export default function CreateQuiz() {
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
-      })
+      }),
     );
     await dispatch(
       getListQuestionByTestAction({
@@ -62,7 +62,7 @@ export default function CreateQuiz() {
         offset: 0,
         filter: JSON.stringify({ testId }),
         orderBy: 'id',
-      })
+      }),
     );
     setVisible(false);
   };

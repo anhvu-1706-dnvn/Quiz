@@ -53,19 +53,19 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
         filter,
         orderBy,
         fields,
-      }
+      },
     );
     // console.log(results);
 
     const data = results.map((e) => ({
-      //name: e.name,
+      // name: e.name,
       id: e.id,
       content: e.content,
       time: e.time,
       score: e.score,
       minimumScore: e.minimumScore,
       answers: e.answers,
-      //key: e.id,
+      // key: e.id,
       // status: e.isVisible,
       // happenAt: moment(e.happenAt).format('L'),
       // locationDescription: e.locationDescription,
@@ -90,7 +90,7 @@ function* createOneQuestion({ payload }) {
       },
       postApi,
       'questions',
-      payload
+      payload,
     );
     yield put(createOneQuestionSuccessAction());
   } catch (error) {
@@ -118,7 +118,7 @@ function* updateOneQuestion({ id, payload }) {
       putApi,
       'questions',
       id,
-      payload
+      payload,
     );
     yield put(updateOneQuestionSuccessAction());
   } catch (error) {
@@ -137,7 +137,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'questions',
-      id
+      id,
     );
     // console.log(response);
 

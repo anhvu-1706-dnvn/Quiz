@@ -6,8 +6,8 @@ export const initialState = {
   isAuthenticated: !!localStorage.getItem('sessionToken'),
   data: {
     fullName: localStorage.getItem('fullName') || '',
-    //id: localStorage.getItem('id'),
-    //avatar: localStorage.getItem('avatar') || '',
+    // id: localStorage.getItem('id'),
+    // avatar: localStorage.getItem('avatar') || '',
   },
   // isAuthenticated: true,
   // data: {
@@ -31,8 +31,8 @@ export const initialState = {
 const loginSuccess = (state, { response }) => {
   const { data } = state;
   data.fullName = response.fullName;
-  //data.id = respone.id;
-  //data.avatar = respone.avatar;
+  // data.id = respone.id;
+  // data.avatar = respone.avatar;
   return {
     ...state,
     data,

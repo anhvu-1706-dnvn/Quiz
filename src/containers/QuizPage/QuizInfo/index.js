@@ -65,7 +65,7 @@ export default function QuizInfo(props) {
 
   useEffect(() => {
     dispatch(getListTagsAction(50, 0));
-    //dispatch(getOneTestAction(props.id));
+    // dispatch(getOneTestAction(props.id));
     dispatch(getOneTestAction(testId));
     setTimeout(() => {
       setLoadingSuccess(true);
@@ -125,7 +125,7 @@ export default function QuizInfo(props) {
           userId: 1,
           name: nameQuiz,
           tagIds: chosenTag,
-        })
+        }),
       );
       dispatch(getOneTestAction(testId));
       setVisibleModalNameSubject(false);
@@ -148,7 +148,7 @@ export default function QuizInfo(props) {
         userId: 1,
         description: quizDescription,
         isDraft: !quizStatus,
-      })
+      }),
     );
     dispatch(getOneTestAction(testId));
     setVisibleModalOtherInfor(false);
@@ -164,7 +164,7 @@ export default function QuizInfo(props) {
       updateOneTestAction(testId, {
         userId: 1,
         isDraft: !status,
-      })
+      }),
     );
     await dispatch(getOneTestAction(testId));
     setQuizStatus(status);
@@ -242,7 +242,11 @@ export default function QuizInfo(props) {
           <div className="title">
             1. Name this quiz
             {errorNameMessage.length > 0 && (
-              <div className="error">({errorNameMessage})</div>
+              <div className="error">
+                (
+                {errorNameMessage}
+                )
+              </div>
             )}
           </div>
           <Input value={nameQuiz} onChange={handleChangeNameQuiz} />
@@ -251,7 +255,11 @@ export default function QuizInfo(props) {
           <div className="title">
             2. Choose relevant subjects
             {errorSubjectMessage.length > 0 && (
-              <div className="error">({errorSubjectMessage})</div>
+              <div className="error">
+                (
+                {errorSubjectMessage}
+                )
+              </div>
             )}
           </div>
           {tagState.tags.length > 0 &&
@@ -289,20 +297,22 @@ export default function QuizInfo(props) {
       </div>
       <div className="quiz-info-brief-wrapper">
         <Popover
-          content={
+          content={(
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontWeight: 'bold' }}>
-                Public:{' '}
+                Public:
+                {' '}
                 <span style={{ fontWeight: 'normal' }}>
                   Visible to everyone
                 </span>
               </span>
               <span style={{ fontWeight: 'bold' }}>
-                Private:{' '}
+                Private:
+                {' '}
                 <span style={{ fontWeight: 'normal' }}>Visible to you</span>
               </span>
             </div>
-          }
+          )}
           className="item"
         >
           {currentTest.isPublic ? (
