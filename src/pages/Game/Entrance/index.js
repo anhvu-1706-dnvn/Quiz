@@ -12,11 +12,15 @@ export default function EntrancePage(props) {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.room);
   useEffect(() => {
-    dispatch(
-      getListRoomAction({
-        filter: JSON.stringify({ code: props.location.state.code }),
-      })
-    );
+    if (!props.location.state) {
+      history.push('/join');
+    } else {
+      dispatch(
+        getListRoomAction({
+          filter: JSON.stringify({ code: props.location.state.code }),
+        })
+      );
+    }
   }, [dispatch]);
 
   return (
@@ -29,7 +33,10 @@ export default function EntrancePage(props) {
         </Header>
         <Content className="entrance-content">
           {data.rooms.length > 0 ? (
-            <EntranceContainer data={data.rooms[0]} />
+            <EntranceContainer
+              data={data.rooms[0]}
+              code={props.location.state.code}
+            />
           ) : (
             <div className="error-section">
               <div className="content">

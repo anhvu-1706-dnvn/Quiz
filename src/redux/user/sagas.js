@@ -20,11 +20,13 @@ function* loginSaga({ params }) {
         isShowSucceedNoti: false,
       },
       loginApi,
-      params,
+      params
     );
     if (response.token) {
       localStorage.setItem('sessionToken', response.token);
       localStorage.setItem('fullName', response.fullName);
+      localStorage.setItem('id', response.id);
+      //localStorage.setItem('avatar', response.avatar);
       // localStorage.setItem('id', response.id);
       // localStorage.setItem('avatar', response.avatar);
       localStorage.setItem('role', response.role.name);
@@ -46,7 +48,7 @@ function* registerSaga({ params }) {
         isShowSucceedNoti: false,
       },
       registerApi,
-      params,
+      params
     );
     yield put(registerSuccessAction(response));
   } catch (error) {
@@ -63,7 +65,7 @@ function* verifySaga({ params }) {
         isShowSucceedNoti: false,
       },
       verifyApi,
-      params,
+      params
     );
     yield put(verifySuccessAction(response));
   } catch (error) {

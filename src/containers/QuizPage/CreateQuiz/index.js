@@ -11,7 +11,7 @@ import {
 } from '../../../redux/question/actions';
 import { Wrapper } from './styles';
 
-export default function CreateQuiz() {
+export default function CreateQuiz(props) {
   const [visible, setVisible] = useState(false);
   const [questionType, setQuestionType] = useState(1);
   const dispatch = useDispatch();
@@ -19,19 +19,20 @@ export default function CreateQuiz() {
   const questions = useSelector((state) => state.question.questions);
   const total = useSelector((state) => state.question.total);
 
-  const testId = 1;
+  const testId = props.id;
 
   useEffect(() => {
-    dispatch(
-      getListQuestionByTestAction({
-        limit: 50,
-        offset: 0,
-        filter: JSON.stringify({ testId }),
-        orderBy: 'id',
-      }),
-    );
+    if (testId) {
+      dispatch(
+        getListQuestionByTestAction({
+          limit: 50,
+          offset: 0,
+          filter: JSON.stringify({ testId }),
+          orderBy: 'id',
+        })
+      );
+    }
   }, [dispatch]);
-  // console.log(questions);
   const showModal = () => {
     setVisible(true);
   };
@@ -50,11 +51,13 @@ export default function CreateQuiz() {
     });
     await dispatch(
       createOneQuestionAction({
-        testId: testId,
+        testId,
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
-      }),
+        minimumScore: Number(payload.minScore),
+        score: Number(payload.maxScore),
+      })
     );
     await dispatch(
       getListQuestionByTestAction({
@@ -62,7 +65,7 @@ export default function CreateQuiz() {
         offset: 0,
         filter: JSON.stringify({ testId }),
         orderBy: 'id',
-      }),
+      })
     );
     setVisible(false);
   };
@@ -85,9 +88,6 @@ export default function CreateQuiz() {
             <Icon type="plus-circle" className="icon-plus" />
             <span>New question</span>
           </Button>
-          {/* <Button className="save-draft">
-              <span>Save draft</span>
-            </Button> */}
         </div>
       </div>
       <div className="questions-body">
@@ -124,6 +124,8 @@ export default function CreateQuiz() {
                 answers={e.answers}
                 time={e.time}
                 id={e.id}
+                maxScore={e.score}
+                minScore={e.minimumScore}
               />
             ))}
         </div>

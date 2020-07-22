@@ -5,15 +5,22 @@ import Wrapper from './styles';
 const { Header } = Layout;
 
 export default function PlayGameHeader(props) {
-  const time = 30;
+  const { time, maxTime } = props;
   const [currentTime, setCurrentTime] = useState(time);
 
   useEffect(() => {
-    if (currentTime <= 0) setCurrentTime(0);
-    else {
-      setTimeout(() => {
-        setCurrentTime(currentTime - 1);
-      }, 1000);
+    if (props.resetTimeInHeader) {
+      setCurrentTime(time);
+    } else {
+      if (currentTime <= 0) {
+        props.setTime(0);
+        setCurrentTime(0);
+      } else {
+        setTimeout(() => {
+          props.setTime(currentTime - 1);
+          setCurrentTime(currentTime - 1);
+        }, 1000);
+      }
     }
   });
 
@@ -23,7 +30,7 @@ export default function PlayGameHeader(props) {
         <div className="progress-section">
           {!props.isShowLeaderBoard && (
             <Progress
-              percent={(currentTime / time) * 100}
+              percent={(currentTime / maxTime) * 100}
               className="countdown-bar"
               showInfo={false}
             />
@@ -35,7 +42,9 @@ export default function PlayGameHeader(props) {
               <Icon type="pause" />
             </Button>
             <div className="infor-wrapper">
-              <span>8/12</span>
+              <span>
+                {props.index}/{props.total}
+              </span>
             </div>
             <div className="infor-wrapper">
               <span>

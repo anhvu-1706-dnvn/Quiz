@@ -89,6 +89,8 @@ const updateOneQuestion = (state, { id, payload }) => {
   questionList[index].answers = payload.answers;
   questionList[index].content = payload.content;
   questionList[index].time = payload.time;
+  questionList[index].minimumScore = payload.minimumScore;
+  questionList[index].score = payload.score;
   return {
     ...state,
     questions: questionList,

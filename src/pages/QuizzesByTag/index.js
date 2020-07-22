@@ -25,7 +25,7 @@ export default function QuizzesByTag(props) {
       result.push(
         <div className="list-card-row" key={offset}>
           {testPerRow.map((e) => (
-            <QuizzCard name={e.name} key={e.id} />
+            <QuizzCard name={e.name} key={e.id} imageUrl={e.image} />
           ))}
         </div>,
       );

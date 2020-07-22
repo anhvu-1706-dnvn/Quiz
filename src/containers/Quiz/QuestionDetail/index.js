@@ -15,6 +15,7 @@ import Wrapper from './styles';
 
 export default function QuestionDetail(props) {
   const [visible, setVisible] = useState(false);
+  const testState = useSelector((state) => state.test);
   const dispatch = useDispatch();
 
   const handleCancel = () => {
@@ -37,11 +38,13 @@ export default function QuestionDetail(props) {
     });
     await dispatch(
       updateOneQuestionAction(id, {
-        testId: 51,
+        testId: testState.currentTest.id,
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
-      }),
+        minimumScore: Number(payload.minScore),
+        score: Number(payload.maxScore),
+      })
     );
     setVisible(false);
   };
@@ -61,6 +64,8 @@ export default function QuestionDetail(props) {
           title={props.title}
           time={props.time}
           answerList={props.answers}
+          minScore={props.minScore}
+          maxScore={props.maxScore}
         />
       </Modal>
       <div className="question-detail-header">
@@ -70,26 +75,20 @@ export default function QuestionDetail(props) {
           </div>
         </Popover>
 
-        <div className="title">
-          Question
-          {props.index}
-        </div>
-        <div className="btn-bar">
-          <button type="button" onClick={() => setVisible(true)}>
-            <EditFilled className="icon" />
-            Edit
-          </button>
-          <Popover content={<div>Duplicate</div>}>
-            <button type="button">
-              <CopyFilled />
+        <div className="title">Question {props.index}</div>
+        {!props.view && (
+          <div className="btn-bar">
+            <button type="button" onClick={() => setVisible(true)}>
+              <EditFilled className="icon" />
+              Edit
             </button>
-          </Popover>
-          <Popover content={<div>Delete</div>}>
-            <button type="button">
-              <DeleteFilled />
-            </button>
-          </Popover>
-        </div>
+            <Popover content={<div>Delete</div>}>
+              <button type="button">
+                <DeleteFilled />
+              </button>
+            </Popover>
+          </div>
+        )}
       </div>
       <div className="question-detail-body">
         <div className="wrapper">
@@ -105,12 +104,18 @@ export default function QuestionDetail(props) {
                 />
               ) : (
                 <QuestionItem content={ReactHtmlParser(e.content)} key={e.id} />
-              ),
+              )
             )}
         </div>
       </div>
       <div className="question-detail-footer">
         <Input value={`${props.time} seconds`} className="select" disabled />
+        <Input
+          value={`Score: ${props.minScore} - ${props.maxScore}`}
+          className="select"
+          style={{ width: 'auto' }}
+          disabled
+        />
       </div>
     </Wrapper>
   );

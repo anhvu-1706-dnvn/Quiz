@@ -6,13 +6,16 @@ import PrivateLayout from '../../layout/PrivateLayout';
 // import Dashboard from '../../pages/Dashboard';
 import CreateQuizz from '../../pages/CreateQuizz';
 import MyQuizz from '../../pages/MyQuizz';
+import QuizzDetail from '../../pages/QuizDetail';
 import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
+import EditQuiz from '../../pages/EditQuiz';
 import AdminDashboard from '../../pages/AdminDashboard';
 import RoomStatistic from '../../pages/RoomStatistic';
 import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
+import ResultGame from '../../pages/Game/Result';
 
 const routes = [
   // {
@@ -32,6 +35,18 @@ const routes = [
     component: MyQuizz,
     exact: true,
     title: 'My quizzes',
+  },
+  {
+    path: '/my-quizzes/quiz',
+    component: QuizzDetail,
+    exact: true,
+    title: 'Quiz Details',
+  },
+  {
+    path: '/quiz',
+    component: EditQuiz,
+    exact: true,
+    title: 'Edit quiz',
   },
   {
     path: '/',
@@ -66,7 +81,13 @@ const routes = [
     title: 'Play a game',
     isUsePublicLayout: true,
   },
-
+  {
+    path: '/result',
+    component: ResultGame,
+    exact: true,
+    title: 'Result a game',
+    isUsePublicLayout: true,
+  },
   // ------------------- Admin Routes ---------------------
   {
     path: '/admin',
@@ -112,7 +133,7 @@ const PrivateRoutes = () => (
             )}
             key={route.path}
           />
-        ),
+        )
     )}
   </Switch>
 );

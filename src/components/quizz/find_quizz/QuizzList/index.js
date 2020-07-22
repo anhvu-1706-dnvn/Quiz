@@ -25,7 +25,9 @@ export default function QuizzList(props) {
       <div className="list-content">
         {props.test &&
           props.test.length > 0 &&
-          props.test.map((e) => <QuizzCard name={e.name} key={e.id} />)}
+          props.test.map((e) => (
+            <QuizzCard name={e.name} key={e.id} imageUrl={e.image} />
+          ))}
 
         {/* <QuizzCard />
         <QuizzCard />
