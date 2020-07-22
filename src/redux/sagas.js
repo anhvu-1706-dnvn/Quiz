@@ -5,6 +5,8 @@ import questionSaga from './question/sagas';
 import testSaga from './test/sagas';
 import tagSaga from './tag/sagas';
 import roomSaga from './room/sagas';
+import sessionSaga from './session/sagas';
+import userAnswerSaga from './user-answer/sagas';
 
 export default function* root() {
   yield all([
@@ -13,5 +15,7 @@ export default function* root() {
     ...testSaga,
     ...tagSaga,
     ...roomSaga,
+    ...sessionSaga,
+    ...userAnswerSaga,
   ]);
 }

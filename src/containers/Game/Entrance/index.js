@@ -3,18 +3,31 @@ import { useDispatch } from 'react-redux';
 import { Icon, Button } from 'antd';
 import { history } from '../../../redux/store';
 import { getListQuestionByTestAction } from '../../../redux/question/actions';
+import { createOneSessionAction } from '../../../redux/session/actions';
 import { EntranceContainerWrapper } from '../styles';
 
 export default function EntranceContainer(props) {
-  const { creator, test } = props.data;
+  const { creator, test, id } = props.data;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       getListQuestionByTestAction({
+        orderBy: 'id',
         filter: JSON.stringify({ testId: test.id }),
       })
     );
   }, [dispatch]);
+
+  const handleClickPlayBtn = () => {
+    dispatch(
+      createOneSessionAction({
+        testId: test.id,
+        userId: localStorage.getItem('id'),
+        roomId: id,
+      })
+    );
+    history.push('/play');
+  };
   return (
     <EntranceContainerWrapper>
       <div className="title">
@@ -31,12 +44,7 @@ export default function EntranceContainer(props) {
           <span style={{ marginLeft: '13px' }}>{creator.fullName}</span>
         </div>
       </div>
-      <Button
-        className="btn-start"
-        onClick={() => {
-          history.push('/play');
-        }}
-      >
+      <Button className="btn-start" onClick={handleClickPlayBtn}>
         Start quiz
       </Button>
     </EntranceContainerWrapper>

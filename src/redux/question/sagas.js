@@ -28,15 +28,6 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
     if (offset === undefined) {
       offset = 0;
     }
-    // if (fields === undefined) {
-    //   fields = `["id", "name"]`;
-    // }
-    // if (orderBy == undefined) {
-    //   orderBy = '-id';
-    // }
-    // console.log(
-    //   limit, offset, filter , orderBy, fields,
-    // );
 
     const { results, total } = yield call(
       apiWrapper,
@@ -55,22 +46,15 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
         fields,
       }
     );
-    // console.log(results);
 
     const data = results.map((e) => ({
-      //name: e.name,
       id: e.id,
       content: e.content,
       time: e.time,
       score: e.score,
       minimumScore: e.minimumScore,
       answers: e.answers,
-      //key: e.id,
-      // status: e.isVisible,
-      // happenAt: moment(e.happenAt).format('L'),
-      // locationDescription: e.locationDescription,
     }));
-    // console.log(data);
 
     yield put(getListQuestionByTestSuccessAction(data, total, limit, offset));
   } catch (error) {
@@ -106,6 +90,8 @@ function* updateOneQuestion({ id, payload }) {
       answers: payload.answers,
       content: payload.content,
       time: payload.time,
+      minimumScore: payload.minimumScore,
+      score: payload.score,
     };
     yield call(
       apiWrapper,

@@ -55,6 +55,8 @@ export default function CreateQuiz(props) {
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
+        minimumScore: Number(payload.minScore),
+        score: Number(payload.maxScore),
       })
     );
     await dispatch(
@@ -122,6 +124,8 @@ export default function CreateQuiz(props) {
                 answers={e.answers}
                 time={e.time}
                 id={e.id}
+                maxScore={e.score}
+                minScore={e.minimumScore}
               />
             ))}
         </div>

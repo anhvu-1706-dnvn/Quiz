@@ -5,6 +5,8 @@ import { question } from './question/reducer';
 import { user } from './user/reducer';
 import { tag } from './tag/reducer';
 import { room } from './room/reducer';
+import { session } from './session/reducer';
+import { userAnswer } from './user-answer/reducer';
 
 export default (history) =>
   combineReducers({
@@ -14,4 +16,6 @@ export default (history) =>
     question,
     tag,
     room,
+    session,
+    userAnswer,
   });

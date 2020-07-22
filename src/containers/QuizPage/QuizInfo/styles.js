@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
     .quiz-info-img {
       height: 100px;
       width: 150px;
+      background-color: ${theme.palette.boldestPrimary};
     }
     .quiz-info-img-text {
       margin-top: 10px;

@@ -44,8 +44,9 @@ export const JoinGameContainerWrapper = styled.div`
         box-shadow: 0 4px 0 ${theme.palette.boldestPrimary};
 
         &:hover {
-          background-color: ${theme.palette.lightPrimary};
-          box-shadow: 0 4px 0 ${theme.palette.primary};
+          background-color: ${theme.palette.boldPrimary};
+          box-shadow: 0 4px 0 ${theme.palette.boldPrimary};
+          border: none;
         }
       }
     }
@@ -146,6 +147,7 @@ export const EntranceContainerWrapper = styled.div`
       height: 100px;
       border-radius: 8px;
       margin-right: 20px;
+      background-color: ${theme.palette.boldestPrimary};
     }
 
     .infor {

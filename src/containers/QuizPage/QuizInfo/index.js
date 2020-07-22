@@ -214,7 +214,7 @@ export default function QuizInfo(props) {
         onClick={() => setVisibleModalOtherInfor(true)}
       >
         <img
-          src="https://picsum.photos/200/300"
+          src={currentTest && currentTest.image}
           alt="quizz-img"
           className="quiz-info-img"
         />

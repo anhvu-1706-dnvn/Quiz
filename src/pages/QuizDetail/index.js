@@ -57,6 +57,8 @@ export default function QuizDetail() {
                 marginLeft: '20px',
                 fontWeight: '700',
                 fontSize: '20px',
+                backgroundColor: '#fff',
+                color: '#000',
               }}
               value={
                 roomState.currentRoomCode !== null
@@ -174,6 +176,8 @@ export default function QuizDetail() {
               answers={e.answers}
               time={e.time}
               id={e.id}
+              minScore={e.minimumScore}
+              maxScore={e.score}
               view
             />
           ))}
