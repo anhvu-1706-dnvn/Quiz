@@ -27,7 +27,7 @@ export default function QuizzesByTag(props) {
           {testPerRow.map((e) => (
             <QuizzCard name={e.name} key={e.id} imageUrl={e.image} />
           ))}
-        </div>
+        </div>,
       );
       offset += 1;
     }

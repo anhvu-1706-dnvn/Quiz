@@ -9,7 +9,7 @@ async function customFetch(path, headerOptions) {
   const normalFetch = fetch(path, headerOptions);
   const res = await timeoutPromise(
     TIME_OUT,
-    normalFetch.then(checkIfErrorOccurs).catch(checkIfErrorOccurs)
+    normalFetch.then(checkIfErrorOccurs).catch(checkIfErrorOccurs),
   );
   if (!res.code) {
     const error = {
@@ -64,7 +64,7 @@ export const timeoutPromise = (ms, promise) =>
       (err) => {
         clearTimeout(timeoutId);
         reject(err);
-      }
+      },
     );
   });
 
@@ -114,6 +114,7 @@ function requestWrapper(method) {
     const paramsObj = {
       ...defaults,
       headers: { ...params, ...defaults.headers },
+      'Access-Control-Allow-Origin': true,
     };
     return customFetch(convertUrl, paramsObj);
   };

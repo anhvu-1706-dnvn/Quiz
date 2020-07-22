@@ -4,6 +4,7 @@ import { test } from './test/reducer';
 import { question } from './question/reducer';
 import { user } from './user/reducer';
 import { tag } from './tag/reducer';
+import { statistic } from './statistic/reducer';
 import { room } from './room/reducer';
 import { session } from './session/reducer';
 import { userAnswer } from './user-answer/reducer';
@@ -15,6 +16,7 @@ export default (history) =>
     test,
     question,
     tag,
+    statistic,
     room,
     session,
     userAnswer,

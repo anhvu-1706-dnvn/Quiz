@@ -19,7 +19,7 @@ export const QuestionTypes = makeConstantCreator(
 
   'UPLOAD_IMAGE_SUCCESS',
   'UPLOAD_IMAGE_FAILURE',
-  'REMOVE_IMAGE'
+  'REMOVE_IMAGE',
 );
 
 // List question
@@ -41,7 +41,7 @@ export const getListQuestionByTestSuccessAction = (
   data,
   total,
   limit,
-  offset
+  offset,
 ) =>
   makeActionCreator(QuestionTypes.GET_LIST_QUESTION_BY_TEST_SUCCESS, {
     data,

@@ -53,7 +53,7 @@ class Login extends Component {
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -71,7 +71,7 @@ class Login extends Component {
                   <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 type="password"
-              />
+              />,
             )}
           </FormItem>
           <div className="sub-action-div">
@@ -118,5 +118,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login))
+  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login)),
 );

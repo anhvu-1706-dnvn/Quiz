@@ -44,7 +44,7 @@ function* getListTest({ limit, offset, filter, orderBy, fields }) {
         filter,
         orderBy,
         fields,
-      }
+      },
     );
 
     const data = results.map((e) => ({
@@ -74,7 +74,7 @@ function* createOneTest({ payload }) {
       },
       postApi,
       'tests',
-      payload
+      payload,
     );
     const data = {
       id: response.id,
@@ -104,7 +104,7 @@ function* updateOneTest({ id, payload }) {
       putApi,
       'tests',
       id,
-      payload
+      payload,
     );
     const response = yield call(
       apiWrapper,
@@ -135,7 +135,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'tests',
-      id
+      id,
     );
 
     const data = {

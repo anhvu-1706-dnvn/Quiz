@@ -10,6 +10,8 @@ import QuizzDetail from '../../pages/QuizDetail';
 import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
 import EditQuiz from '../../pages/EditQuiz';
+import AdminDashboard from '../../pages/AdminDashboard';
+import RoomStatistic from '../../pages/RoomStatistic';
 import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
@@ -85,6 +87,19 @@ const routes = [
     exact: true,
     title: 'Result a game',
     isUsePublicLayout: true,
+
+  // ------------------- Admin Routes ---------------------
+  {
+    path: '/admin',
+    component: AdminDashboard,
+    exact: true,
+    title: 'Admin Dashboard',
+  },
+  {
+    path: '/admin/rooms/:id',
+    component: RoomStatistic,
+    exact: true,
+    title: 'Admin Dashboard',
   },
 ];
 
@@ -118,7 +133,7 @@ const PrivateRoutes = () => (
             )}
             key={route.path}
           />
-        )
+        ),
     )}
   </Switch>
 );

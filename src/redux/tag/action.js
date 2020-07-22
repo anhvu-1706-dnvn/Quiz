@@ -10,7 +10,7 @@ export const TagTypes = makeConstantCreator(
   'GET_ONE_TAG_FAILURE',
   'GET_LIST_TAG_WITH_TEST',
   'GET_LIST_TAG_WITH_TEST_SUCCESS',
-  'GET_LIST_TAG_WITH_TEST_FAILURE'
+  'GET_LIST_TAG_WITH_TEST_FAILURE',
 );
 
 // List tag
@@ -47,7 +47,7 @@ export const getListTagWithTestAction = (
   offset,
   filter,
   orderBy,
-  fields
+  fields,
 ) =>
   makeActionCreator(TagTypes.GET_LIST_TAG_WITH_TEST, {
     limit,

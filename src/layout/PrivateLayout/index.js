@@ -148,7 +148,10 @@ class PrivateLayout extends Component {
                     <div>
                       <Avatar size="large" src={avatar} />
                       {'   '}
-                      <span>Hi, {fullName}</span>
+                      <span>
+                        Hi,
+                        {fullName}
+                      </span>
                     </div>
                   </Dropdown>
                 </div>
@@ -195,7 +198,10 @@ class PrivateLayout extends Component {
                     <div>
                       <Avatar size="large" src={avatar} />
                       {'   '}
-                      <span>Hi, {fullName}</span>
+                      <span>
+                        Hi,
+                        {fullName}
+                      </span>
                     </div>
                   </Dropdown>
                 </div>
@@ -234,5 +240,5 @@ export default connect(
   }),
   {
     logout: logoutAction,
-  }
+  },
 )(PrivateLayout);

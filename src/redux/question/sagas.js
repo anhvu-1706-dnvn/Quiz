@@ -48,12 +48,17 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
     );
 
     const data = results.map((e) => ({
+      // name: e.name,
       id: e.id,
       content: e.content,
       time: e.time,
       score: e.score,
       minimumScore: e.minimumScore,
       answers: e.answers,
+      // key: e.id,
+      // status: e.isVisible,
+      // happenAt: moment(e.happenAt).format('L'),
+      // locationDescription: e.locationDescription,
     }));
 
     yield put(getListQuestionByTestSuccessAction(data, total, limit, offset));

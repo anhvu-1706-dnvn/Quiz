@@ -8,6 +8,8 @@ export const initialState = {
     fullName: localStorage.getItem('fullName') || '',
     id: localStorage.getItem('id'),
     //avatar: localStorage.getItem('avatar') || '',
+    // id: localStorage.getItem('id'),
+    // avatar: localStorage.getItem('avatar') || '',
   },
   // isAuthenticated: true,
   // data: {
@@ -33,6 +35,8 @@ const loginSuccess = (state, { response }) => {
   data.fullName = response.fullName;
   data.id = response.id;
   //data.avatar = respone.avatar;
+  // data.id = respone.id;
+  // data.avatar = respone.avatar;
   return {
     ...state,
     data,

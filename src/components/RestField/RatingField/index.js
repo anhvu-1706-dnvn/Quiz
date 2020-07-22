@@ -20,9 +20,9 @@ const RatingField = props => (
     <div>
       {!props.isHideTotalRater && (
         <Text type="bodyGray">
-(
+          (
           {getRecordData(props.record, props.totalRater) || 0}
-)
+          )
         </Text>
       )}
     </div>

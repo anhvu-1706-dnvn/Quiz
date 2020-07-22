@@ -67,7 +67,7 @@ class Register extends Component {
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -88,7 +88,7 @@ class Register extends Component {
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -106,7 +106,7 @@ class Register extends Component {
                   <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 type="password"
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -124,7 +124,7 @@ class Register extends Component {
                   <Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 addonBefore="+84"
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -137,11 +137,15 @@ class Register extends Component {
             </div>
             <Select defaultValue="2" onChange={this.handleChangeRoleId}>
               <Option value="2">
-                <span style={{ fontWeight: 'bold' }}>Creator</span> - Can join,
+                <span style={{ fontWeight: 'bold' }}>Creator</span>
+                {' '}
+                - Can join,
                 create and custom quizzes
               </Option>
               <Option value="3">
-                <span style={{ fontWeight: 'bold' }}>Participant</span> - Only
+                <span style={{ fontWeight: 'bold' }}>Participant</span>
+                {' '}
+                - Only
                 can join, quizzes
               </Option>
             </Select>
@@ -186,5 +190,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Register))
+  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Register)),
 );

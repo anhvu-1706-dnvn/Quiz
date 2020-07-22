@@ -47,7 +47,7 @@ function* getOneTagSaga({ id }) {
         errorDescription: 'Error',
       },
       getOne,
-      id
+      id,
     );
 
     const data = {
