@@ -133,7 +133,7 @@ function* getOne({ id }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: false,
-        errorDescription: 'Có lỗi xảy ra',
+        errorDescription: 'Error',
       },
       getDataByIdApi,
       'questions',

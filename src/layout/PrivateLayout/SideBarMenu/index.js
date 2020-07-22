@@ -22,18 +22,6 @@ const sidebarMenu = [
     url: '/my-quizzes',
     icon: 'file-text',
   },
-  {
-    key: 'participants',
-    text: 'Quản lý học sih',
-    url: '/participants',
-    icon: 'team',
-  },
-  {
-    key: 'report',
-    text: 'Quản lý điểm',
-    url: '/marks',
-    icon: 'bar-chart',
-  },
 ];
 
 export default class SideBarMenu extends Component {

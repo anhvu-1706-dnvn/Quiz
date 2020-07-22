@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../../configs/theme';
 
 export default styled.div`
   width: 700px;
@@ -20,6 +21,7 @@ export default styled.div`
       height: 100px;
       border-radius: 4px;
       margin-right: 20px;
+      background: ${theme.palette.boldestPrimary};
     }
 
     .icon {
@@ -40,5 +42,7 @@ export default styled.div`
     margin-top: 15px;
     margin-right: 15px;
     font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
   }
 `;

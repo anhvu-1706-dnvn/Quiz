@@ -96,6 +96,14 @@ function * getRoomStatisticDetailInfo({roomId}) {
       time: moment(e.updatedAt).diff(moment(e.createdAt),'seconds'),
       key: e.id,
     }))]
+    roomDetail.userRanking.sort((a, b) => {
+      if (a.score > b.score) return -1;
+      if (a.score < b.score) return 1;
+      if (a.time > b.time) return 1;
+      if (a.time < b.time) return -1;
+      return 0
+    })
+    roomDetail.userRanking = [...roomDetail.userRanking.map((e, i) => ({...e, position: i+1}))]
     yield put(getRoomStatisticDetailSuccessAction(roomDetail));
   } catch (error) {
     console.log(error);

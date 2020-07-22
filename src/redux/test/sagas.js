@@ -1,5 +1,5 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import moment from 'moment';
+// import moment from 'moment';
 import {
   TestTypes,
   getListTestSuccessAction,
@@ -12,10 +12,15 @@ import {
   getOneTestFailureAction,
 } from './actions';
 // import {data} from './tempData'
-import { putApi, postApi, getDataByIdApi } from '../../api/common/crud';
+import {
+  putApi,
+  postApi,
+  getDataByIdApi,
+  getAllApi,
+} from '../../api/common/crud';
 import { apiWrapper } from '../../utils/reduxUtils';
 
-function* getListTest({ id, limit, offset, filter, orderBy, fields }) {
+function* getListTest({ limit, offset, filter, orderBy, fields }) {
   try {
     if (limit === undefined) {
       limit = 50;
@@ -23,20 +28,16 @@ function* getListTest({ id, limit, offset, filter, orderBy, fields }) {
     if (offset === undefined) {
       offset = 0;
     }
-    if (fields === undefined) {
-      fields = `["id", "name"]`;
-    }
 
     const { results, total } = yield call(
       apiWrapper,
       {
         isShowLoading: true,
         isShowSucceedNoti: false,
-        errorDescription: 'Có lỗi xảy ra',
+        errorDescription: 'Error',
       },
-      getDataByIdApi,
+      getAllApi,
       'tests',
-      id,
       {
         limit,
         offset,
@@ -46,17 +47,14 @@ function* getListTest({ id, limit, offset, filter, orderBy, fields }) {
       },
     );
 
-    // console.log(results);
-
     const data = results.map((e) => ({
       name: e.name,
       id: e.id,
       key: e.id,
-      status: e.isVisible,
-      happenAt: moment(e.happenAt).format('L'),
-      locationDescription: e.locationDescription,
+      image: e.image,
+      description: e.description,
+      isPublic: !e.isDraft,
     }));
-    // console.log(data);
 
     yield put(getListTestSuccessAction(data, total, limit, offset));
   } catch (error) {
@@ -80,22 +78,22 @@ function* createOneTest({ payload }) {
     );
     const data = {
       id: response.id,
+      name: response.name,
+      tags: response.tags,
+      description: response.description,
+      image: response.image,
+      isPublic: !response.isDraft,
     };
     yield put(createOneTestSuccessAction(data));
   } catch (error) {
-    yield put(createOneTestFailureAction());
+    yield put(createOneTestFailureAction(error));
   }
 }
 
 function* updateOneTest({ id, payload }) {
   try {
-    // payload = {
-    //   name: payload.name,
-    //   code: payload.code,
-    //   isVisible: payload.status,
-    // };
     delete payload.key;
-    yield call(
+    const data = yield call(
       apiWrapper,
       {
         isShowLoading: true,
@@ -108,9 +106,21 @@ function* updateOneTest({ id, payload }) {
       id,
       payload,
     );
-    yield put(updateOneTestSuccessAction(id));
+    const response = yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: false,
+        errorDescription: 'Error',
+      },
+      getDataByIdApi,
+      'tests',
+      id,
+    );
+    data.tags = response.tags;
+    yield put(updateOneTestSuccessAction(data));
   } catch (error) {
-    yield put(updateOneTestFailureAction());
+    yield put(updateOneTestFailureAction(error));
   }
 }
 
@@ -121,23 +131,21 @@ function* getOne({ id }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: false,
-        errorDescription: 'Có lỗi xảy ra',
+        errorDescription: 'Error',
       },
       getDataByIdApi,
       'tests',
       id,
     );
-    // console.log(response);
 
     const data = {
       id: response.id,
       name: response.name,
       tags: response.tags,
       description: response.description,
-      // happenAt: moment(response.happenAt).format('L'),
+      image: response.image,
       isPublic: !response.isDraft,
     };
-    // console.log(data);
 
     yield put(getOneTestSuccessAction(data));
   } catch (error) {

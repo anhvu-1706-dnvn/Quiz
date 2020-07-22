@@ -1,5 +1,5 @@
-import { takeEvery, put, call } from "redux-saga/effects";
-import moment from "moment";
+import { takeEvery, put, call } from 'redux-saga/effects';
+import moment from 'moment';
 import {
   TestTypes,
   getListTestSuccessAction,
@@ -10,11 +10,11 @@ import {
   updateOneTestFailureAction,
   getOneTestSuccessAction,
   getOneTestFailureAction,
-} from "./actions";
+} from './actions';
 // import {data} from './tempData'
-import { getTests } from "../../api/modules/test";
-import { putApi, postApi, getDataByIdApi } from "../../api/common/crud";
-import { apiWrapper } from "../../utils/reduxUtils";
+import { getTests } from '../../api/modules/test';
+import { putApi, postApi, getDataByIdApi } from '../../api/common/crud';
+import { apiWrapper } from '../../utils/reduxUtils';
 
 function* getListTest({ limit, offset, filter, orderBy, fields }) {
   try {
@@ -40,12 +40,12 @@ function* getListTest({ limit, offset, filter, orderBy, fields }) {
     });
     // console.log(results);
 
-    const data = results.map(e => ({
+    const data = results.map((e) => ({
       name: e.name,
       id: e.id,
       key: e.id,
       status: e.isVisible,
-      happenAt: moment(e.happenAt).format("L"),
+      happenAt: moment(e.happenAt).format('L'),
       locationDescription: e.locationDescription,
     }));
     // console.log(data);
@@ -63,11 +63,11 @@ function* createOneTest({ payload }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: "Thêm thành công",
-        errorDescription: "Có lỗi xảy ra",
+        successDescription: 'Thêm thành công',
+        errorDescription: 'Error',
       },
       postApi,
-      "tests",
+      'tests',
       payload,
     );
     yield put(createOneTestSuccessAction());
@@ -90,11 +90,11 @@ function* updateOneTest({ id, payload }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: "Sửa thành công",
-        errorDescription: "Có lỗi xảy ra",
+        successDescription: 'Sửa thành công',
+        errorDescription: 'Error',
       },
       putApi,
-      "tests",
+      'tests',
       id,
       payload,
     );
@@ -111,10 +111,10 @@ function* getOne({ id }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: false,
-        errorDescription: "Có lỗi xảy ra",
+        errorDescription: 'Error',
       },
       getDataByIdApi,
-      "tests",
+      'tests',
       id,
     );
     // console.log(response);
@@ -124,7 +124,7 @@ function* getOne({ id }) {
       name: response.name,
       content: response.name,
       locationDescription: response.locationDescription,
-      happenAt: moment(response.happenAt).format("L"),
+      happenAt: moment(response.happenAt).format('L'),
       isVisible: response.isVisible,
     };
     // console.log(data);
@@ -134,7 +134,6 @@ function* getOne({ id }) {
     yield put(getOneTestFailureAction(error));
   }
 }
-
 
 export default [
   takeEvery(TestTypes.GET_LIST_TEST, getListTest),

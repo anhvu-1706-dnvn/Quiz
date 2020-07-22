@@ -6,7 +6,7 @@ export const initialState = {
   isAuthenticated: !!localStorage.getItem('sessionToken'),
   data: {
     fullName: localStorage.getItem('fullName') || '',
-    // id: localStorage.getItem('id'),
+    id: localStorage.getItem('id'),
     // avatar: localStorage.getItem('avatar') || '',
   },
   // isAuthenticated: true,
@@ -31,7 +31,7 @@ export const initialState = {
 const loginSuccess = (state, { response }) => {
   const { data } = state;
   data.fullName = response.fullName;
-  // data.id = respone.id;
+  data.id = response.id;
   // data.avatar = respone.avatar;
   return {
     ...state,
@@ -71,7 +71,7 @@ const registerFail = (state, { error }) => ({
 });
 
 // Verify
-const verifySuccess = (state, { response }) => {
+const verifySuccess = (state) => {
   return {
     ...state,
     isShowLoading: false,

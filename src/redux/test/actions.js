@@ -52,8 +52,8 @@ export const createOneTestFailureAction = (error) =>
 // Edit one test
 export const updateOneTestAction = (id, payload) =>
   makeActionCreator(TestTypes.UPDATE_ONE_TEST, { id, payload });
-export const updateOneTestSuccessAction = (id) =>
-  makeActionCreator(TestTypes.UPDATE_ONE_TEST_SUCCESS, { id });
+export const updateOneTestSuccessAction = (data) =>
+  makeActionCreator(TestTypes.UPDATE_ONE_TEST_SUCCESS, { data });
 export const updateOneTestFailureAction = (error) =>
   makeActionCreator(TestTypes.UPDATE_ONE_TEST_FAILURE, { error });
 

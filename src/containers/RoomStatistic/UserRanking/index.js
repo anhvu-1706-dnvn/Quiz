@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Col, Row, Table } from 'antd'
 import { connect } from "react-redux";
+import {TrophyOutlined} from '@ant-design/icons'
 import Wrapper from './styles'
 import * as StatisticAction from '../../../redux/statistic/actions'
 
@@ -14,13 +15,21 @@ class UserRanking extends Component {
         title: 'Full name',
         dataIndex: 'fullName',
         key: 'fullName',
+        render: (text, record, index) => {
+          if(record.position === 1) {
+            return <TrophyOutlined />
+          }
+          console.log(record);
+          
+          return text
+        },
       },
       {
         title: 'Score',
         dataIndex: 'score',
         key: 'score',
-        sorter: (a, b) => a.score - b.score,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.score - b.score,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Time',
@@ -28,8 +37,8 @@ class UserRanking extends Component {
         width: '30%',
         key: 'time',
         render: (text) => `${text} s`,
-        sorter: (a, b) => a.time - b.time,
-         sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.time - b.time,
+        //  sortDirections: ['descend', 'ascend'],
       },
     ];
   }

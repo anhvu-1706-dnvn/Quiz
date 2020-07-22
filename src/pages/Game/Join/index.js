@@ -1,7 +1,9 @@
 import React from 'react';
-import { Layout, Input, Button, Icon } from 'antd';
+import { Layout, Input, Button, Icon, Menu, Dropdown } from 'antd';
+import { useDispatch } from 'react-redux';
 import JoinGameContainer from '../../../containers/Game/Join';
 import { history } from '../../../redux/store';
+import { logout as logoutAction } from '../../../redux/user/actions';
 import logo from '../../../assets/images/logoFull.png';
 import { JoinGamePageWrapper } from '../styles';
 
@@ -9,6 +11,12 @@ const { Header, Content } = Layout;
 const { Search } = Input;
 
 export default function JoinGame() {
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(logoutAction());
+    history.push('/login');
+  };
+
   return (
     <JoinGamePageWrapper>
       <Layout className="game-layout">
@@ -34,13 +42,25 @@ export default function JoinGame() {
             </div>
           </div>
           <div className="right-section">
-            <Button className="btn-back" onClick={() => history.push('/')}>
-              <Icon type="left-circle" />
-              Back to dashboard
-            </Button>
-            <Button className="btn-menu">
+            {localStorage.getItem('role') !== 'participant' && (
+              <Button className="btn-back" onClick={() => history.push('/')}>
+                <Icon type="left-circle" />
+                Back to dashboard
+              </Button>
+            )}
+            <Dropdown
+              overlay={() => (
+                <Menu style={{ minWidth: '120px' }}>
+                  <Menu.Item onClick={logout} key="logout">
+                    Log out
+                  </Menu.Item>
+                </Menu>
+              )}
+              trigger={['click']}
+              className="btn-menu"
+            >
               <Icon type="menu" />
-            </Button>
+            </Dropdown>
           </div>
         </Header>
         <Content className="content">

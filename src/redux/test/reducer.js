@@ -16,8 +16,7 @@ export const initialState = {
 
   updateTestSuccess: undefined,
   updateTestFailure: undefined,
-
-  currentTest: {},
+  currentTest: null,
   registrations: [],
   testImage: null,
 };
@@ -38,6 +37,7 @@ const getListTestSuccess = (state, { data, total, limit, offset }) => ({
   loading: false,
   listTestSuccess: true,
   listTestFailure: false,
+  currentTest: data[0],
 });
 
 const getListTestFailure = (state) => ({
@@ -75,11 +75,12 @@ const updateOneTest = (state, { id, payload }) => {
     tests: testList,
   };
 };
-const updateOneTestSuccess = (state) => ({
+const updateOneTestSuccess = (state, { data }) => ({
   ...state,
   loading: false,
   updateTestFailure: false,
   updateTestSuccess: true,
+  currentTest: data,
 });
 const updateOneTestFailure = (state) => ({
   ...state,
