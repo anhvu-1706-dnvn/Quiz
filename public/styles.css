@@ -80,7 +80,7 @@
 }
 
 .modal-create-quizz .ant-modal-content {
-  height: 360px !important;
+  /* height: 360px !important; */
 }
 
 .edit-quiz-info-modal-body .title {

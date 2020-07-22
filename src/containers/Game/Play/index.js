@@ -1,47 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import AnswerButton from '../../../components/game/play/AnswerButton';
 import RankCard from '../../../components/game/play/RankCard';
 import { PlayGameContainerWrapper, RankingContainerWrapper } from '../styles';
 
 export default function PlayGameContainer(props) {
-  // const [isShowLeaderBoard, setIsShowLeaderBoard] = useState(false);
-
-  // useEffect(() => {
-  //   if (isShowLeaderBoard) {
-  //     setTimeout(() => {
-  //       setIsShowLeaderBoard(false);
-  //     }, 10000);
-  //   }
-  // });
-
-  // const handleChooseAnswer = (id) => {
-  //   if (id === 1) setIsShowLeaderBoard(true);
-  // };
-
   return !props.isShowLeaderBoard ? (
     <PlayGameContainerWrapper>
-      <div className="title-section">What is your name ?</div>
+      <div className="title-section">
+        {ReactHtmlParser(props.question && props.question.content)}
+      </div>
       <div className="answer-section">
-        <AnswerButton
-          content="Peter"
-          backgroundColor="#2C9CA6"
-          onClick={() => props.handleChooseAnswer(1)}
-        />
-        <AnswerButton
-          content="Jame"
-          backgroundColor="#ECA82C"
-          onClick={() => props.handleChooseAnswer(2)}
-        />
-        <AnswerButton
-          content="David"
-          backgroundColor="#D4546A"
-          onClick={() => props.handleChooseAnswer(3)}
-        />
-        <AnswerButton
-          content="Jack"
-          backgroundColor="#461A42"
-          onClick={() => props.handleChooseAnswer(4)}
-        />
+        {props.question &&
+          props.question.answers.map((e, index) => (
+            <AnswerButton
+              content={ReactHtmlParser(e.content)}
+              index={index + 1}
+              onClick={() => props.handleChooseAnswer(index)}
+              key={e.id}
+            />
+          ))}
       </div>
     </PlayGameContainerWrapper>
   ) : (

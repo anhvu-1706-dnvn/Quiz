@@ -186,3 +186,145 @@ export const EntranceContainerWrapper = styled.div`
     }
   }
 `;
+
+export const ResultContainerWrapper = styled.div`
+  color: #fff;
+  font-size: 20px;
+  padding: 24px;
+  border-radius: 16px;
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.08),
+    hsla(0, 0%, 100%, 0.04)
+  );
+
+  .title {
+    display: flex;
+    font-size: 32px;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .avatar {
+      width: 80px;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+  }
+
+  .played-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .accuracy-title {
+      width: 100%;
+      font-size: 16px;
+      color: #504750;
+    }
+
+    .ant-progress-text {
+      color: #fff !important;
+    }
+
+    .title {
+      color: #504750;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .detail-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 20px;
+
+      .stat-container {
+        display: flex;
+        align-items: center;
+
+        .icon-correct {
+          margin-right: 10px;
+          color: #00c985;
+        }
+
+        .icon-incorrect {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .played-infor {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .infor-container {
+      display: flex;
+      p {
+        margin: 0;
+      }
+
+      .left-section {
+        .title {
+          color: #504750;
+          font-size: 16px;
+        }
+      }
+
+      .right-section {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+
+        .icon {
+          padding: 8px;
+          font-size: 22px;
+          border-radius: 8px;
+        }
+
+        .dollar-icon {
+          background: linear-gradient(
+            135deg,
+            #f5a623,
+            rgba(245, 166, 35, 0.69)
+          );
+        }
+
+        .golden-icon {
+          background: linear-gradient(
+            135deg,
+            ${theme.palette.primary},
+            ${theme.palette.boldestPrimary}
+          );
+        }
+      }
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+
+    .btn-result-page {
+      border: none;
+      margin-bottom: 20px;
+      height: 45px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .btn-play-again {
+      color: #fff;
+      background-color: ${theme.palette.primary}
+      &:hover {
+        background-color: ${theme.palette.boldPrimary}
+      }
+    }
+
+    .btn-back {
+      color: #000;
+    }
+  }
+`;

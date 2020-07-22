@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Row, Col, Modal, Input } from 'antd';
-import CreateQuiz from '../../containers/QuizPage/CreateQuiz';
-import QuizInfo from '../../containers/QuizPage/QuizInfo';
+import { Modal, Input } from 'antd';
 import TagSubject from '../../components/quizz/create_quizz/TagSubject';
 import { history } from '../../redux/store';
 import { getListTagsAction } from '../../redux/tag/action';
@@ -10,18 +8,18 @@ import { createOneTestAction } from '../../redux/test/actions';
 import Wrapper from './styles';
 
 export default function CreateQuizz() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [chosenTag, setChosenTag] = useState([]);
   const [errorSubjectMessage, setErrorSubjectMessage] = useState('');
   const [errorNameMessage, setErrorNameMessage] = useState('');
   const [nameQuiz, setNameQuiz] = useState('');
+  const userId = localStorage.getItem('id');
   const dispatch = useDispatch();
 
   const tagState = useSelector((state) => state.tag);
-  const testState = useSelector((state) => state.test);
 
   useEffect(() => {
-    dispatch(getListTagsAction(20, 0));
+    dispatch(getListTagsAction(100, 0));
   }, [dispatch]);
 
   const handleOk = () => {
@@ -33,8 +31,9 @@ export default function CreateQuizz() {
     }
     if (chosenTag.length > 0 && nameQuiz.length > 0) {
       dispatch(
-        createOneTestAction({ userId: 1, name: nameQuiz, tagIds: chosenTag })
+        createOneTestAction({ userId, name: nameQuiz, tagIds: chosenTag })
       );
+      history.push('/quiz');
       setVisible(false);
     }
   };
@@ -46,7 +45,7 @@ export default function CreateQuizz() {
 
   const handleCancel = () => {
     setVisible(false);
-    history.push('/');
+    history.goBack();
   };
 
   const handleChooseTag = (id) => {
@@ -84,7 +83,7 @@ export default function CreateQuizz() {
       >
         <div>
           <h2>Create a quiz</h2>
-          <div className="title">
+          <div className="title" style={{ marginBottom: '10px' }}>
             1. Name this quiz
             {errorNameMessage.length > 0 && (
               <div className="error">({errorNameMessage})</div>
@@ -93,7 +92,7 @@ export default function CreateQuizz() {
           <Input value={nameQuiz} onChange={handleChangeNameQuiz} />
           <br />
           <br />
-          <div className="title">
+          <div className="title" style={{ marginBottom: '10px' }}>
             2. Choose relevant subjects
             {errorSubjectMessage.length > 0 && (
               <div className="error">({errorSubjectMessage})</div>
@@ -110,19 +109,6 @@ export default function CreateQuizz() {
             ))}
         </div>
       </Modal>
-      {/* {!visible && Object.keys(testState.currentTest).length > 0 && ( */}
-      {!visible && (
-        <div className="create-quiz-content-wrapper">
-          <Row type="flex" justify="center">
-            <Col xs={24} lg={14}>
-              <CreateQuiz />
-            </Col>
-            <Col xs={0} lg={10} className="scroll-vertical">
-              <QuizInfo id={testState.currentTest.id} name={nameQuiz} />
-            </Col>
-          </Row>
-        </div>
-      )}
     </Wrapper>
   );
 }

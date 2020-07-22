@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../../configs/theme';
 
 export default styled.div`
   max-width: 198px;
@@ -23,6 +24,7 @@ export default styled.div`
 
   .card-header {
     position: relative;
+    background-color: ${theme.palette.boldestPrimary};
 
     .quizz-img {
       height: 100px;

@@ -5,11 +5,7 @@ export default function QuizzCard(props) {
   return (
     <Wrapper>
       <div className="card-header">
-        <img
-          src="https://picsum.photos/200/300"
-          alt="quizz-img"
-          className="quizz-img"
-        />
+        <img src={props.imageUrl} alt="quizz-img" className="quizz-img" />
         <div className="card-stat-row">
           <div className="card-stat">10 Qs</div>
           <div className="card-stat">3.7k plays</div>

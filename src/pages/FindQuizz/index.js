@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import QuizzList from '../../components/quizz/find_quizz/QuizzList';
+import { history } from '../../redux/store';
 import { getListTagWithTestAction } from '../../redux/tag/action';
 import Wrapper from './styles';
 
@@ -11,6 +12,9 @@ export default function FindQuizz() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.tag);
   useEffect(() => {
+    if (localStorage.getItem('role') === 'participant') {
+      history.push('/join');
+    }
     dispatch(getListTagWithTestAction());
   }, [dispatch]);
 

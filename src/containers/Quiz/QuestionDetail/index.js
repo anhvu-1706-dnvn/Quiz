@@ -15,6 +15,7 @@ import Wrapper from './styles';
 
 export default function QuestionDetail(props) {
   const [visible, setVisible] = useState(false);
+  const testState = useSelector((state) => state.test);
   const dispatch = useDispatch();
 
   const handleCancel = () => {
@@ -37,7 +38,7 @@ export default function QuestionDetail(props) {
     });
     await dispatch(
       updateOneQuestionAction(id, {
-        testId: 51,
+        testId: testState.currentTest.id,
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
@@ -71,22 +72,24 @@ export default function QuestionDetail(props) {
         </Popover>
 
         <div className="title">Question {props.index}</div>
-        <div className="btn-bar">
-          <button type="button" onClick={() => setVisible(true)}>
-            <EditFilled className="icon" />
-            Edit
-          </button>
-          <Popover content={<div>Duplicate</div>}>
-            <button type="button">
-              <CopyFilled />
+        {!props.view && (
+          <div className="btn-bar">
+            <button type="button" onClick={() => setVisible(true)}>
+              <EditFilled className="icon" />
+              Edit
             </button>
-          </Popover>
-          <Popover content={<div>Delete</div>}>
-            <button type="button">
-              <DeleteFilled />
-            </button>
-          </Popover>
-        </div>
+            <Popover content={<div>Duplicate</div>}>
+              <button type="button">
+                <CopyFilled />
+              </button>
+            </Popover>
+            <Popover content={<div>Delete</div>}>
+              <button type="button">
+                <DeleteFilled />
+              </button>
+            </Popover>
+          </div>
+        )}
       </div>
       <div className="question-detail-body">
         <div className="wrapper">

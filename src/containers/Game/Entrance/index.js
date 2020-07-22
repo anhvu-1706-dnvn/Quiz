@@ -1,10 +1,20 @@
-import React from 'react';
-import { Button, Icon } from 'antd';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Icon, Button } from 'antd';
+import { history } from '../../../redux/store';
+import { getListQuestionByTestAction } from '../../../redux/question/actions';
 import { EntranceContainerWrapper } from '../styles';
 
 export default function EntranceContainer(props) {
   const { creator, test } = props.data;
-  console.log(creator);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      getListQuestionByTestAction({
+        filter: JSON.stringify({ testId: test.id }),
+      })
+    );
+  }, [dispatch]);
   return (
     <EntranceContainerWrapper>
       <div className="title">
@@ -21,7 +31,14 @@ export default function EntranceContainer(props) {
           <span style={{ marginLeft: '13px' }}>{creator.fullName}</span>
         </div>
       </div>
-      <Button className="btn-start">Start quiz</Button>
+      <Button
+        className="btn-start"
+        onClick={() => {
+          history.push('/play');
+        }}
+      >
+        Start quiz
+      </Button>
     </EntranceContainerWrapper>
   );
 }
