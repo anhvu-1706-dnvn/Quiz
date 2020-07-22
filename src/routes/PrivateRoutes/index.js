@@ -87,7 +87,7 @@ const routes = [
     exact: true,
     title: 'Result a game',
     isUsePublicLayout: true,
-
+  },
   // ------------------- Admin Routes ---------------------
   {
     path: '/admin',
@@ -133,7 +133,7 @@ const PrivateRoutes = () => (
             )}
             key={route.path}
           />
-        ),
+        )
     )}
   </Switch>
 );
