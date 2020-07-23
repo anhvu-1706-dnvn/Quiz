@@ -1,5 +1,4 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import moment from 'moment';
 import {
   TestTypes,
   getListTestSuccessAction,
@@ -115,7 +114,7 @@ function* updateOneTest({ id, payload }) {
       },
       getDataByIdApi,
       'tests',
-      id
+      id,
     );
     data.tags = response.tags;
     yield put(updateOneTestSuccessAction(data));

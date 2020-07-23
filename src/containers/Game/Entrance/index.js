@@ -14,7 +14,7 @@ export default function EntranceContainer(props) {
       getListQuestionByTestAction({
         orderBy: 'id',
         filter: JSON.stringify({ testId: test.id }),
-      })
+      }),
     );
   }, [dispatch]);
 
@@ -24,7 +24,7 @@ export default function EntranceContainer(props) {
         testId: test.id,
         userId: localStorage.getItem('id'),
         roomId: id,
-      })
+      }),
     );
     history.push('/play');
   };
@@ -40,7 +40,8 @@ export default function EntranceContainer(props) {
       <div className="creator-section">
         <div>
           <Icon type="user" style={{ marginRight: '8px' }} />
-          Created:{' '}
+          Created:
+          {' '}
           <span style={{ marginLeft: '13px' }}>{creator.fullName}</span>
         </div>
       </div>

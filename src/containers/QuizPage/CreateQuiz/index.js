@@ -29,7 +29,7 @@ export default function CreateQuiz(props) {
           offset: 0,
           filter: JSON.stringify({ testId }),
           orderBy: 'id',
-        })
+        }),
       );
     }
   }, [dispatch]);
@@ -57,7 +57,7 @@ export default function CreateQuiz(props) {
         time: Number(payload.time),
         minimumScore: Number(payload.minScore),
         score: Number(payload.maxScore),
-      })
+      }),
     );
     await dispatch(
       getListQuestionByTestAction({
@@ -65,7 +65,7 @@ export default function CreateQuiz(props) {
         offset: 0,
         filter: JSON.stringify({ testId }),
         orderBy: 'id',
-      })
+      }),
     );
     setVisible(false);
   };

@@ -133,7 +133,7 @@ const PrivateRoutes = () => (
             )}
             key={route.path}
           />
-        )
+        ),
     )}
   </Switch>
 );

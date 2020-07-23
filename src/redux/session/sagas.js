@@ -20,7 +20,7 @@ function* createSessionSaga({ payload }) {
       },
       postApi,
       'sessions',
-      payload
+      payload,
     );
     yield put(createOneSessionSuccessAction(data));
   } catch (error) {
