@@ -28,7 +28,11 @@ export default function OptionBar(props) {
 
   return (
     <Wrapper>
-      <div className="title">All my quizzes ({props.total})</div>
+      <div className="title">
+        All my quizzes (
+        {props.total}
+        )
+      </div>
       <div className="order-container">
         <span>Order:</span>
         <Select

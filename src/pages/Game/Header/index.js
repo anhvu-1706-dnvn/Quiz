@@ -11,8 +11,7 @@ export default function PlayGameHeader(props) {
   useEffect(() => {
     if (props.resetTimeInHeader) {
       setCurrentTime(time);
-    } else {
-      if (currentTime <= 0) {
+    } else if (currentTime <= 0) {
         props.setTime(0);
         setCurrentTime(0);
       } else {
@@ -21,7 +20,6 @@ export default function PlayGameHeader(props) {
           setCurrentTime(currentTime - 1);
         }, 1000);
       }
-    }
   });
 
   return (
@@ -43,13 +41,16 @@ export default function PlayGameHeader(props) {
             </Button>
             <div className="infor-wrapper">
               <span>
-                {props.index}/{props.total}
+                {props.index}
+                /
+                {props.total}
               </span>
             </div>
             <div className="infor-wrapper">
               <span>
                 Streak:
-                <Icon type="fire" theme="filled" className="icon" />3
+                <Icon type="fire" theme="filled" className="icon" />
+                3
               </span>
             </div>
           </div>

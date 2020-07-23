@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React from 'react';
 import { Icon, Button } from 'antd';
 import Editor from '../../../../../components/common/Editor';
 import { Wrapper } from './style';

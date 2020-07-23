@@ -165,7 +165,10 @@ export default function QuizDetail() {
       </div>
       <div className="question-container">
         <div className="title-preview">
-          Preview ({questionState.total} questions)
+          Preview (
+          {questionState.total}
+          {' '}
+          questions)
         </div>
         {questionState.questions &&
           questionState.questions.map((e, index) => (

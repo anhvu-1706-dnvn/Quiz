@@ -44,7 +44,7 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
         filter,
         orderBy,
         fields,
-      }
+      },
     );
 
     const data = results.map((e) => ({
@@ -79,7 +79,7 @@ function* createOneQuestion({ payload }) {
       },
       postApi,
       'questions',
-      payload
+      payload,
     );
     yield put(createOneQuestionSuccessAction());
   } catch (error) {
@@ -109,7 +109,7 @@ function* updateOneQuestion({ id, payload }) {
       putApi,
       'questions',
       id,
-      payload
+      payload,
     );
     yield put(updateOneQuestionSuccessAction());
   } catch (error) {
@@ -128,7 +128,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'questions',
-      id
+      id,
     );
     // console.log(response);
 

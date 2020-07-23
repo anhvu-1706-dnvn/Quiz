@@ -6,7 +6,7 @@ export const RoomTypes = makeConstantCreator(
   'GET_LIST_ROOM_FAILURE',
   'CREATE_ONE_ROOM_ACTION',
   'CREATE_ONE_ROOM_SUCCESS',
-  'CREATE_ONE_ROOM_FAILURE'
+  'CREATE_ONE_ROOM_FAILURE',
 );
 
 export const getListRoomAction = ({ limit, offset, filter, orderBy, fields }) =>

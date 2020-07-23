@@ -3,7 +3,7 @@ import { makeConstantCreator, makeActionCreator } from '../../utils/reduxUtils';
 export const UserAnswerTypes = makeConstantCreator(
   'CREATE_ONE_USER_ANSWER_ACTION',
   'CREATE_ONE_USER_ANSWER_SUCCESS',
-  'CREATE_ONE_USER_ANSWER_FAILURE'
+  'CREATE_ONE_USER_ANSWER_FAILURE',
 );
 
 // Create one room

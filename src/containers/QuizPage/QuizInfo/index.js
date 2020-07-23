@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditFilled, TagOutlined, InboxOutlined } from '@ant-design/icons';
-import { Modal, Input, Icon, Progress, Checkbox, Upload, Select } from 'antd';
+import { Modal, Input, Icon, Progress, Checkbox, Upload } from 'antd';
 import TagSubject from '../../../components/quizz/create_quizz/TagSubject';
 import { getListTagsAction } from '../../../redux/tag/action';
 import { updateOneTestAction } from '../../../redux/test/actions';
@@ -11,7 +14,7 @@ import { Wrapper } from './styles';
 const delayTime = 800;
 const { Dragger } = Upload;
 const { TextArea } = Input;
-export default function QuizInfo(props) {
+export default function QuizInfo() {
   const [visibleModalNameSubject, setVisibleModalNameSubject] = useState(false);
   const [visibleModalOtherInfor, setVisibleModalOtherInfor] = useState(false);
   const [errorSubjectMessage, setErrorSubjectMessage] = useState('');
@@ -38,7 +41,7 @@ export default function QuizInfo(props) {
         offset: 0,
         filter: JSON.stringify({ testId }),
         orderBy: 'id',
-      })
+      }),
     );
     setTimeout(() => {
       setLoadingSuccess(true);
@@ -98,7 +101,7 @@ export default function QuizInfo(props) {
           userId,
           name: nameQuiz,
           tagIds: chosenTag,
-        })
+        }),
       );
       setVisibleModalNameSubject(false);
       if (errorNameMessage !== '') {
@@ -120,7 +123,7 @@ export default function QuizInfo(props) {
         userId,
         description: quizDescription,
         isDraft: !quizStatus,
-      })
+      }),
     );
     setVisibleModalOtherInfor(false);
   };

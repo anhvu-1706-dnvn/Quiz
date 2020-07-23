@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import { history } from '../../../redux/store';
-import { createOneUserAnswerAction } from '../../../redux/user-answer/actions';
+// import { createOneUserAnswerAction } from '../../../redux/user-answer/actions';
 import PlayGameContainter from '../../../containers/Game/Play';
 import Header from '../Header';
 import { PlayGamePageWrapper } from '../styles';
@@ -10,16 +10,16 @@ import { PlayGamePageWrapper } from '../styles';
 const { Content } = Layout;
 
 export default function PlayGamePage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const data = useSelector((state) => state.question);
-  const sessionState = useSelector((state) => state.session);
-  const roomState = useSelector((state) => state.room);
+  // const sessionState = useSelector((state) => state.session);
+  // const roomState = useSelector((state) => state.room);
 
   const [isShowLeaderBoard, setIsShowLeaderBoard] = useState(false);
   const [indexQuestion, setIndexQuestion] = useState(0);
   const [resetTimeInHeader, setResetTimeInHeader] = useState(false);
   const [time, setTime] = useState(
-    data.questions[indexQuestion] && data.questions[indexQuestion].time
+    data.questions[indexQuestion] && data.questions[indexQuestion].time,
   );
 
   const leaderBoardDelayTime = 5000;
@@ -27,19 +27,17 @@ export default function PlayGamePage() {
   useEffect(() => {
     if (data.questions.length === 0) {
       history.push('/join');
-    } else {
-      if (isShowLeaderBoard) {
-        setResetTimeInHeader(true);
-        setTimeout(() => {
-          setIsShowLeaderBoard(false);
-          setResetTimeInHeader(false);
-          if (indexQuestion < data.total - 1) {
-            setIndexQuestion(indexQuestion + 1);
-          } else {
-            history.push('/result');
-          }
-        }, leaderBoardDelayTime);
-      }
+    } else if (isShowLeaderBoard) {
+      setResetTimeInHeader(true);
+      setTimeout(() => {
+        setIsShowLeaderBoard(false);
+        setResetTimeInHeader(false);
+        if (indexQuestion < data.total - 1) {
+          setIndexQuestion(indexQuestion + 1);
+        } else {
+          history.push('/result');
+        }
+      }, leaderBoardDelayTime);
     }
   });
 
@@ -49,7 +47,7 @@ export default function PlayGamePage() {
 
   const handleChooseAnswer = (index) => {
     const answer = data.questions[indexQuestion].answers[index];
-    let score = 0;
+    // const score = 0;
     if (answer.isCorrect) {
       console.log(time);
     }

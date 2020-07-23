@@ -7,7 +7,7 @@ export const initialState = {
   data: {
     fullName: localStorage.getItem('fullName') || '',
     id: localStorage.getItem('id'),
-    //avatar: localStorage.getItem('avatar') || '',
+    // avatar: localStorage.getItem('avatar') || '',
     // id: localStorage.getItem('id'),
     // avatar: localStorage.getItem('avatar') || '',
   },
@@ -26,6 +26,7 @@ export const initialState = {
   registerSuccess: false,
   verifyError: false,
   verifySuccess: false,
+  verifyResponse: null,
 };
 // End setup
 
@@ -34,7 +35,7 @@ const loginSuccess = (state, { response }) => {
   const { data } = state;
   data.fullName = response.fullName;
   data.id = response.id;
-  //data.avatar = respone.avatar;
+  // data.avatar = respone.avatar;
   // data.id = respone.id;
   // data.avatar = respone.avatar;
   return {
@@ -81,6 +82,7 @@ const verifySuccess = (state, { response }) => {
     isShowLoading: false,
     verifyError: false,
     verifySuccess: true,
+    verifyResponse: response,
   };
 };
 

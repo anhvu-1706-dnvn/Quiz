@@ -18,7 +18,7 @@ export default function EntrancePage(props) {
       dispatch(
         getListRoomAction({
           filter: JSON.stringify({ code: props.location.state.code }),
-        })
+        }),
       );
     }
   }, [dispatch]);
