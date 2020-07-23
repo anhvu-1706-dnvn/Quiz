@@ -68,7 +68,7 @@ function* createOneTest({ payload }) {
       },
       postApi,
       'tests',
-      payload
+      payload,
     );
     yield put(createOneTestSuccessAction());
   } catch (error) {
@@ -96,7 +96,7 @@ function* updateOneTest({ id, payload }) {
       putApi,
       'tests',
       id,
-      payload
+      payload,
     );
     yield put(updateOneTestSuccessAction());
   } catch (error) {
@@ -115,7 +115,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'tests',
-      id
+      id,
     );
     // console.log(response);
 

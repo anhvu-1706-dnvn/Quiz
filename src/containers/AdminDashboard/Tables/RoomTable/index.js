@@ -25,7 +25,7 @@ class RoomTable extends Component {
         key: 'testName',
       },
       {
-        title: 'Creator',
+        title: 'Host',
         dataIndex: 'creatorName',
         width: '30%',
         key: 'creatorName',
@@ -56,7 +56,12 @@ class RoomTable extends Component {
     
     return (
       <Wrapper>
-        <Table columns={this.columns} dataSource={rooms} />
+        <Card>
+          <Table
+            columns={this.columns}
+            dataSource={rooms} 
+            />
+        </Card>
       </Wrapper>
     )
   }

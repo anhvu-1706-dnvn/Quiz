@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Col, Row, Table,Icon } from 'antd'
+import { Icon } from 'antd'
+// import { Card, Col, Row, Table,Icon } from 'antd'
 import { connect } from "react-redux";
 import {
   TagOutlined,
@@ -80,8 +81,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+// const mapDispatchToProps = (dispatch) => ({
  
-});
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestDetail);
+export default connect(mapStateToProps, {})(TestDetail);

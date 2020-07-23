@@ -26,7 +26,7 @@ export default function JoinGameContainer() {
 
   const handleClickJoinBtn = () => {
     console.log('abcd');
-    //socket.emit('joinRoom', code);
+    // socket.emit('joinRoom', code);
     // history.push('/entrance');
   };
 

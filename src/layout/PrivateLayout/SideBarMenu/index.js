@@ -24,6 +24,22 @@ const sidebarMenu = [
   },
 ];
 
+
+const adminSideBarMenu = [
+  {
+    key: 'dashboard',
+    text: 'Dashboard',
+    url: '/admin',
+    icon: 'dashboard',
+  },
+  {
+    key: 'user',
+    text: 'Manage user',
+    url: '/admin/users',
+    icon: 'user',
+  },
+]
+
 export default class SideBarMenu extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +52,25 @@ export default class SideBarMenu extends Component {
   }
 
   render() {
+    const role = localStorage.getItem('role')
+    let menuInfo = sidebarMenu.map((el) => (
+      <Menu.Item key={el.key} onClick={() => history.push(el.url)}>
+        <span>
+          <Icon type={el.icon} />
+          <span>{el.text}</span>
+        </span>
+      </Menu.Item>
+    ))
+    if(role === 'admin') {
+      menuInfo = adminSideBarMenu.map((el) => (
+        <Menu.Item key={el.key} onClick={() => history.push(el.url)}>
+          <span>
+            <Icon type={el.icon} />
+            <span>{el.text}</span>
+          </span>
+        </Menu.Item>
+      ))
+    }
     return (
       <Menu
         mode="inline"
@@ -48,14 +83,7 @@ export default class SideBarMenu extends Component {
         location={this.props.children}
         className="sidebarMenu"
       >
-        {sidebarMenu.map((el) => (
-          <Menu.Item key={el.key} onClick={() => history.push(el.url)}>
-            <span>
-              <Icon type={el.icon} />
-              <span>{el.text}</span>
-            </span>
-          </Menu.Item>
-        ))}
+        {menuInfo}
       </Menu>
     );
   }

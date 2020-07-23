@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Card, Col, Row, Divider } from 'antd'
+import { Divider } from 'antd'
 import ReactHtmlParser from 'react-html-parser';
 import Wrapper from './styles'
 import QuestionItem from '../../../../components/quizz/question/Item';
 
 export default class QuestionDetail extends Component {
   handleOnclik = () => {
-    console.log('OK');
     
   }
 

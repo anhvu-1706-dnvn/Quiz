@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Card, Col, Row, Table } from 'antd'
+import { Card } from 'antd'
+// import { Card, Col, Row, Table } from 'antd'
 import { connect } from "react-redux";
 import Chart from 'react-apexcharts'
-import { LeftCircleFilled } from '@ant-design/icons';
+// import { LeftCircleFilled } from '@ant-design/icons';
 import Wrapper from './styles'
 
 class SessionChart extends Component {
@@ -96,8 +97,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+// const mapDispatchToProps = (dispatch) => ({
 
-});
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SessionChart);
+export default connect(mapStateToProps, {})(SessionChart);

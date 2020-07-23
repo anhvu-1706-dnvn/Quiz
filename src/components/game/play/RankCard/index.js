@@ -18,7 +18,11 @@ export default function RankCard(props) {
           <div className="name">{props.name}</div>
         </div>
         <div className="right-section">
-          <div className="score">{props.score} pts</div>
+          <div className="score">
+            {props.score}
+            {' '}
+            pts
+          </div>
         </div>
       </div>
     </Wrapper>

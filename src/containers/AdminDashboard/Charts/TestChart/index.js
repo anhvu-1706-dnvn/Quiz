@@ -62,15 +62,18 @@ class TestChart extends Component {
     ]
     return (
       <Wrapper>
-        <Chart
-          options={{...this.options,
+        <Card>
+          <Chart
+            options={{...this.options,
               xaxis: {
                 type: "string",
                 categories,
               }}}
-          series={series}
-          type="bar" />
+            series={series}
+            type="bar" />
 
+        </Card>
+        
       </Wrapper>
     )
   }

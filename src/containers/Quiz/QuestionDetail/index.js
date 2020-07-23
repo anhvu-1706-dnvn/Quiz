@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   EditFilled,
-  CopyFilled,
+  // CopyFilled,
   DeleteFilled,
   InfoCircleOutlined,
 } from '@ant-design/icons';
@@ -44,7 +44,7 @@ export default function QuestionDetail(props) {
         time: Number(payload.time),
         minimumScore: Number(payload.minScore),
         score: Number(payload.maxScore),
-      })
+      }),
     );
     setVisible(false);
   };
@@ -75,7 +75,10 @@ export default function QuestionDetail(props) {
           </div>
         </Popover>
 
-        <div className="title">Question {props.index}</div>
+        <div className="title">
+          Question
+          {props.index}
+        </div>
         {!props.view && (
           <div className="btn-bar">
             <button type="button" onClick={() => setVisible(true)}>
@@ -104,7 +107,7 @@ export default function QuestionDetail(props) {
                 />
               ) : (
                 <QuestionItem content={ReactHtmlParser(e.content)} key={e.id} />
-              )
+              ),
             )}
         </div>
       </div>

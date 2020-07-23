@@ -19,7 +19,7 @@ export default function PlayGamePage() {
   const [indexQuestion, setIndexQuestion] = useState(0);
   const [resetTimeInHeader, setResetTimeInHeader] = useState(false);
   const [time, setTime] = useState(
-    data.questions[indexQuestion] && data.questions[indexQuestion].time
+    data.questions[indexQuestion] && data.questions[indexQuestion].time,
   );
 
   const leaderBoardDelayTime = 5000;
@@ -27,8 +27,7 @@ export default function PlayGamePage() {
   useEffect(() => {
     if (data.questions.length === 0) {
       history.push('/join');
-    } else {
-      if (isShowLeaderBoard) {
+    } else if (isShowLeaderBoard) {
         setResetTimeInHeader(true);
         setTimeout(() => {
           setIsShowLeaderBoard(false);
@@ -40,7 +39,6 @@ export default function PlayGamePage() {
           }
         }, leaderBoardDelayTime);
       }
-    }
   });
 
   const setTimeToCountScore = (value) => {
@@ -49,7 +47,7 @@ export default function PlayGamePage() {
 
   const handleChooseAnswer = (index) => {
     const answer = data.questions[indexQuestion].answers[index];
-    let score = 0;
+    const score = 0;
     if (answer.isCorrect) {
       console.log(time);
     }

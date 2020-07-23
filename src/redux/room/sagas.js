@@ -52,7 +52,7 @@ function* createRoomSaga({ payload }) {
       },
       postApi,
       'rooms',
-      payload
+      payload,
     );
     const data = {
       code: results.code,
