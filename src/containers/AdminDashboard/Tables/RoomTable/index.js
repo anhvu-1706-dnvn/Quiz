@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import { Card, Col, Row, Statistic, Table } from 'antd'
-import { connect } from "react-redux";
-import moment from 'moment'
+import React, { Component } from 'react';
+import { Table, Card } from 'antd';
+import { connect } from 'react-redux';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
-import Wrapper from './styles'
-import * as StatisticAction from '../../../../redux/statistic/actions'
+import Wrapper from './styles';
+import * as StatisticAction from '../../../../redux/statistic/actions';
 
 class RoomTable extends Component {
   constructor(props) {
-    super(props)
-    const {rooms} = this.props;
+    super(props);
+    const { rooms } = this.props;
     this.columns = [
       {
         title: 'Code',
         dataIndex: 'code',
         key: 'code',
         render: (text, row) => {
-          return <Link to={`/admin/rooms/${row.id}`}>{text}</Link>
+          return <Link to={`/admin/rooms/${row.id}`}>{text}</Link>;
         },
       },
       {
@@ -40,20 +40,18 @@ class RoomTable extends Component {
         dataIndex: 'createdAt',
         key: 'createdAt',
         render: (time) => {
-          return moment(time).format('L')
+          return moment(time).format('L');
         },
       },
     ];
-    if(rooms.length === 0) {
-      this.props.retrieveStatisticRoom()
+    if (rooms.length === 0) {
+      this.props.retrieveStatisticRoom();
     }
   }
-  
 
   render() {
-    
     const { rooms } = this.props;
-    
+
     return (
       <Wrapper>
         <Card>
@@ -63,13 +61,13 @@ class RoomTable extends Component {
             />
         </Card>
       </Wrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   const { statistic } = state;
-  const {rooms} = statistic
+  const { rooms } = statistic;
   return {
     rooms,
   };

@@ -1,5 +1,4 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import moment from 'moment';
 import {
   TestTypes,
   getListTestSuccessAction,

@@ -26,8 +26,8 @@ export const initialState = {
   registerSuccess: false,
   verifyError: false,
   verifySuccess: false,
-
   list: null,
+  verifyResponse: null,
 };
 // End setup
 
@@ -83,6 +83,7 @@ const verifySuccess = (state, { response }) => {
     isShowLoading: false,
     verifyError: false,
     verifySuccess: true,
+    verifyResponse: response,
   };
 };
 

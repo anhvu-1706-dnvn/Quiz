@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { Card, Table } from 'antd'
-import { connect } from "react-redux";
-import Wrapper from './styles'
-import * as StatisticAction from '../../../redux/statistic/actions'
+import React, { Component } from 'react';
+import { Card, Table } from 'antd';
+import { connect } from 'react-redux';
+import Wrapper from './styles';
+import * as StatisticAction from '../../../redux/statistic/actions';
 
 class UserRanking extends Component {
   constructor(props) {
-    super(props)
-    const {id} = this.props.match.params
-    this.props.retrieveRoomStatisticDetail(id)
+    super(props);
+    const { id } = this.props.match.params;
+    this.props.retrieveRoomStatisticDetail(id);
     this.columns = [
       {
         dataIndex: 'fullName',
@@ -57,11 +57,11 @@ class UserRanking extends Component {
       {
         title: 'Time',
         dataIndex: 'time',
-        width: '30%',
+        width: '20%',
         key: 'time',
         render: (text) => `${text} s`,
         sorter: (a, b) => a.time - b.time,
-         sortDirections: ['descend', 'ascend'],
+        sortDirections: ['descend', 'ascend'],
       },
     ];
   }
@@ -70,19 +70,17 @@ class UserRanking extends Component {
     const { roomDetail } = this.props;
     return (
       <Wrapper>
-        <Card
-          title={` User ranking (${roomDetail?.totalParticipant} members)`}
-        >
+        <Card title={` User ranking (${roomDetail?.totalParticipant} members)`}>
           <Table columns={this.columns} dataSource={roomDetail?.userRanking} />
         </Card>
       </Wrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   const { statistic } = state;
-  const {roomDetail} = statistic
+  const { roomDetail } = statistic;
   return {
     roomDetail,
   };

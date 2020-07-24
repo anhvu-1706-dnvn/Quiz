@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import { Card } from 'antd'
-// import { Card, Col, Row, Table } from 'antd'
-import { connect } from "react-redux";
-import Chart from 'react-apexcharts'
+import React, { Component } from 'react';
+import { Card } from 'antd';
+import { connect } from 'react-redux';
+import Chart from 'react-apexcharts';
 // import { LeftCircleFilled } from '@ant-design/icons';
-import Wrapper from './styles'
+import Wrapper from './styles';
 
 class SessionChart extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.options = {
       chart: {
         height: 350,
@@ -29,15 +28,15 @@ class SessionChart extends Component {
           opacity: 0.5,
         },
       },
-     
+
       noData: {
-        text: "No data to display",
-        align: "center",
-        verticalAlign: "middle",
+        text: 'No data to display',
+        align: 'center',
+        verticalAlign: 'middle',
         offsetX: 0,
         offsetY: 0,
         style: {
-          fontSize: "14px",
+          fontSize: '14px',
         },
       },
     };
@@ -45,29 +44,28 @@ class SessionChart extends Component {
 
   render() {
     const { roomDetail } = this.props;
-    const categories = []
-    const series = []
-    if(roomDetail) {
-      const {scores} = roomDetail;
-      const sortedScores = Object.keys(scores).map(e=>+e).sort()
-      const min = sortedScores.length && sortedScores[0] 
-      const max = sortedScores.length && sortedScores[sortedScores.length-1]
-      for (let i = 0; i <= roomDetail.test.maximumScore; i+=1) {
-        if(scores[i]) {
-          categories.push(i)
-          series.push(scores[i])
-        } 
-        else if(i%10 ===0 && (i < min || i >max)) {
-          categories.push(i)
-          series.push(0)
+    const categories = [];
+    const series = [];
+    if (roomDetail) {
+      const { scores } = roomDetail;
+      const sortedScores = Object.keys(scores)
+        .map((e) => +e)
+        .sort();
+      const min = sortedScores.length && sortedScores[0];
+      const max = sortedScores.length && sortedScores[sortedScores.length - 1];
+      for (let i = 0; i <= roomDetail.test.maximumScore; i += 1) {
+        if (scores[i]) {
+          categories.push(i);
+          series.push(scores[i]);
+        } else if (i % 10 === 0 && (i < min || i > max)) {
+          categories.push(i);
+          series.push(0);
         }
       }
     }
     return (
       <Wrapper>
-        <Card
-          title="Score spectrum"
-         >
+        <Card title="Score spectrum">
           <Chart
             options={{
               ...this.options,
@@ -75,23 +73,23 @@ class SessionChart extends Component {
                 labels: {
                   show: true,
                 },
-                type: "string",
+                type: 'string',
                 categories,
               },
             }}
-            series={[{data: series}]}
+            series={[{ data: series }]}
             type="area"
             height={350}
           />
         </Card>
       </Wrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   const { statistic } = state;
-  const {roomDetail} = statistic
+  const { roomDetail } = statistic;
   return {
     roomDetail,
   };

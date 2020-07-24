@@ -99,6 +99,7 @@ function* listUserSage() {
     const results = response.results.map((e, idx)=> ({...e, key: idx, role: e.role?.name, createdAt: moment(e.createdAt).format('LL')}))
     yield put(getListUserSuccessAction(results));
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     
   }

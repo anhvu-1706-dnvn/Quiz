@@ -38,6 +38,12 @@ const adminSideBarMenu = [
     url: '/admin/users',
     icon: 'user',
   },
+  {
+    key: 'test',
+    text: 'Manage test',
+    url: '/admin/tests',
+    icon: 'ant-design',
+  },
 ]
 
 export default class SideBarMenu extends Component {
