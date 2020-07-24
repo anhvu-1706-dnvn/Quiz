@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, Button, Divider } from 'antd';
+import { Select, Button, Divider, Input } from 'antd';
 import { SaveFilled } from '@ant-design/icons';
 import AnswerOption from './AnswerOption';
 import { Wrapper } from './styles';
@@ -32,7 +32,9 @@ export default function QuestionEditor(props) {
     (props.time && props.time.toString()) || '30',
   );
 
-  // console.log(answerList);
+  const [minScore, setMinScore] = useState(props.minScore || '');
+  const [maxScore, setMaxScore] = useState(props.maxScore || '');
+
   const handleAddAnswer = () => {
     const newAnswerList = [
       ...answerList,
@@ -48,6 +50,14 @@ export default function QuestionEditor(props) {
 
   const handleChangeTitle = (value) => {
     setTitle(value);
+  };
+
+  const handleChangeMinScore = (e) => {
+    setMinScore(e.target.value);
+  };
+
+  const handleChangeMaxScore = (e) => {
+    setMaxScore(e.target.value);
   };
 
   const handleChangeContentAnswer = (key, value) => {
@@ -87,22 +97,46 @@ export default function QuestionEditor(props) {
       setTitle('');
     }
 
-    props.handleOk({ answerList, title, time });
+    props.handleOk({ answerList, title, time, minScore, maxScore });
   };
 
   return (
     <Wrapper>
       <div className="header">
-        <div className="title">
-          Question
-          {props.index}
+        <div className="title-wrapper">
+          <div className="title">
+            Question
+            {props.index}
+          </div>
+          <div className="question-type-select">
+            <Select
+              className="type"
+              value={props.type && props.type.toString()}
+            >
+              <Option value="1">Multiple Choice</Option>
+              <Option value="2">Checkbox</Option>
+              <Option value="3">Fill in the blank</Option>
+            </Select>
+          </div>
         </div>
-        <div className="question-type-select">
-          <Select className="type" value={props.type && props.type.toString()}>
-            <Option value="1">Multiple Choice</Option>
-            <Option value="2">Checkbox</Option>
-            <Option value="3">Fill in the blank</Option>
-          </Select>
+
+        <div className="question-score-wrapper">
+          <div className="score-input-wrapper">
+            <span>Min score</span>
+            <Input
+              className="score-input"
+              value={minScore}
+              onChange={handleChangeMinScore}
+            />
+          </div>
+          <div className="score-input-wrapper">
+            <span>Max score</span>
+            <Input
+              className="score-input"
+              value={maxScore}
+              onChange={handleChangeMaxScore}
+            />
+          </div>
         </div>
       </div>
       <div className="body">

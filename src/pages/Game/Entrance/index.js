@@ -33,7 +33,10 @@ export default function EntrancePage(props) {
         </Header>
         <Content className="entrance-content">
           {data.rooms.length > 0 ? (
-            <EntranceContainer data={data.rooms[0]} />
+            <EntranceContainer
+              data={data.rooms[0]}
+              code={props.location.state.code}
+            />
           ) : (
             <div className="error-section">
               <div className="content">

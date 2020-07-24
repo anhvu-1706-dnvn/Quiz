@@ -7,6 +7,11 @@ export const initialState = {
   data: {
     fullName: localStorage.getItem('fullName') || '',
     id: localStorage.getItem('id'),
+<<<<<<< HEAD
+=======
+    //avatar: localStorage.getItem('avatar') || '',
+    // id: localStorage.getItem('id'),
+>>>>>>> 74879175b343f90e48484a098bedf646724f58fe
     // avatar: localStorage.getItem('avatar') || '',
   },
   // isAuthenticated: true,
@@ -32,6 +37,11 @@ const loginSuccess = (state, { response }) => {
   const { data } = state;
   data.fullName = response.fullName;
   data.id = response.id;
+<<<<<<< HEAD
+=======
+  //data.avatar = respone.avatar;
+  // data.id = respone.id;
+>>>>>>> 74879175b343f90e48484a098bedf646724f58fe
   // data.avatar = respone.avatar;
   return {
     ...state,

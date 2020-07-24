@@ -2,22 +2,44 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   .header {
-    padding: 8px 16px;
     border-radius: 4px 4px 0 0;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    .question-type-select {
-      height: 32px;
-      border-radius: 4px;
-      display: inline-block;
-      position: relative;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    .title-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      margin-bottom: 20px;
+
+      .question-type-select {
+        height: 32px;
+        border-radius: 4px;
+        display: inline-block;
+        position: relative;
+      }
+      .title {
+        font-size: 14px;
+        display: inline-block;
+        line-height: 30px;
+        margin-right: 16px;
+      }
     }
-    .title {
-      font-size: 14px;
-      display: inline-block;
-      line-height: 30px;
-      margin-right: 16px;
+    .question-score-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      .score-input-wrapper {
+        display: flex;
+        align-items: center;
+        width: 45%;
+        justify-content: space-between;
+
+        .score-input {
+          width: 60% !important;
+        }
+      }
     }
   }
 

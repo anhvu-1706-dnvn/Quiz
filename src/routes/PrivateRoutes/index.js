@@ -9,9 +9,9 @@ import MyQuizz from '../../pages/MyQuizz';
 import QuizzDetail from '../../pages/QuizDetail';
 import FindQuizz from '../../pages/FindQuizz';
 import QuizzesByTag from '../../pages/QuizzesByTag';
+import EditQuiz from '../../pages/EditQuiz';
 import AdminDashboard from '../../pages/AdminDashboard';
 import RoomStatistic from '../../pages/RoomStatistic';
-import EditQuiz from '../../pages/EditQuiz';
 import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
@@ -88,7 +88,6 @@ const routes = [
     title: 'Result a game',
     isUsePublicLayout: true,
   },
-
   // ------------------- Admin Routes ---------------------
   {
     path: '/admin',

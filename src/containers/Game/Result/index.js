@@ -4,6 +4,7 @@ import { history } from '../../../redux/store';
 import { ResultContainerWrapper } from '../styles';
 
 export default function ResultContainer() {
+  const fullName = localStorage.getItem('fullName');
   return (
     <ResultContainerWrapper>
       <div className="title">
@@ -12,12 +13,12 @@ export default function ResultContainer() {
           alt="avatar"
           className="avatar"
         />
-        <div>Hieu Nguyen</div>
+        <div>{fullName}</div>
       </div>
       <div className="played-stat">
         <div className="title">Performance Stats</div>
         <div className="detail-wrapper">
-          <div className="stat-container">
+          <div className="stat-container" style={{ marginRight: '20px' }}>
             <Icon type="check-circle" theme="filled" className="icon-correct" />
             <div className="detail">4 correct</div>
           </div>

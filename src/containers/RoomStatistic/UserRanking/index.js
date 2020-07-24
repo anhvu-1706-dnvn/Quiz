@@ -17,7 +17,7 @@ class UserRanking extends Component {
         key: 'fullName',
         render: (text, record, index) => {
           if(record.position === 1) {
-            return <TrophyOutlined />
+            return `${<TrophyOutlined />Ư text
           }
           console.log(record);
           

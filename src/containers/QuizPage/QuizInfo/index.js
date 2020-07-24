@@ -130,17 +130,6 @@ export default function QuizInfo(props) {
     if (e.target.value.length > 0) setErrorNameMessage('');
   };
 
-  // const handleChangeStatusQuiz = async (status) => {
-  //   await dispatch(
-  //     updateOneTestAction(testId, {
-  //       userId: 1,
-  //       isDraft: !status,
-  //     }),
-  //   );
-  //   await dispatch(getOneTestAction(testId));
-  //   setQuizStatus(status);
-  // };
-
   let percent = 25;
 
   if (currentTest && currentTest.description) percent += 25;
@@ -233,7 +222,7 @@ export default function QuizInfo(props) {
         onClick={() => setVisibleModalOtherInfor(true)}
       >
         <img
-          src="https://picsum.photos/200/300"
+          src={currentTest && currentTest.image}
           alt="quizz-img"
           className="quiz-info-img"
         />

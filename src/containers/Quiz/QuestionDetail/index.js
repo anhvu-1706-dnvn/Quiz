@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   EditFilled,
-  CopyFilled,
+  // CopyFilled,
   DeleteFilled,
   InfoCircleOutlined,
 } from '@ant-design/icons';
@@ -42,6 +42,8 @@ export default function QuestionDetail(props) {
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
+        minimumScore: Number(payload.minScore),
+        score: Number(payload.maxScore),
       }),
     );
     setVisible(false);
@@ -62,6 +64,8 @@ export default function QuestionDetail(props) {
           title={props.title}
           time={props.time}
           answerList={props.answers}
+          minScore={props.minScore}
+          maxScore={props.maxScore}
         />
       </Modal>
       <div className="question-detail-header">
@@ -71,22 +75,13 @@ export default function QuestionDetail(props) {
           </div>
         </Popover>
 
-        <div className="title">
-          Question
-          {' '}
-          {props.index}
-        </div>
+        <div className="title">{`Question ${props.index}`}</div>
         {!props.view && (
           <div className="btn-bar">
             <button type="button" onClick={() => setVisible(true)}>
               <EditFilled className="icon" />
               Edit
             </button>
-            <Popover content={<div>Duplicate</div>}>
-              <button type="button">
-                <CopyFilled />
-              </button>
-            </Popover>
             <Popover content={<div>Delete</div>}>
               <button type="button">
                 <DeleteFilled />
@@ -115,6 +110,12 @@ export default function QuestionDetail(props) {
       </div>
       <div className="question-detail-footer">
         <Input value={`${props.time} seconds`} className="select" disabled />
+        <Input
+          value={`Score: ${props.minScore} - ${props.maxScore}`}
+          className="select"
+          style={{ width: 'auto' }}
+          disabled
+        />
       </div>
     </Wrapper>
   );
