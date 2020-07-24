@@ -11,8 +11,7 @@ export default function PlayGameHeader(props) {
   useEffect(() => {
     if (props.resetTimeInHeader) {
       setCurrentTime(time);
-    } else {
-      if (currentTime <= 0) {
+    } else if (currentTime <= 0) {
         props.setTime(0);
         setCurrentTime(0);
       } else {

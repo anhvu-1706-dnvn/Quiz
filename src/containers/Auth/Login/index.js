@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -23,10 +24,15 @@ class Login extends Component {
 
   render() {
     const { form, isAuthenticated } = this.props;
-
+    const role = localStorage.getItem('role')
+   
     if (isAuthenticated) {
+      if(role=== 'admin') {
+        return <Redirect to="/admin" />;
+      }
       return <Redirect to="/" />;
     }
+   
     const { getFieldDecorator } = form;
     return (
       <Wrapper>

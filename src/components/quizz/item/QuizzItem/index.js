@@ -1,6 +1,5 @@
 import React from 'react';
 import { CaretRightOutlined, CopyrightCircleFilled } from '@ant-design/icons';
-import { Tag } from 'antd';
 import { useDispatch } from 'react-redux';
 import { getOneTestAction } from '../../../../redux/test/actions';
 import { getListQuestionByTestAction } from '../../../../redux/question/actions';

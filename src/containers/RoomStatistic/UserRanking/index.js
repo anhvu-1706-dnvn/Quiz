@@ -1,27 +1,50 @@
-import React, { Component } from 'react'
-import { Card, Col, Row, Table } from 'antd'
-import { connect } from "react-redux";
-import {TrophyOutlined} from '@ant-design/icons'
-import Wrapper from './styles'
-import * as StatisticAction from '../../../redux/statistic/actions'
+import React, { Component } from 'react';
+import { Card, Table } from 'antd';
+import { connect } from 'react-redux';
+import Wrapper from './styles';
+import * as StatisticAction from '../../../redux/statistic/actions';
 
 class UserRanking extends Component {
   constructor(props) {
-    super(props)
-    const {id} = this.props.match.params
-    this.props.retrieveRoomStatisticDetail(id)
+    super(props);
+    const { id } = this.props.match.params;
+    this.props.retrieveRoomStatisticDetail(id);
     this.columns = [
       {
-        title: 'Full name',
         dataIndex: 'fullName',
         key: 'fullName',
-        render: (text, record, index) => {
+        render: (text, record) => {
           if(record.position === 1) {
-            return `${<TrophyOutlined />Ư text
+            return (
+              <span className="rank-1">
+                {` ${text} `}
+                <div className="trophy-icon">
+                  <img src="https://img.icons8.com/color/48/000000/gold-medal--v1.png" alt="" />
+                </div>
+              </span>
+            )
           }
-          console.log(record);
-          
-          return text
+          if(record.position === 2) {
+            return (
+              <span className="rank-2">
+                {` ${text} `}
+                <div className="trophy-icon">
+                  <img src="https://img.icons8.com/color/48/000000/olympic-medal-silver.png" alt="" />
+                </div>
+              </span>
+            )
+          }
+          if(record.position === 3) {
+            return (
+              <span className="rank-3">
+                {` ${text} `}
+                <div className="trophy-icon">
+                  <img src="https://img.icons8.com/color/48/000000/olympic-medal-bronze.png" alt="" />
+                </div>
+              </span>
+            )
+          }
+          return text;
         },
       },
       {
@@ -34,11 +57,11 @@ class UserRanking extends Component {
       {
         title: 'Time',
         dataIndex: 'time',
-        width: '30%',
+        width: '20%',
         key: 'time',
         render: (text) => `${text} s`,
-        // sorter: (a, b) => a.time - b.time,
-        //  sortDirections: ['descend', 'ascend'],
+        sorter: (a, b) => a.time - b.time,
+        sortDirections: ['descend', 'ascend'],
       },
     ];
   }
@@ -47,19 +70,17 @@ class UserRanking extends Component {
     const { roomDetail } = this.props;
     return (
       <Wrapper>
-        <Card
-          title={` User ranking (${roomDetail?.totalParticipant} members)`}
-        >
+        <Card title={` User ranking (${roomDetail?.totalParticipant} members)`}>
           <Table columns={this.columns} dataSource={roomDetail?.userRanking} />
         </Card>
       </Wrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   const { statistic } = state;
-  const {roomDetail} = statistic
+  const { roomDetail } = statistic;
   return {
     roomDetail,
   };

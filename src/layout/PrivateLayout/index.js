@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -43,7 +44,7 @@ class PrivateLayout extends Component {
   render() {
     const { children, logout, isAuthenticated, fullName, avatar } = this.props;
     const path = window.location.pathname;
-
+    const role = localStorage.getItem('role')
     if (!isAuthenticated) return <Redirect to="/login" />;
     return (
       <PrivateLayoutWrapper>
@@ -83,7 +84,7 @@ class PrivateLayout extends Component {
               </div>
             </div>
             <div className="sidebar-btn-create-wrapper">
-              {!this.state.collapsed ? (
+              {role === 'admin'? '' : !this.state.collapsed ? (
                 <Button
                   className="create-quiz-button"
                   onClick={() => history.push('/create-quizzes')}

@@ -16,6 +16,8 @@ import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
 import ResultGame from '../../pages/Game/Result';
+import ListUser from '../../pages/ListUser';
+import ListTest from '../../pages/ListTest';
 
 const routes = [
   // {
@@ -101,7 +103,18 @@ const routes = [
     exact: true,
     title: 'Admin Dashboard',
   },
-
+  {
+    path: '/admin/users',
+    component: ListUser,
+    exact: true,
+    title: 'List User',
+  },
+  {
+    path: '/admin/tests',
+    component: ListTest,
+    exact: true,
+    title: 'List Test',
+  },
 ];
 
 const PrivateRoutes = () => (

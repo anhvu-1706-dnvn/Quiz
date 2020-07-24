@@ -21,7 +21,7 @@ class OverallStatistic extends Component {
             <Card className="card-main">
               <Statistic
                 className="left-info"
-                title="Admin"
+                title="ADMIN"
                 value={this.props?.totalAdmin}
               />
             </Card>
@@ -30,7 +30,7 @@ class OverallStatistic extends Component {
             <Card className="card-main">
               <Statistic
                 className="left-info"
-                title="Participant"
+                title="PARTICIPANT"
                 value={this.props?.totalParticipant}
               />
             </Card>
@@ -48,7 +48,7 @@ class OverallStatistic extends Component {
             <Card className="card-main">
               <Statistic
                 className="left-info"
-                title="Total test"
+                title="TOTAL QUIZ"
                 value={this.props?.totalTest}
               />
             </Card>

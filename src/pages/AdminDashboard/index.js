@@ -13,7 +13,7 @@ export default function AdminDashboard () {
           <OverallStatistic />
         </Col>
       </Row>
-      <Row gutter={[16,16]} type="flex">
+      <Row gutter={[32,32]} type="flex">
         <Col md={12}>  
           <TestChart />
         </Col>

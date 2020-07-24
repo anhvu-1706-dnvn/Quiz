@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import io from 'socket.io-client';
-import { Input, Button } from 'antd';
+// import io from 'socket.io-client';
+import { Input } from 'antd';
 import QuizzList from '../../../components/quizz/find_quizz/QuizzList';
 import { getListTagWithTestAction } from '../../../redux/tag/action';
-import { history } from '../../../redux/store';
 import { JoinGameContainerWrapper } from '../styles';
 
 // const socket = io('http://02b58e6b5a3d.ngrok.io/room');
@@ -25,7 +24,7 @@ export default function JoinGameContainer() {
   };
 
   const handleClickJoinBtn = () => {
-    console.log('abcd');
+    // console.log('abcd');
     // socket.emit('joinRoom', code);
     // history.push('/entrance');
   };

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   EditFilled,
-  // CopyFilled,
   DeleteFilled,
   InfoCircleOutlined,
 } from '@ant-design/icons';
@@ -75,7 +74,10 @@ export default function QuestionDetail(props) {
           </div>
         </Popover>
 
-        <div className="title">{`Question ${props.index}`}</div>
+        <div className="title">
+          Question
+          {props.index}
+        </div>
         {!props.view && (
           <div className="btn-bar">
             <button type="button" onClick={() => setVisible(true)}>
