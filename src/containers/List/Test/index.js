@@ -36,13 +36,18 @@ class TestTable extends Component {
         dataIndex: 'description',
         key: 'description',
       },
+      {
+        title: 'Total played',
+        dataIndex: 'totalRoom',
+        key: 'totalRoom',
+        sorter: (a, b) => a.totalRoom - b.totalRoom,
+        sortDirections: ['descend', 'ascend'],
+      },
     ];
   }
 
   render() {
     const { tests } = this.props;
-    console.log(tests);
-    
     return (
       <Wrapper>
         <Card>

@@ -159,27 +159,37 @@ class PrivateLayout extends Component {
               </Header>
             ) : (
               <Header className="header">
+                
                 <div className="leftHeader">
-                  <Icon
-                    className="trigger"
-                    type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                    onClick={this.toggle}
-                  />
-                  <Button
-                    className="create-quiz-button"
-                    onClick={() => history.push('/create-quizzes')}
-                  >
-                    <PlusCircleFilled />
-                    <span>Create a new quizz</span>
-                  </Button>
+                  {role === 'admin'? '' : (
+                    <div>
+                      <Icon
+                        className="trigger"
+                        type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                        onClick={this.toggle}
+                      />
+                      <Button
+                        className="create-quiz-button"
+                        onClick={() => history.push('/create-quizzes')}
+                        >
+                        <PlusCircleFilled />
+                        <span>Create a new quizz</span>
+                      </Button>
+                    </div>
+           
+                    )}
+
                 </div>
+                    
+                
                 <div className="rightHeader">
-                  <Button
-                    className="btn-join"
-                    onClick={() => history.push('/join')}
-                  >
-                    Join a game
-                  </Button>
+                  {role === 'admin'? '' : (
+                    <Button
+                      className="btn-join"
+                      onClick={() => history.push('/join')}>
+                      Join a game
+                    </Button>
+                )}
                   <Dropdown
                     overlay={() => (
                       <Menu style={{ minWidth: '120px' }}>

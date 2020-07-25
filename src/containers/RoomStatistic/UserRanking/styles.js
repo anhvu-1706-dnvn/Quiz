@@ -16,12 +16,10 @@ export default styled.div`
     }
   }
   .ant-table-thead > tr > th {
-    background: #ffa502;
-    color: #fff;
+    background: #7ed6df;
+    color: #000;
     font-weight: bold;
-  }
-  .ant-card-head {
-    background: #f1f2f6;
+    border-radius: 0 !important;
   }
   .ant-card-body {
     padding: 0 !important;

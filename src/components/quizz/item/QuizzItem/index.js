@@ -20,12 +20,12 @@ export default function QuizzBar(props) {
         offset: 0,
         filter: JSON.stringify({ testId: props.id }),
         orderBy: 'id',
-      }),
+      })
     );
     dispatch(
-      getListRoomAction({ filter: JSON.stringify({ testId: props.id }) }),
+      getListRoomAction({ filter: JSON.stringify({ testId: props.id }) })
     );
-    history.push('/my-quizzes/quiz');
+    history.push('/quiz');
   };
 
   return (
@@ -43,9 +43,7 @@ export default function QuizzBar(props) {
           </h4>
           <h4>
             <CopyrightCircleFilled className="icon avatar" />
-            Created by 
-            {' '}
-            {name}
+            Created by {name}
           </h4>
         </div>
       </div>

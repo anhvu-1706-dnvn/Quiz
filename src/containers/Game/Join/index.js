@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import io from 'socket.io-client';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import QuizzList from '../../../components/quizz/find_quizz/QuizzList';
+import { history } from '../../../redux/store';
 import { getListTagWithTestAction } from '../../../redux/tag/action';
-import { JoinGameContainerWrapper } from '../styles';
 
-// const socket = io('http://02b58e6b5a3d.ngrok.io/room');
+import {
+  setCurrentRoomCode,
+  checkRoomAction,
+} from '../../../redux/room/actions';
+
+import { JoinGameContainerWrapper } from '../styles';
 
 export default function JoinGameContainer() {
   const [code, setCode] = useState('');
@@ -24,9 +27,9 @@ export default function JoinGameContainer() {
   };
 
   const handleClickJoinBtn = () => {
-    // console.log('abcd');
-    // socket.emit('joinRoom', code);
-    // history.push('/entrance');
+    dispatch(setCurrentRoomCode({ code }));
+    dispatch(checkRoomAction({ code }));
+    history.push('/entrance');
   };
 
   return (
@@ -38,21 +41,9 @@ export default function JoinGameContainer() {
             className="input-code"
             onChange={handleChangeCode}
           />
-          <Link
-            className="btn-join"
-            to={{
-              pathname: '/entrance',
-              state: {
-                code,
-              },
-            }}
-            onClick={() => handleClickJoinBtn()}
-          >
+          <Button className="btn-join" onClick={() => handleClickJoinBtn()}>
             Join
-          </Link>
-          {/* <Button className="btn-join" onClick={handleClickJoinBtn}>
-            Join
-          </Button> */}
+          </Button>
         </div>
       </div>
       <div className="list-quizzes-section">

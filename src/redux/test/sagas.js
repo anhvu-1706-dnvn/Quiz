@@ -9,6 +9,8 @@ import {
   updateOneTestFailureAction,
   getOneTestSuccessAction,
   getOneTestFailureAction,
+  deleteOneTestSuccessAction,
+  deleteOneTestFailureAction,
 } from './actions';
 // import {data} from './tempData'
 import {
@@ -16,6 +18,7 @@ import {
   postApi,
   getDataByIdApi,
   getAllApi,
+  delApi,
 } from '../../api/common/crud';
 import { apiWrapper } from '../../utils/reduxUtils';
 
@@ -45,7 +48,6 @@ function* getListTest({ limit, offset, filter, orderBy, fields }) {
         fields,
       },
     );
-
     const data = results.map((e) => ({
       name: e.name,
       id: e.id,
@@ -53,6 +55,7 @@ function* getListTest({ limit, offset, filter, orderBy, fields }) {
       image: e.image,
       description: e.description,
       isPublic: !e.isDraft,
+      totalRoom: e.rooms?.length,
     }));
 
     yield put(getListTestSuccessAction(data, total, limit, offset));
@@ -109,7 +112,7 @@ function* updateOneTest({ id, payload }) {
       apiWrapper,
       {
         isShowLoading: true,
-        isShowSucceedNoti: false,
+        isShowSucceedNoti: true,
         errorDescription: 'Error',
       },
       getDataByIdApi,
@@ -152,9 +155,30 @@ function* getOne({ id }) {
   }
 }
 
+function* deleteOne({ id }) {
+  try {
+    yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: true,
+        errorDescription: 'Error',
+      },
+      delApi,
+      'tests',
+      id,
+    );
+
+    yield put(deleteOneTestSuccessAction(id));
+  } catch (error) {
+    yield put(deleteOneTestFailureAction());
+  }
+}
+
 export default [
   takeEvery(TestTypes.GET_LIST_TEST, getListTest),
   takeEvery(TestTypes.CREATE_ONE_TEST, createOneTest),
   takeEvery(TestTypes.UPDATE_ONE_TEST, updateOneTest),
   takeEvery(TestTypes.GET_ONE_TEST, getOne),
+  takeEvery(TestTypes.DELETE_ONE_TEST, deleteOne),
 ];

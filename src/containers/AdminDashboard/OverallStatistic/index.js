@@ -39,7 +39,7 @@ class OverallStatistic extends Component {
             <Card className="card-main card-3">
               <Statistic
                 className="left-info"
-                title="Creator"
+                title="CREATOR"
                 value={this.props?.totalCreator}
               />
             </Card>

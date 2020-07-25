@@ -9,7 +9,10 @@ import { Divider, Popover, Input, Modal } from 'antd';
 import ReactHtmlParser from 'react-html-parser';
 import QuestionItem from '../../../components/quizz/question/Item';
 import QuestionEditor from '../../QuizPage/CreateQuiz/QuestionEditor';
-import { updateOneQuestionAction } from '../../../redux/question/actions';
+import {
+  updateOneQuestionAction,
+  deleteOneQuestionAction,
+} from '../../../redux/question/actions';
 import Wrapper from './styles';
 
 export default function QuestionDetail(props) {
@@ -43,9 +46,13 @@ export default function QuestionDetail(props) {
         time: Number(payload.time),
         minimumScore: Number(payload.minScore),
         score: Number(payload.maxScore),
-      }),
+      })
     );
     setVisible(false);
+  };
+
+  const handleClickDeleteQuestion = () => {
+    dispatch(deleteOneQuestionAction(props.id));
   };
   return (
     <Wrapper>
@@ -74,10 +81,7 @@ export default function QuestionDetail(props) {
           </div>
         </Popover>
 
-        <div className="title">
-          Question
-          {props.index}
-        </div>
+        <div className="title">Question {props.index}</div>
         {!props.view && (
           <div className="btn-bar">
             <button type="button" onClick={() => setVisible(true)}>
@@ -85,7 +89,7 @@ export default function QuestionDetail(props) {
               Edit
             </button>
             <Popover content={<div>Delete</div>}>
-              <button type="button">
+              <button type="button" onClick={handleClickDeleteQuestion}>
                 <DeleteFilled />
               </button>
             </Popover>
@@ -106,7 +110,7 @@ export default function QuestionDetail(props) {
                 />
               ) : (
                 <QuestionItem content={ReactHtmlParser(e.content)} key={e.id} />
-              ),
+              )
             )}
         </div>
       </div>

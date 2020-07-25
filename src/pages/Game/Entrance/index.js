@@ -1,51 +1,52 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Layout, Button } from 'antd';
+import { GridLoader } from 'react-spinners';
 import { history } from '../../../redux/store';
 import EntranceContainer from '../../../containers/Game/Entrance';
-import { getListRoomAction } from '../../../redux/room/actions';
+
 import { EntranceGamePageWrapper } from '../styles';
 
 const { Header, Content } = Layout;
 
-export default function EntrancePage(props) {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.room);
-  useEffect(() => {
-    if (!props.location.state) {
-      history.push('/join');
-    } else {
-      dispatch(
-        getListRoomAction({
-          filter: JSON.stringify({ code: props.location.state.code }),
-        }),
-      );
-    }
-  }, [dispatch]);
+export default function EntrancePage() {
+  const totalQuestion = useSelector((state) => state.question.total);
+  const roomState = useSelector((state) => state.room);
 
-  return (
+  const handleClickExitBtn = () => {
+    history.goBack();
+  };
+
+  return roomState.loadingSetCurrentRoom ? (
+    <EntranceGamePageWrapper>
+      <div className="loading-container">
+        <GridLoader
+          size={50}
+          color={'#fff'}
+          loading={roomState.loadingSetCurrentRoom}
+        />
+      </div>
+    </EntranceGamePageWrapper>
+  ) : (
     <EntranceGamePageWrapper>
       <Layout className="entrance-layout">
         <Header className="entrance-header">
-          <Button className="exit-btn" onClick={() => history.push('/join')}>
+          <Button className="exit-btn" onClick={handleClickExitBtn}>
             X
           </Button>
         </Header>
         <Content className="entrance-content">
-          {data.rooms.length > 0 ? (
+          {roomState.currentRoom !== null ? (
             <EntranceContainer
-              data={data.rooms[0]}
-              code={props.location.state.code}
+              total={totalQuestion}
+              handleClickExitBtn={handleClickExitBtn}
             />
           ) : (
             <div className="error-section">
               <div className="content">
                 This room is not available. Try again!
               </div>
-              <Button
-                className="return-btn"
-                onClick={() => history.push('/join')}
-              >
+              <Button className="return-btn" onClick={handleClickExitBtn}>
                 Back
               </Button>
             </div>

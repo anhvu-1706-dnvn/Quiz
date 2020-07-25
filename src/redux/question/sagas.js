@@ -10,9 +10,12 @@ import {
   updateOneQuestionFailureAction,
   getOneQuestionSuccessAction,
   getOneQuestionFailureAction,
+  deleteOneQuestionSuccessAction,
+  deleteOneQuestionFailureAction,
 } from './actions';
 // import {data} from './tempData'
 import {
+  delApi,
   putApi,
   postApi,
   getAllApi,
@@ -44,7 +47,7 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
         filter,
         orderBy,
         fields,
-      },
+      }
     );
 
     const data = results.map((e) => ({
@@ -79,7 +82,7 @@ function* createOneQuestion({ payload }) {
       },
       postApi,
       'questions',
-      payload,
+      payload
     );
     yield put(createOneQuestionSuccessAction());
   } catch (error) {
@@ -109,7 +112,7 @@ function* updateOneQuestion({ id, payload }) {
       putApi,
       'questions',
       id,
-      payload,
+      payload
     );
     yield put(updateOneQuestionSuccessAction());
   } catch (error) {
@@ -128,7 +131,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'questions',
-      id,
+      id
     );
     // console.log(response);
 
@@ -148,9 +151,30 @@ function* getOne({ id }) {
   }
 }
 
+function* deleteOne({ id }) {
+  try {
+    yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: false,
+        errorDescription: 'Error',
+      },
+      delApi,
+      'questions',
+      id
+    );
+
+    yield put(deleteOneQuestionSuccessAction(id));
+  } catch (error) {
+    yield put(deleteOneQuestionFailureAction());
+  }
+}
+
 export default [
   takeEvery(QuestionTypes.GET_LIST_QUESTION_BY_TEST, getListQuestion),
   takeEvery(QuestionTypes.CREATE_ONE_QUESTION, createOneQuestion),
   takeEvery(QuestionTypes.UPDATE_ONE_QUESTION, updateOneQuestion),
   takeEvery(QuestionTypes.GET_ONE_QUESTION, getOne),
+  takeEvery(QuestionTypes.DELETE_ONE_QUESTION, deleteOne),
 ];
