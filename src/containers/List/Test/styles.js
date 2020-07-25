@@ -9,4 +9,11 @@ export default styled.div`
     margin: 16px 0;
     padding: 10px 50px;
   }
+  .test-img {
+    height: 30px;
+    width: 30px;
+    img {
+      width: 100%;
+    }
+  }
 `

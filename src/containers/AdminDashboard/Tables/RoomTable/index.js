@@ -20,7 +20,7 @@ class RoomTable extends Component {
         },
       },
       {
-        title: 'Quiz Name',
+        title: 'Quiz',
         dataIndex: 'testName',
         key: 'testName',
       },
@@ -58,7 +58,7 @@ class RoomTable extends Component {
           <Table
             columns={this.columns}
             dataSource={rooms} 
-            pagination={{defaultPageSize: 5}}
+            pagination={{defaultPageSize: 7}}
             />
         </Card>
       </Wrapper>

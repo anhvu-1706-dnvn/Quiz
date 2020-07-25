@@ -6,7 +6,7 @@ export default styled.div`
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.15);
   margin-bottom: 40px;
   .question-detail-header {
-    background-color: #f7f6f6;
+    background-color: #f1f2f6;
     padding: 8px 12px;
     display: flex;
     align-items: center;
@@ -42,6 +42,9 @@ export default styled.div`
         font-size: 12px;
         padding-bottom: 4px;
         color: #6b7c93;
+      }
+      .item {
+        width: 100%;
       }
     }
   }

@@ -48,14 +48,14 @@ class UserRanking extends Component {
         },
       },
       {
-        title: 'Score',
+        title: 'SCORE',
         dataIndex: 'score',
         key: 'score',
-        // sorter: (a, b) => a.score - b.score,
-        // sortDirections: ['descend', 'ascend'],
+        sorter: (a, b) => a.score - b.score,
+        sortDirections: ['descend', 'ascend'],
       },
       {
-        title: 'Time',
+        title: 'TIME',
         dataIndex: 'time',
         width: '20%',
         key: 'time',

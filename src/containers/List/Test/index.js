@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Table, Card } from 'antd'
 import { connect } from "react-redux";
 import Wrapper from './styles'
-import * as UserAction from '../../../redux/user/actions'
+import * as TestAction from '../../../redux/test/actions'
 
-class UserTable extends Component {
+class TestTable extends Component {
   constructor(props) {
     super(props)
-    this.props.retrieveUsers()
+    this.props.retrieveTests()
     this.columns = [
       {
         title: 'ID',
@@ -17,66 +17,36 @@ class UserTable extends Component {
         sortDirections: ['descend', 'ascend'],
       },
       {
-        title: 'Role',
-        dataIndex: 'role',
-        key: 'role',
-        filters: [
-          {
-            text: 'admin',
-            value: 'admin',
-          },
-          {
-            text: 'creator',
-            value: 'creator',
-          },
-          {
-            text: 'participant',
-            value: 'participant',
-          },
-        ],
-        onFilter: (value, record) => record.role.indexOf(value) === 0,
+        title: 'Image',
+        dataIndex: 'image',
+        key: 'image',
+        render: (text) => (
+          <div className="test-img"> 
+            <img src={text} alt="" />
+          </div>
+),
       },
       {
-        title: 'Full name',
-        dataIndex: 'fullName',
-        key: 'fullName',
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
       },
       {
-        title: 'Phone',
-        dataIndex: 'phoneNumber',
-        key: 'phoneNumber',
-      },
-      {
-        title: 'Email',
-        dataIndex: 'email',
-        key: 'email',
-      },
-      {
-        title: 'Total test created',
-        dataIndex: 'totalTest',
-        key: 'totalTest',
-      },
-      {
-        title: 'Total test played',
-        dataIndex: 'totalTestPlayed',
-        key: 'totalTestPlayed',
-      },
-      {
-        title: 'Created At',
-        dataIndex: 'createdAt',
-        key: 'createdAt',
-        sorter: (a, b) => a.createdAt - b.createdAt,
-        sortDirections: ['descend', 'ascend'],
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
       },
     ];
   }
 
   render() {
-    const { list } = this.props;
+    const { tests } = this.props;
+    console.log(tests);
+    
     return (
       <Wrapper>
         <Card>
-          <Table columns={this.columns} dataSource={list} pagination={{defaultPageSize: 10}}  />
+          <Table columns={this.columns} dataSource={tests} pagination={{defaultPageSize: 10}}  />
         </Card>
       </Wrapper>
     )
@@ -84,17 +54,17 @@ class UserTable extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user } = state;
-  const {list} = user
+  const { test } = state;
+  const {tests} = test
   return {
-    list,
+    tests,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  retrieveUsers: () => {
-    dispatch(UserAction.getListUserAction());
+  retrieveTests: () => {
+    dispatch(TestAction.getListTestAction({limit: 500, offset:0, orderBy: "id"}));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserTable);
+export default connect(mapStateToProps, mapDispatchToProps)(TestTable);

@@ -2,37 +2,35 @@ import React, { Component } from 'react'
 import { Card, Row, Col } from 'antd'
 import { connect } from "react-redux";
 import Wrapper from './styles'
+import * as UserAction from '../../../../redux/user/actions'
 
 class UserBadget extends Component {
-  // constructor(props) {
-  //   super(props)
-  
-  // }
+  constructor(props) {
+    super(props)
+    const {topContributes} = this.props;
+    if(topContributes === null) {
+      this.props.retrieveUserContributes()
+    }
+  }
 
   handleClick = () => {
     
   }
 
   render() {
-    const data = [
-      {
-        id:1,
-        fullName: 'Minh Hoang Ho',
-        total: 20,
-      },
-      {
-        id:1,
-        fullName: 'Minh Hoang Ho',
-        total: 20,
-      },
-      {
-        id:1,
-        fullName: 'Minh Hoang Ho',
-        total: 20,
-      },
-    ]
-    const badgets = data.map(e=> (
-      <div className="badget">
+    const {topContributes} = this.props;
+    let data = []
+    if(topContributes) {
+      const {contributers} = topContributes
+      if(contributers.length > 3) {
+        data=contributers.slice(0,3)
+      } else {
+        data = [...contributers]
+      }
+      data = data.map(e=> ({...e, total: e.totalTest,  key: e.id}))
+    }
+    const badgets = data.map((e, idx)=> (
+      <div className={`badget badget-${idx}`}>
         <div className="card-header">
           <div className="card-stat-row">
             <div className="card-stat">{` ${e.total} Quizzes`}</div>
@@ -47,12 +45,12 @@ class UserBadget extends Component {
           </div>
         </div>
       </div>
-))
+    ))
     return (
       <Wrapper>
         <Row>
           <Col>
-            <Card title="Top contribution">
+            <Card title="Top contributes">
               {badgets}
             </Card>
           </Col>
@@ -64,12 +62,18 @@ class UserBadget extends Component {
 
 const mapStateToProps = (state) => {
   const { user } = state;
-  const {list} = user
+  const {topContributes} = user
   return {
-    list,
+    topContributes,
   };
 };
 
 
+const mapDispatchToProps = (dispatch) => ({
+  retrieveUserContributes: () => {
+    dispatch(UserAction.getTopContributeAction());
+  },
+});
 
-export default connect(mapStateToProps, {})(UserBadget);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserBadget);

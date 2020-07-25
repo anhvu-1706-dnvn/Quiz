@@ -5,7 +5,8 @@ import RankCard from '../../../components/game/play/RankCard';
 import { PlayGameContainerWrapper, RankingContainerWrapper } from '../styles';
 
 export default function PlayGameContainer(props) {
-  return !props.isShowLeaderBoard ? (
+  // return !props.isShowLeaderBoard ? (
+  return false ? (
     <PlayGameContainerWrapper>
       <div className="title-section">
         {ReactHtmlParser(props.question && props.question.content)}

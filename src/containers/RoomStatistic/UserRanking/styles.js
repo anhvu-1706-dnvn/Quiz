@@ -15,4 +15,15 @@ export default styled.div`
       display: inline-block;
     }
   }
+  .ant-table-thead > tr > th {
+    background: #ffa502;
+    color: #fff;
+    font-weight: bold;
+  }
+  .ant-card-head {
+    background: #f1f2f6;
+  }
+  .ant-card-body {
+    padding: 0 !important;
+  }
 `;

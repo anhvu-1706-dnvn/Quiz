@@ -6,6 +6,8 @@ export default styled.div`
     padding: 24px;
   }
 
+  
+
   .badget {
     margin-bottom: 20px;
     width: 100%;
@@ -36,10 +38,10 @@ export default styled.div`
         padding: 12px 12px;
         justify-content: center;
         .card-stat {
-          padding: 0 4px;
+          padding: 0 20px;
           background-color: #f2f2f2;
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-          border-radius: 4px;
+          border-radius: 30px;
           font-size: 30px;
           font-weight: 600;
           color: rgba(41, 42, 58, 0.67);
@@ -60,8 +62,19 @@ export default styled.div`
     }
 
     .name-wrapper {
+      color: #fff;
       text-transform: uppercase;
     }
+  }
+
+  .badget-0 {
+    background: #9b59b6;
+  }
+  .badget-1 {
+    background: #3498db;
+  }
+  .badget-2 {
+    background: #2ecc71;
   }
 
 `

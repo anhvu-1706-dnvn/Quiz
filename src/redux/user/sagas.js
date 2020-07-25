@@ -9,6 +9,7 @@ import {
   verifySuccessAction,
   verifyFailureAction,
   getListUserSuccessAction,
+  getTopContributeSuccessAction,
 } from './actions';
 import { loginApi, registerApi, verifyApi } from '../../api/modules/auth';
 import { apiWrapper } from '../../utils/reduxUtils';
@@ -84,7 +85,7 @@ function logoutSaga() {
   }
 }
 
-function* listUserSage() {
+function* listUserSaga() {
   try {
     const response = yield call(
       apiWrapper,
@@ -94,10 +95,28 @@ function* listUserSage() {
       },
       getAllApi,
       'users',
-      {limit: 100, offset:0, orderBy: 'id'},
+      {limit: 500, offset:0, orderBy: 'id'},
     );
     const results = response.results.map((e, idx)=> ({...e, key: idx, role: e.role?.name, createdAt: moment(e.createdAt).format('LL')}))
     yield put(getListUserSuccessAction(results));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+    
+  }
+}
+function* getTopContribute() {
+  try {
+    const response = yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: false,
+      },
+      getAllApi,
+      'users/statistic/top',
+    );
+    yield put(getTopContributeSuccessAction(response));
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
@@ -111,5 +130,6 @@ export default [
   takeEvery(UserTypes.REGISTER, registerSaga),
   takeEvery(UserTypes.VERIFY, verifySaga),
   takeEvery(UserTypes.LOGOUT, logoutSaga),
-  takeEvery(UserTypes.GET_LIST_USER, listUserSage),
+  takeEvery(UserTypes.GET_LIST_USER, listUserSaga),
+  takeEvery(UserTypes.GET_TOP_CONTRIBUTE, getTopContribute),
 ];

@@ -25,6 +25,7 @@ export const initialState = {
   verifySuccess: false,
   list: null,
   verifyResponse: null,
+  topContributes: null,
 };
 // End setup
 
@@ -107,6 +108,12 @@ const getListUserSuccess = (state, {data}) => ({
   list:data,
 });
 
+const getTopContributeSuccess = (state, {data}) => ({
+  ...state,
+  isShowLoading: false,
+  topContributes:data,
+});
+
 export const user = makeReducerCreator(initialState, {
   [UserTypes.LOGIN_USER_SUCCESS]: loginSuccess,
   [UserTypes.LOGIN_USER_FAIL]: loginFail,
@@ -117,5 +124,5 @@ export const user = makeReducerCreator(initialState, {
   [UserTypes.LOGOUT]: logout,
   [UserTypes.LOGIN]: loginLoading,
   [UserTypes.GET_LIST_USER_SUCCESS]: getListUserSuccess,
-
+  [UserTypes.GET_TOP_CONTRIBUTE_SUCCESS]: getTopContributeSuccess,
 });
