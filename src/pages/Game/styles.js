@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import theme from '../../configs/theme';
 
 export const JoinGamePageWrapper = styled.div`
+  height: 100vh;
+  background-color: #f0f2f5;
   .header {
     background-color: #fff !important;
     padding: 0 20px !important;
@@ -248,6 +250,40 @@ export const PlayGamePageWrapper = styled.div`
     }
   }
 `;
+
+export const LeaderBoardPageWrapper = styled.div`
+  height: 100vh;
+  background-color: #000;
+
+  .leader-board-layout {
+    .leader-board-header {
+      background-color: #000;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+
+      .exit-btn {
+        background-color: hsla(0, 0%, 100%, 0.33);
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+  }
+`;
+
 export const ResultGamePageWrapper = styled.div`
   height: 100vh;
   background-color: #000;

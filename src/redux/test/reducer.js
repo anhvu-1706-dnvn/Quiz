@@ -16,6 +16,8 @@ export const initialState = {
 
   updateTestSuccess: undefined,
   updateTestFailure: undefined,
+  deleteTestSuccess: undefined,
+  deleteTestFailure: undefined,
   currentTest: null,
   registrations: [],
   testImage: null,
@@ -101,6 +103,28 @@ const getOneTestFailure = (state) => ({
 });
 
 // -----------------------------------------
+const deleteOneTestSuccess = (state, { id }) => {
+  const test = state.tests.find((e) => e.id === id);
+  const index = state.tests.indexOf(test);
+  const newTests = [
+    ...state.tests.slice(0, index),
+    ...state.tests.slice(index + 1),
+  ];
+  return {
+    ...state,
+    tests: newTests,
+    deleteTestSuccess: true,
+    deleteTestFailure: false,
+  };
+};
+
+const deleteOneTestFailure = (state) => ({
+  ...state,
+  deleteTestSuccess: false,
+  deleteTestFailure: true,
+});
+
+// -----------------------------------------
 // UPLOAD IMAGE
 const uploadImageSuccess = (state, { fileUrl }) => {
   return {
@@ -151,6 +175,9 @@ export const test = makeReducerCreator(initialState, {
 
   [TestTypes.GET_ONE_TEST_SUCCESS]: getOneTestSuccess,
   [TestTypes.GET_ONE_TEST_FAILURE]: getOneTestFailure,
+
+  [TestTypes.DELETE_ONE_TEST_SUCCESS]: deleteOneTestSuccess,
+  [TestTypes.DELETE_ONE_TEST_FAILURE]: deleteOneTestFailure,
 
   [TestTypes.UPLOAD_IMAGE_SUCCESS]: uploadImageSuccess,
   [TestTypes.UPLOAD_IMAGE_FAILURE]: uploadImageFailure,

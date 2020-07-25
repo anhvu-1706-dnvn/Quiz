@@ -17,9 +17,13 @@ export const TestTypes = makeConstantCreator(
   'GET_ONE_TEST_SUCCESS',
   'GET_ONE_TEST_FAILURE',
 
+  'DELETE_ONE_TEST',
+  'DELETE_ONE_TEST_SUCCESS',
+  'DELETE_ONE_TEST_FAILURE',
+
   'UPLOAD_IMAGE_SUCCESS',
   'UPLOAD_IMAGE_FAILURE',
-  'REMOVE_IMAGE',
+  'REMOVE_IMAGE'
 );
 
 // List test
@@ -64,6 +68,14 @@ export const getOneTestSuccessAction = (data) =>
   makeActionCreator(TestTypes.GET_ONE_TEST_SUCCESS, { data });
 export const getOneTestFailureAction = (error) =>
   makeActionCreator(TestTypes.GET_ONE_TEST_FAILURE, { error });
+
+// Delete one test
+export const deleteOneTestAction = (id) =>
+  makeActionCreator(TestTypes.DELETE_ONE_TEST, { id });
+export const deleteOneTestSuccessAction = (id) =>
+  makeActionCreator(TestTypes.DELETE_ONE_TEST_SUCCESS, { id });
+export const deleteOneTestFailureAction = () =>
+  makeActionCreator(TestTypes.DELETE_ONE_TEST_FAILURE);
 
 // Upload - remove image
 export const uploadImageSuccessAction = (fileUrl, mode) =>

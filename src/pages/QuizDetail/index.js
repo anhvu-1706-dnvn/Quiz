@@ -1,104 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Icon, Button, Tag, Popover, Modal, Input } from 'antd';
+import { Icon, Button, Modal } from 'antd';
 import { history } from '../../redux/store';
-import theme from '../../configs/theme';
 import QuestionDetail from '../../containers/Quiz/QuestionDetail';
 import { createOneRoomAction } from '../../redux/room/actions';
+import { deleteOneTestAction } from '../../redux/test/actions';
 import Wrapper from './styles';
 
 export default function QuizDetail() {
   const dispatch = useDispatch();
   const testState = useSelector((state) => state.test);
   const questionState = useSelector((state) => state.question);
-  const roomState = useSelector((state) => state.room);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (testState.currentTest === null) {
-      history.push('/my-quizzes');
+      history.goBack();
     }
   });
 
   const handleClickBtnEdit = () => {
-    history.push('/quiz');
+    history.push('/quiz/edit');
+  };
+
+  const handleClickGenerateCode = async () => {
+    await dispatch(
+      createOneRoomAction({ testId: testState.currentTest.id, status: true })
+    );
+    history.push('/entrance');
+  };
+
+  const handleClickDeleteTest = () => {
+    setVisible(true);
   };
 
   const handleOk = () => {
-    setVisible(false);
+    dispatch(deleteOneTestAction(testState.currentTest.id));
+    history.push('/my-quizzes');
   };
 
   const handleCancel = () => {
     setVisible(false);
   };
 
-  const handleClickGenerateCode = () => {
-    dispatch(createOneRoomAction({ testId: testState.currentTest.id }));
-  };
-
   return (
     <Wrapper>
       <Modal
-        title="Generate a new code"
+        title="Delete a test"
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
-        maskClosable={false}
       >
-        <div>
-          <div style={{ fontSize: '20px', marginBottom: '20px' }}>
-            Hint: Use this code to join in the test
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Code</span>
-            <Input
-              style={{
-                marginLeft: '20px',
-                fontWeight: '700',
-                fontSize: '20px',
-                backgroundColor: '#fff',
-                color: '#000',
-              }}
-              value={
-                roomState.currentRoomCode !== null
-                  ? roomState.currentRoomCode
-                  : ''
-              }
-              disabled
-            />
-            <Popover content={<div>Copy this code</div>}>
-              <CopyToClipboard
-                text={
-                  roomState.currentRoomCode !== null
-                    ? roomState.currentRoomCode
-                    : ''
-                }
-              >
-                <Button
-                  style={{
-                    marginLeft: '20px',
-                    color: '#000',
-                  }}
-                >
-                  <Icon type="copy" theme="filled" />
-                </Button>
-              </CopyToClipboard>
-            </Popover>
-            <Popover content={<div>Re-generate a new code</div>}>
-              <Button
-                style={{
-                  marginLeft: '10px',
-                  color: '#fff',
-                  backgroundColor: theme.palette.primary,
-                }}
-                onClick={handleClickGenerateCode}
-              >
-                <Icon type="sync" />
-              </Button>
-            </Popover>
-          </div>
-        </div>
+        <p>Do you really want to delete this test?</p>
       </Modal>
       <div className="main-infor-container">
         <img
@@ -109,25 +62,6 @@ export default function QuizDetail() {
         <div className="infor">
           <div className="name">
             {testState.currentTest && testState.currentTest.name}
-            {roomState.currentRoomCode !== null ? (
-              <Popover
-                content={<div>Invite your friends to play by this code</div>}
-              >
-                <Tag color="#00c985" className="status">
-                  {roomState.currentRoomCode}
-                </Tag>
-              </Popover>
-            ) : (
-              <Popover content={<div>Click to generate a new code</div>}>
-                <Tag
-                  color="#f50"
-                  className="status"
-                  onClick={() => setVisible(true)}
-                >
-                  Empty code
-                </Tag>
-              </Popover>
-            )}
           </div>
           <div className="tag-wrapper">
             {testState.currentTest &&
@@ -153,22 +87,22 @@ export default function QuizDetail() {
             <Icon type="edit" theme="filled" className="icon" />
             <span>Edit</span>
           </Button>
-          <Button className="btn-action" onClick={() => setVisible(true)}>
+          <Button className="btn-action" onClick={handleClickGenerateCode}>
             <Icon type="play-circle" theme="filled" className="icon" />
             <span>Start</span>
           </Button>
         </div>
-        <Button className="btn-action btn-delete">
+        <Button
+          className="btn-action btn-delete"
+          onClick={handleClickDeleteTest}
+        >
           <Icon type="delete" theme="filled" className="icon" />
           <span>Delete</span>
         </Button>
       </div>
       <div className="question-container">
         <div className="title-preview">
-          Preview (
-          {questionState.total}
-          {' '}
-          questions)
+          Preview ({questionState.total} questions)
         </div>
         {questionState.questions &&
           questionState.questions.map((e, index) => (

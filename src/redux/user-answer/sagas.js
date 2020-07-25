@@ -20,7 +20,7 @@ function* createUserAnswerSaga({ payload }) {
       },
       postApi,
       'user-answers',
-      payload,
+      payload
     );
     yield put(createOneUserAnswerSuccessAction(data));
   } catch (error) {
@@ -31,6 +31,6 @@ function* createUserAnswerSaga({ payload }) {
 export default [
   takeEvery(
     UserAnswerTypes.CREATE_ONE_USER_ANSWER_ACTION,
-    createUserAnswerSaga,
+    createUserAnswerSaga
   ),
 ];

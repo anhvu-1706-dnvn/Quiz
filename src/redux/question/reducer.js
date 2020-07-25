@@ -18,6 +18,9 @@ export const initialState = {
   updateQuestionSuccess: undefined,
   updateQuestionFailure: undefined,
 
+  deleteQuestionSuccess: undefined,
+  deleteQuestionFailure: undefined,
+
   currentQuestion: {},
   questionImage: null,
 
@@ -46,7 +49,7 @@ const getListQuestionByTest = (state) => ({
 
 const getListQuestionByTestSuccess = (
   state,
-  { data, total, limit, offset },
+  { data, total, limit, offset }
 ) => ({
   ...state,
   questions: data,
@@ -123,6 +126,28 @@ const getOneQuestionFailure = (state) => ({
 });
 
 // -----------------------------------------
+const deleteOneQuestionSuccess = (state, { id }) => {
+  const question = state.questions.find((e) => e.id === id);
+  const index = state.questions.indexOf(question);
+  const newQuestions = [
+    ...state.questions.slice(0, index),
+    ...state.questions.slice(index + 1),
+  ];
+  return {
+    ...state,
+    questions: newQuestions,
+    deleteQuestionSuccess: true,
+    deleteQuestionFailure: false,
+  };
+};
+
+const deleteOneQuestionFailure = (state) => ({
+  ...state,
+  deleteQuestionSuccess: false,
+  deleteQuestionFailure: true,
+});
+
+// -----------------------------------------
 // UPLOAD IMAGE
 const uploadImageSuccess = (state, { fileUrl }) => {
   return {
@@ -156,6 +181,9 @@ export const question = makeReducerCreator(initialState, {
 
   [QuestionTypes.GET_ONE_QUESTION_SUCCESS]: getOneQuestionSuccess,
   [QuestionTypes.GET_ONE_QUESTION_FAILURE]: getOneQuestionFailure,
+
+  [QuestionTypes.DELETE_ONE_QUESTION_SUCCESS]: deleteOneQuestionSuccess,
+  [QuestionTypes.DELETE_ONE_QUESTION_FAILURE]: deleteOneQuestionFailure,
 
   [QuestionTypes.UPLOAD_IMAGE_SUCCESS]: uploadImageSuccess,
   [QuestionTypes.UPLOAD_IMAGE_FAILURE]: uploadImageFailure,

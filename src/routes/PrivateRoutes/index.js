@@ -15,6 +15,7 @@ import RoomStatistic from '../../pages/RoomStatistic';
 import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
+import LeaderBoardGame from '../../pages/Game/LeaderBoard';
 import ResultGame from '../../pages/Game/Result';
 
 const routes = [
@@ -37,13 +38,13 @@ const routes = [
     title: 'My quizzes',
   },
   {
-    path: '/my-quizzes/quiz',
+    path: '/quiz',
     component: QuizzDetail,
     exact: true,
     title: 'Quiz Details',
   },
   {
-    path: '/quiz',
+    path: '/quiz/edit',
     component: EditQuiz,
     exact: true,
     title: 'Edit quiz',
@@ -79,6 +80,13 @@ const routes = [
     component: PlayGame,
     exact: true,
     title: 'Play a game',
+    isUsePublicLayout: true,
+  },
+  {
+    path: '/leader-board',
+    component: LeaderBoardGame,
+    exact: true,
+    title: 'Leader board of a game',
     isUsePublicLayout: true,
   },
   {
@@ -133,7 +141,7 @@ const PrivateRoutes = () => (
             )}
             key={route.path}
           />
-        ),
+        )
     )}
   </Switch>
 );
