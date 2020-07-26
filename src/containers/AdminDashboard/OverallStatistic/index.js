@@ -18,37 +18,37 @@ class OverallStatistic extends Component {
       <Wrapper>
         <Row gutter={24}>
           <Col xs={24} md={12} lg={6}>
-            <Card className="card-main">
+            <Card className="card-main card-1">
               <Statistic
                 className="left-info"
-                title="Admin"
+                title="ADMIN"
                 value={this.props?.totalAdmin}
               />
             </Card>
           </Col>
           <Col xs={24} md={12} lg={6}>
-            <Card className="card-main">
+            <Card className="card-main card-2">
               <Statistic
                 className="left-info"
-                title="Participant"
+                title="PARTICIPANT"
                 value={this.props?.totalParticipant}
               />
             </Card>
           </Col>
           <Col xs={24} md={12} lg={6}>
-            <Card className="card-main">
+            <Card className="card-main card-3">
               <Statistic
                 className="left-info"
-                title="Creator"
+                title="CREATOR"
                 value={this.props?.totalCreator}
               />
             </Card>
           </Col>
           <Col xs={24} md={12} lg={6}>
-            <Card className="card-main">
+            <Card className="card-main card-4">
               <Statistic
                 className="left-info"
-                title="Total test"
+                title="TOTAL QUIZ"
                 value={this.props?.totalTest}
               />
             </Card>

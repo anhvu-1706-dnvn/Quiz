@@ -7,9 +7,6 @@ export const initialState = {
   data: {
     fullName: localStorage.getItem('fullName') || '',
     id: localStorage.getItem('id'),
-    // avatar: localStorage.getItem('avatar') || '',
-    // id: localStorage.getItem('id'),
-    // avatar: localStorage.getItem('avatar') || '',
   },
   // isAuthenticated: true,
   // data: {
@@ -26,7 +23,9 @@ export const initialState = {
   registerSuccess: false,
   verifyError: false,
   verifySuccess: false,
+  list: null,
   verifyResponse: null,
+  topContributes: null,
 };
 // End setup
 
@@ -35,8 +34,6 @@ const loginSuccess = (state, { response }) => {
   const { data } = state;
   data.fullName = response.fullName;
   data.id = response.id;
-  // data.avatar = respone.avatar;
-  // data.id = respone.id;
   // data.avatar = respone.avatar;
   return {
     ...state,
@@ -76,7 +73,7 @@ const registerFail = (state, { error }) => ({
 });
 
 // Verify
-const verifySuccess = (state, { response }) => {
+const verifySuccess = (state, {response}) => {
   return {
     ...state,
     isShowLoading: false,
@@ -104,6 +101,19 @@ const loginLoading = (state) => ({
   isShowLoading: true,
 });
 
+
+const getListUserSuccess = (state, {data}) => ({
+  ...state,
+  isShowLoading: false,
+  list:data,
+});
+
+const getTopContributeSuccess = (state, {data}) => ({
+  ...state,
+  isShowLoading: false,
+  topContributes:data,
+});
+
 export const user = makeReducerCreator(initialState, {
   [UserTypes.LOGIN_USER_SUCCESS]: loginSuccess,
   [UserTypes.LOGIN_USER_FAIL]: loginFail,
@@ -113,4 +123,6 @@ export const user = makeReducerCreator(initialState, {
   [UserTypes.VERIFY_USER_FAIL]: verifyFail,
   [UserTypes.LOGOUT]: logout,
   [UserTypes.LOGIN]: loginLoading,
+  [UserTypes.GET_LIST_USER_SUCCESS]: getListUserSuccess,
+  [UserTypes.GET_TOP_CONTRIBUTE_SUCCESS]: getTopContributeSuccess,
 });

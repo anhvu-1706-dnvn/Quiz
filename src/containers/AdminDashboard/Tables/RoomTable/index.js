@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table, Card } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -20,20 +20,20 @@ class RoomTable extends Component {
         },
       },
       {
-        title: 'Test Name',
+        title: 'Quiz',
         dataIndex: 'testName',
         key: 'testName',
       },
       {
-        title: 'Creator',
+        title: 'Host',
         dataIndex: 'creatorName',
-        width: '30%',
         key: 'creatorName',
       },
       {
         title: 'Total Participant',
         dataIndex: 'totalParticipant',
         key: 'totalParticipant',
+        width: '25%',
       },
       {
         title: 'Created At',
@@ -54,7 +54,13 @@ class RoomTable extends Component {
 
     return (
       <Wrapper>
-        <Table columns={this.columns} dataSource={rooms} />
+        <Card>
+          <Table
+            columns={this.columns}
+            dataSource={rooms} 
+            pagination={{defaultPageSize: 7}}
+            />
+        </Card>
       </Wrapper>
     );
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -44,7 +45,7 @@ class PrivateLayout extends Component {
   render() {
     const { children, logout, isAuthenticated, fullName } = this.props;
     const path = window.location.pathname;
-
+    const role = localStorage.getItem('role')
     if (!isAuthenticated) return <Redirect to="/login" />;
     return (
       <PrivateLayoutWrapper>
@@ -84,7 +85,7 @@ class PrivateLayout extends Component {
               </div>
             </div>
             <div className="sidebar-btn-create-wrapper">
-              {!this.state.collapsed ? (
+              {role === 'admin'? '' : !this.state.collapsed ? (
                 <Button
                   className="create-quiz-button"
                   onClick={() => history.push('/create-quizzes')}
@@ -159,27 +160,37 @@ class PrivateLayout extends Component {
               </Header>
             ) : (
               <Header className="header">
+                
                 <div className="leftHeader">
-                  <Icon
-                    className="trigger"
-                    type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                    onClick={this.toggle}
-                  />
-                  <Button
-                    className="create-quiz-button"
-                    onClick={() => history.push('/create-quizzes')}
-                  >
-                    <PlusCircleFilled />
-                    <span>Create a new quizz</span>
-                  </Button>
+                  {role === 'admin'? '' : (
+                    <div>
+                      <Icon
+                        className="trigger"
+                        type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                        onClick={this.toggle}
+                      />
+                      <Button
+                        className="create-quiz-button"
+                        onClick={() => history.push('/create-quizzes')}
+                        >
+                        <PlusCircleFilled />
+                        <span>Create a new quizz</span>
+                      </Button>
+                    </div>
+           
+                    )}
+
                 </div>
+                    
+                
                 <div className="rightHeader">
-                  <Button
-                    className="btn-join"
-                    onClick={() => history.push('/join')}
-                  >
-                    Join a game
-                  </Button>
+                  {role === 'admin'? '' : (
+                    <Button
+                      className="btn-join"
+                      onClick={() => history.push('/join')}>
+                      Join a game
+                    </Button>
+                )}
                   <Dropdown
                     overlay={() => (
                       <Menu style={{ minWidth: '120px' }}>

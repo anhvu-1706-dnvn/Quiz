@@ -5,7 +5,11 @@ export default styled.div`
 
   .test-info {
     display:flex;
-
+    padding: 20px;
+    background: #778beb;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    color: #fff;
   }
 
 

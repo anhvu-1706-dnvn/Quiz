@@ -95,6 +95,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+// const mapDispatchToProps = (dispatch) => ({
 
-export default connect(mapStateToProps, mapDispatchToProps)(SessionChart);
+// });
+
+export default connect(mapStateToProps, {})(SessionChart);

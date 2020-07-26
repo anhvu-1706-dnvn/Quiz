@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Card, Col, Row, Statistic } from 'antd'
+import { Card } from 'antd'
 import { connect } from 'react-redux';
 import Chart from 'react-apexcharts';
 import Wrapper from './styles';
@@ -58,17 +58,18 @@ class TestChart extends Component {
     ];
     return (
       <Wrapper>
-        <Chart
-          options={{
-            ...this.options,
-            xaxis: {
-              type: 'string',
-              categories,
-            },
-          }}
-          series={series}
-          type="bar"
-        />
+        <Card>
+          <Chart
+            options={{...this.options,
+              xaxis: {
+                type: "string",
+                categories,
+              }}}
+            series={series}
+            type="bar" />
+
+        </Card>
+        
       </Wrapper>
     );
   }
