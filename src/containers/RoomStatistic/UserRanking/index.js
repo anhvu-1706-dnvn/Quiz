@@ -11,21 +11,53 @@ class UserRanking extends Component {
     this.props.retrieveRoomStatisticDetail(id);
     this.columns = [
       {
-        title: 'Full name',
         dataIndex: 'fullName',
         key: 'fullName',
+        render: (text, record) => {
+          if(record.position === 1) {
+            return (
+              <span className="rank-1">
+                {` ${text} `}
+                <div className="trophy-icon">
+                  <img src="https://img.icons8.com/color/48/000000/gold-medal--v1.png" alt="" />
+                </div>
+              </span>
+            )
+          }
+          if(record.position === 2) {
+            return (
+              <span className="rank-2">
+                {` ${text} `}
+                <div className="trophy-icon">
+                  <img src="https://img.icons8.com/color/48/000000/olympic-medal-silver.png" alt="" />
+                </div>
+              </span>
+            )
+          }
+          if(record.position === 3) {
+            return (
+              <span className="rank-3">
+                {` ${text} `}
+                <div className="trophy-icon">
+                  <img src="https://img.icons8.com/color/48/000000/olympic-medal-bronze.png" alt="" />
+                </div>
+              </span>
+            )
+          }
+          return text;
+        },
       },
       {
-        title: 'Score',
+        title: 'SCORE',
         dataIndex: 'score',
         key: 'score',
         sorter: (a, b) => a.score - b.score,
         sortDirections: ['descend', 'ascend'],
       },
       {
-        title: 'Time',
+        title: 'TIME',
         dataIndex: 'time',
-        width: '30%',
+        width: '20%',
         key: 'time',
         render: (text) => `${text} s`,
         sorter: (a, b) => a.time - b.time,

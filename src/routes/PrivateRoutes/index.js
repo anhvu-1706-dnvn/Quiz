@@ -15,7 +15,10 @@ import RoomStatistic from '../../pages/RoomStatistic';
 import JoinGame from '../../pages/Game/Join';
 import EntranceGame from '../../pages/Game/Entrance';
 import PlayGame from '../../pages/Game/Play';
+import LeaderBoardGame from '../../pages/Game/LeaderBoard';
 import ResultGame from '../../pages/Game/Result';
+import ListUser from '../../pages/ListUser';
+import ListTest from '../../pages/ListTest';
 
 const routes = [
   // {
@@ -37,13 +40,13 @@ const routes = [
     title: 'My quizzes',
   },
   {
-    path: '/my-quizzes/quiz',
+    path: '/quiz',
     component: QuizzDetail,
     exact: true,
     title: 'Quiz Details',
   },
   {
-    path: '/quiz',
+    path: '/quiz/edit',
     component: EditQuiz,
     exact: true,
     title: 'Edit quiz',
@@ -82,6 +85,13 @@ const routes = [
     isUsePublicLayout: true,
   },
   {
+    path: '/leader-board',
+    component: LeaderBoardGame,
+    exact: true,
+    title: 'Leader board of a game',
+    isUsePublicLayout: true,
+  },
+  {
     path: '/result',
     component: ResultGame,
     exact: true,
@@ -100,6 +110,18 @@ const routes = [
     component: RoomStatistic,
     exact: true,
     title: 'Admin Dashboard',
+  },
+  {
+    path: '/admin/users',
+    component: ListUser,
+    exact: true,
+    title: 'List User',
+  },
+  {
+    path: '/admin/tests',
+    component: ListTest,
+    exact: true,
+    title: 'List Test',
   },
 ];
 

@@ -17,9 +17,13 @@ export const QuestionTypes = makeConstantCreator(
   'GET_ONE_QUESTION_SUCCESS',
   'GET_ONE_QUESTION_FAILURE',
 
+  'DELETE_ONE_QUESTION',
+  'DELETE_ONE_QUESTION_SUCCESS',
+  'DELETE_ONE_QUESTION_FAILURE',
+
   'UPLOAD_IMAGE_SUCCESS',
   'UPLOAD_IMAGE_FAILURE',
-  'REMOVE_IMAGE',
+  'REMOVE_IMAGE'
 );
 
 // List question
@@ -41,7 +45,7 @@ export const getListQuestionByTestSuccessAction = (
   data,
   total,
   limit,
-  offset,
+  offset
 ) =>
   makeActionCreator(QuestionTypes.GET_LIST_QUESTION_BY_TEST_SUCCESS, {
     data,
@@ -75,6 +79,14 @@ export const getOneQuestionSuccessAction = (data) =>
   makeActionCreator(QuestionTypes.GET_ONE_QUESTION_SUCCESS, { data });
 export const getOneQuestionFailureAction = (error) =>
   makeActionCreator(QuestionTypes.GET_ONE_QUESTION_FAILURE, { error });
+
+// Delete one test
+export const deleteOneQuestionAction = (id) =>
+  makeActionCreator(QuestionTypes.DELETE_ONE_QUESTION, { id });
+export const deleteOneQuestionSuccessAction = (id) =>
+  makeActionCreator(QuestionTypes.DELETE_ONE_QUESTION_SUCCESS, { id });
+export const deleteOneQuestionFailureAction = () =>
+  makeActionCreator(QuestionTypes.DELETE_ONE_QUESTION_FAILURE);
 
 // Upload - remove image
 export const uploadImageSuccessAction = (fileUrl, mode) =>

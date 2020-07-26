@@ -6,8 +6,8 @@ import QuestionItem from '../../../../components/quizz/question/Item';
 
 export default class QuestionDetail extends Component {
   handleOnclik = () => {
-    console.log('OK');
-  };
+    
+  }
 
   render() {
     return (
@@ -27,12 +27,14 @@ export default class QuestionDetail extends Component {
               this.props.answers.map((e) =>
                 e.isCorrect ? (
                   <QuestionItem
+                    className="item"
                     content={ReactHtmlParser(e.content)}
                     correct
                     key={e.id}
                   />
                 ) : (
                   <QuestionItem
+                    className="item"
                     content={ReactHtmlParser(e.content)}
                     key={e.id}
                   />

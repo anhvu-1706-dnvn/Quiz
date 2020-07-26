@@ -9,7 +9,7 @@ export default function RoomStatistic (props) {
   return (
     <Wrapper>
       <Row gutter={[16,16]}>
-        <Col md={12}>
+        <Col md={14}>
           <TestDetail {...props} />
         </Col>
         <Col md={8}>

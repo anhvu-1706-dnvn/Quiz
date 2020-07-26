@@ -40,6 +40,7 @@ export default styled.div`
       .tag-wrapper {
         display: flex;
         margin-top: 15px;
+        flex-direction: column;
 
         .tag {
           margin-right: 20px;

@@ -4,28 +4,38 @@ import styled from 'styled-components';
 const PublicLayoutWrapper = styled.div`
   .layout {
     height: 100vh;
+  }
+
+  .main-img {
+    background-color: transparent;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+  }
+
+  .overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
-  .main-img {
-    background-image: url(https://previews.123rf.com/images/ashasha/ashasha1904/ashasha190401291/122953956-question-marks-scattered-on-white-background-quiz-doubt-poll-survey-faq-interrogation-query-backgrou.jpg);
-    //background-image: url('../../assets/images/login-background.jpg');
-    background-color: transparent;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 100vh;
-  }
-
   .main-content {
-    background-color: none;
-    padding: 70px 50px;
+    padding: 40px 40px;
     text-align: center;
     min-width: 450px;
     width: auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
     @media only screen and (max-width: 500px) {
       min-width: 320px;
       width: 100%;

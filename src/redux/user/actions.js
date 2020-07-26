@@ -12,6 +12,12 @@ export const UserTypes = makeConstantCreator(
   'VERIFY_USER_SUCCESS',
   'LOGOUT',
   'GET_CURRENT_USER',
+
+  'GET_LIST_USER',
+  'GET_LIST_USER_SUCCESS',
+
+  'GET_TOP_CONTRIBUTE',
+  'GET_TOP_CONTRIBUTE_SUCCESS',
 );
 
 // Login
@@ -43,3 +49,16 @@ export const logout = () => makeActionCreator(UserTypes.LOGOUT);
 // User
 export const getCurentUser = () =>
   makeActionCreator(UserTypes.GET_CURRENT_USER);
+
+
+// Get list user
+export const getListUserAction = () =>
+  makeActionCreator(UserTypes.GET_LIST_USER);
+export const getListUserSuccessAction = (data) =>
+  makeActionCreator(UserTypes.GET_LIST_USER_SUCCESS, {data});
+
+// Get top contribute and play
+export const getTopContributeAction = () =>
+  makeActionCreator(UserTypes.GET_TOP_CONTRIBUTE);
+export const getTopContributeSuccessAction = (data) =>
+  makeActionCreator(UserTypes.GET_TOP_CONTRIBUTE_SUCCESS, {data});

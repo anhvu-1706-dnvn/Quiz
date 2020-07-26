@@ -5,34 +5,41 @@ import Wrapper from './styles';
 const { Header } = Layout;
 
 export default function PlayGameHeader(props) {
-  const { time, maxTime } = props;
-  const [currentTime, setCurrentTime] = useState(time);
+  const { maxTime } = props;
+  const [currentTime, setCurrentTime] = useState(maxTime);
 
   useEffect(() => {
-    if (props.resetTimeInHeader) {
-      setCurrentTime(time);
-    } else if (currentTime <= 0) {
-        props.setTime(0);
-        setCurrentTime(0);
-      } else {
-        setTimeout(() => {
-          props.setTime(currentTime - 1);
-          setCurrentTime(currentTime - 1);
-        }, 1000);
-      }
+    if (props.isNewQuestion) {
+      setCurrentTime(maxTime);
+      console.log('Current Time after reset : ', currentTime);
+      
+      props.resetTime();
+      // clearTimeout();
+    }
+
+    if (currentTime <= 0) {
+      setCurrentTime(0);
+    } else {
+      setTimeout(() => {
+        const temp = currentTime
+        setCurrentTime(temp - 1);
+        console.log('Current Time Count down : ', currentTime);
+      }, 1000);
+    }
   });
+
+  // console.log('max: ' + maxTime);
+  // console.log('time: ' + currentTime);
 
   return (
     <Wrapper>
       <Header className="header">
         <div className="progress-section">
-          {!props.isShowLeaderBoard && (
-            <Progress
-              percent={(currentTime / maxTime) * 100}
-              className="countdown-bar"
-              showInfo={false}
-            />
-          )}
+          <Progress
+            percent={(currentTime / maxTime) * 100}
+            className="countdown-bar"
+            showInfo={false}
+          />
         </div>
         <div className="content">
           <div className="left-section">
@@ -46,15 +53,14 @@ export default function PlayGameHeader(props) {
                 {props.total}
               </span>
             </div>
-            <div className="infor-wrapper">
+            {/* <div className="infor-wrapper">
               <span>
                 Streak:
-                <Icon type="fire" theme="filled" className="icon" />
-                3
+                <Icon type="fire" theme="filled" className="icon" />3
               </span>
-            </div>
+            </div> */}
           </div>
-          <div className="right-section">
+          {/* <div className="right-section">
             <div className="infor-wrapper">
               <span>
                 <Icon type="golden" theme="filled" className="rank-icon icon" />
@@ -71,7 +77,7 @@ export default function PlayGameHeader(props) {
                 990
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </Header>
     </Wrapper>

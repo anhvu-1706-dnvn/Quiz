@@ -185,7 +185,11 @@ export default function QuizInfo() {
           <div className="title">
             1. Name this quiz
             {errorNameMessage.length > 0 && (
-              <div className="error">({errorNameMessage})</div>
+              <div className="error">
+                (
+                {errorNameMessage}
+                )
+              </div>
             )}
           </div>
           <Input value={nameQuiz} onChange={handleChangeNameQuiz} />
@@ -194,7 +198,11 @@ export default function QuizInfo() {
           <div className="title">
             2. Choose relevant subjects
             {errorSubjectMessage.length > 0 && (
-              <div className="error">({errorSubjectMessage})</div>
+              <div className="error">
+                (
+                {errorSubjectMessage}
+                )
+              </div>
             )}
           </div>
           {tagState.tags.length > 0 &&

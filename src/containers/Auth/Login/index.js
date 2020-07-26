@@ -24,10 +24,15 @@ class Login extends Component {
 
   render() {
     const { form, isAuthenticated } = this.props;
-
+    const role = localStorage.getItem('role')
+   
     if (isAuthenticated) {
+      if(role=== 'admin') {
+        return <Redirect to="/admin" />;
+      }
       return <Redirect to="/" />;
     }
+   
     const { getFieldDecorator } = form;
     return (
       <Wrapper>
