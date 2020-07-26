@@ -5,6 +5,8 @@ export default styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+
   .main-infor-container {
     background-color: #fff;
     border-radius: 4px;

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Icon, Button, Modal } from 'antd';
+import { PulseLoader } from 'react-spinners';
+import theme from '../../configs/theme';
 import { history } from '../../redux/store';
 import QuestionDetail from '../../containers/Quiz/QuestionDetail';
 import { createOneRoomAction } from '../../redux/room/actions';
@@ -11,20 +13,21 @@ export default function QuizDetail() {
   const dispatch = useDispatch();
   const testState = useSelector((state) => state.test);
   const questionState = useSelector((state) => state.question);
+  const currentUserId = Number(localStorage.getItem('id'));
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    if (testState.currentTest === null) {
-      history.goBack();
-    }
-  });
+  // useEffect(() => {
+  //   if (testState.currentTest === null) {
+  //     history.goBack();
+  //   }
+  // });
 
   const handleClickBtnEdit = () => {
     history.push('/quiz/edit');
   };
 
-  const handleClickGenerateCode = async () => {
-    await dispatch(
+  const handleClickGenerateCode = () => {
+    dispatch(
       createOneRoomAction({ testId: testState.currentTest.id, status: true })
     );
     history.push('/entrance');
@@ -43,7 +46,7 @@ export default function QuizDetail() {
     setVisible(false);
   };
 
-  return (
+  return !testState.loading && !questionState.loading ? (
     <Wrapper>
       <Modal
         title="Delete a test"
@@ -81,25 +84,35 @@ export default function QuizDetail() {
           )}
         </div>
       </div>
-      <div className="btn-container">
-        <div className="main-action">
-          <Button className="btn-action" onClick={handleClickBtnEdit}>
-            <Icon type="edit" theme="filled" className="icon" />
-            <span>Edit</span>
+      {testState.currentTest &&
+      currentUserId === testState.currentTest.userId ? (
+        <div className="btn-container">
+          <div className="main-action">
+            <Button className="btn-action" onClick={handleClickBtnEdit}>
+              <Icon type="edit" theme="filled" className="icon" />
+              <span>Edit</span>
+            </Button>
+            <Button className="btn-action" onClick={handleClickGenerateCode}>
+              <Icon type="play-circle" theme="filled" className="icon" />
+              <span>Start</span>
+            </Button>
+          </div>
+          <Button
+            className="btn-action btn-delete"
+            onClick={handleClickDeleteTest}
+          >
+            <Icon type="delete" theme="filled" className="icon" />
+            <span>Delete</span>
           </Button>
+        </div>
+      ) : (
+        <div className="btn-container">
           <Button className="btn-action" onClick={handleClickGenerateCode}>
             <Icon type="play-circle" theme="filled" className="icon" />
             <span>Start</span>
           </Button>
         </div>
-        <Button
-          className="btn-action btn-delete"
-          onClick={handleClickDeleteTest}
-        >
-          <Icon type="delete" theme="filled" className="icon" />
-          <span>Delete</span>
-        </Button>
-      </div>
+      )}
       <div className="question-container">
         <div className="title-preview">
           Preview ({questionState.total} questions)
@@ -118,6 +131,16 @@ export default function QuizDetail() {
               view
             />
           ))}
+      </div>
+    </Wrapper>
+  ) : (
+    <Wrapper>
+      <div className="loading-container">
+        <PulseLoader
+          color={theme.palette.primary}
+          size={30}
+          loading={testState.loading && questionState.loading}
+        />
       </div>
     </Wrapper>
   );

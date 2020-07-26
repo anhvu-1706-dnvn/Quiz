@@ -6,7 +6,6 @@ export default styled.div`
   justify-content: center;
   max-width: 1071px;
   margin: 0 auto;
-  display: flex;
   flex-direction: column;
   align-items: center;
 

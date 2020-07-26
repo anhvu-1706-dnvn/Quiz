@@ -11,25 +11,23 @@ import {
 } from '../../../redux/question/actions';
 import { Wrapper } from './styles';
 
-export default function CreateQuiz(props) {
+export default function CreateQuiz() {
   const [visible, setVisible] = useState(false);
   const [questionType, setQuestionType] = useState(1);
   const dispatch = useDispatch();
 
-  const questions = useSelector((state) => state.question.questions);
-  const total = useSelector((state) => state.question.total);
-
-  const testId = props.id;
+  const questionState = useSelector((state) => state.question);
+  const testState = useSelector((state) => state.test);
 
   useEffect(() => {
-    if (testId) {
+    if (testState.currentTest) {
       dispatch(
         getListQuestionByTestAction({
           limit: 50,
           offset: 0,
-          filter: JSON.stringify({ testId }),
+          filter: JSON.stringify({ testId: testState.currentTest.id }),
           orderBy: 'id',
-        }),
+        })
       );
     }
   }, [dispatch]);
@@ -51,21 +49,21 @@ export default function CreateQuiz(props) {
     });
     await dispatch(
       createOneQuestionAction({
-        testId,
+        testId: testState.currentTest.id,
         answers: answerList,
         content: payload.title,
         time: Number(payload.time),
         minimumScore: Number(payload.minScore),
         score: Number(payload.maxScore),
-      }),
+      })
     );
     await dispatch(
       getListQuestionByTestAction({
         limit: 50,
         offset: 0,
-        filter: JSON.stringify({ testId }),
+        filter: JSON.stringify({ testId: testState.currentTest.id }),
         orderBy: 'id',
-      }),
+      })
     );
     setVisible(false);
   };
@@ -91,7 +89,7 @@ export default function CreateQuiz(props) {
         </div>
       </div>
       <div className="questions-body">
-        {questions && questions.length === 0 && (
+        {questionState.questions && questionState.questions.length === 0 && (
           <div className="questionType-panel">
             <QuestionType
               name="multiple choice"
@@ -115,8 +113,8 @@ export default function CreateQuiz(props) {
         )}
 
         <div>
-          {questions &&
-            questions.map((e, index) => (
+          {questionState.questions &&
+            questionState.questions.map((e, index) => (
               <QuestionDetail
                 key={e.id}
                 index={index + 1}
@@ -138,7 +136,7 @@ export default function CreateQuiz(props) {
         maskClosable={false}
       >
         <QuestionEditor
-          index={total + 1}
+          index={questionState.total + 1}
           type={questionType}
           handleOk={handleOk}
           handleCancel={handleCancel}

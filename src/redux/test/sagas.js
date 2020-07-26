@@ -69,14 +69,26 @@ function* createOneTest({ payload }) {
     const response = yield call(
       apiWrapper,
       {
-        isShowLoading: true,
-        isShowSucceedNoti: true,
+        isShowLoading: false,
+        isShowSucceedNoti: false,
         successDescription: 'Created Successfully',
         errorDescription: 'Error',
       },
       postApi,
       'tests',
       payload
+    );
+    const tagResponse = yield call(
+      apiWrapper,
+      {
+        isShowLoading: true,
+        isShowSucceedNoti: true,
+        successDescription: 'Created Successfully',
+        errorDescription: 'Error',
+      },
+      getDataByIdApi,
+      'tests',
+      response.id
     );
     const data = {
       id: response.id,
@@ -85,6 +97,8 @@ function* createOneTest({ payload }) {
       description: response.description,
       image: response.image,
       isPublic: !response.isDraft,
+      userId: response.userId,
+      tags: tagResponse.tags,
     };
     yield put(createOneTestSuccessAction(data));
   } catch (error) {
@@ -98,9 +112,8 @@ function* updateOneTest({ id, payload }) {
     const data = yield call(
       apiWrapper,
       {
-        isShowLoading: true,
-        isShowSucceedNoti: true,
-        successDescription: 'Updated Successfully',
+        isShowLoading: false,
+        isShowSucceedNoti: false,
         errorDescription: 'Error',
       },
       putApi,
@@ -113,6 +126,7 @@ function* updateOneTest({ id, payload }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
+        successDescription: 'Updated Successfully',
         errorDescription: 'Error',
       },
       getDataByIdApi,
@@ -147,6 +161,7 @@ function* getOne({ id }) {
       description: response.description,
       image: response.image,
       isPublic: !response.isDraft,
+      userId: response.userId,
     };
 
     yield put(getOneTestSuccessAction(data));
@@ -162,6 +177,7 @@ function* deleteOne({ id }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
+        successDescription: 'Deleted Successfully',
         errorDescription: 'Error',
       },
       delApi,

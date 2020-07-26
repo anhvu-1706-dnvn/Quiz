@@ -8,6 +8,10 @@ export async function getDataByIdApi(resource, id, data) {
   return get(`/${resource}/${id}`, data);
 }
 
+export async function getResultDataByIdApi(resource, id, data) {
+  return get(`/${resource}/${id}/result`, data);
+}
+
 export async function delApi(resource, id) {
   if (id) {
     return del(`/${resource}/${id}`);
@@ -29,6 +33,7 @@ export async function patchApi(resource, id, data) {
 
 export async function exportExcel(resource, data) {
   return {
-    resource, data,
+    resource,
+    data,
   };
 }

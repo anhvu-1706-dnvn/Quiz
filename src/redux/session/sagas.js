@@ -4,8 +4,10 @@ import {
   SessionTypes,
   createOneSessionSuccessAction,
   createOneSessionFailureAction,
+  getOneSessionSuccessAction,
+  getOneSessionFailureAction,
 } from './actions';
-import { postApi } from '../../api/common/crud';
+import { postApi, getResultDataByIdApi } from '../../api/common/crud';
 import { apiWrapper } from '../../utils/reduxUtils';
 
 function* createSessionSaga({ payload }) {
@@ -20,7 +22,7 @@ function* createSessionSaga({ payload }) {
       },
       postApi,
       'sessions',
-      payload,
+      payload
     );
     yield put(createOneSessionSuccessAction(data));
   } catch (error) {
@@ -28,6 +30,27 @@ function* createSessionSaga({ payload }) {
   }
 }
 
+function* getSessionSaga({ id }) {
+  try {
+    const data = yield call(
+      apiWrapper,
+      {
+        isShowLoading: false,
+        isShowSucceedNoti: false,
+        successDescription: 'Created Successfully',
+        errorDescription: 'Error',
+      },
+      getResultDataByIdApi,
+      'sessions',
+      id
+    );
+    yield put(getOneSessionSuccessAction(data));
+  } catch (error) {
+    yield put(getOneSessionFailureAction());
+  }
+}
+
 export default [
   takeEvery(SessionTypes.CREATE_ONE_SESSION_ACTION, createSessionSaga),
+  takeEvery(SessionTypes.GET_ONE_SESSION_ACTION, getSessionSaga),
 ];

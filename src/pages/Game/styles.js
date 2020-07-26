@@ -174,6 +174,18 @@ export const PlayGamePageWrapper = styled.div`
     .content {
       background-color: #000;
     }
+
+    .content-show-index-question {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+      font-weight: 700;
+      height: 90vh;
+    }
+
     .header {
       align-items: center;
       display: flex;

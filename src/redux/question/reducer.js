@@ -7,7 +7,7 @@ export const initialState = {
   questions: [],
   offset: 0, // offset = (page - 1) * limit;
   limit: 10,
-  total: null,
+  total: 0,
   loading: false,
   listQuestionSuccess: undefined,
   listQuestionFailure: undefined,
@@ -69,12 +69,13 @@ const getListQuestionByTestFailure = (state) => ({
 });
 
 // ---------------------------------------
-const createOneQuestionSuccess = (state) => {
+const createOneQuestionSuccess = (state, { data }) => {
   return {
     ...state,
     loading: false,
     createQuestionFailure: false,
     createQuestionSuccess: true,
+    questions: [...state.questions, data],
   };
 };
 
@@ -167,6 +168,17 @@ const removeImage = (state) => ({
 });
 // --------------------------------------------------
 
+const updateCurrentQuestion = (state, { data }) => ({
+  ...state,
+  currentQuestion: data,
+});
+
+const deleteListQuestion = (state) => ({
+  ...state,
+  questions: [],
+  total: 0,
+});
+
 export const question = makeReducerCreator(initialState, {
   [QuestionTypes.GET_LIST_QUESTION_BY_TEST]: getListQuestionByTest,
   [QuestionTypes.GET_LIST_QUESTION_BY_TEST_SUCCESS]: getListQuestionByTestSuccess,
@@ -189,4 +201,7 @@ export const question = makeReducerCreator(initialState, {
   [QuestionTypes.UPLOAD_IMAGE_FAILURE]: uploadImageFailure,
 
   [QuestionTypes.REMOVE_IMAGE]: removeImage,
+
+  [QuestionTypes.UPDATE_CURRENT_QUESTION]: updateCurrentQuestion,
+  [QuestionTypes.DELETE_LIST_QUESTION]: deleteListQuestion,
 });

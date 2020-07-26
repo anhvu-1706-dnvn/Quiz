@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
+  height: 100%;
+
   .option-section {
     display: flex;
     flex-direction: column;

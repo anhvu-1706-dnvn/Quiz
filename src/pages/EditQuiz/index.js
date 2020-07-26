@@ -18,12 +18,10 @@ export default function EditQuiz() {
       <div className="create-quiz-content-wrapper">
         <Row type="flex" justify="center">
           <Col xs={24} lg={14}>
-            <CreateQuiz
-              id={testState.currentTest && testState.currentTest.id}
-            />
+            <CreateQuiz />
           </Col>
           <Col xs={0} lg={10} className="scroll-vertical">
-            <QuizInfo id={testState.currentTest && testState.currentTest.id} />
+            <QuizInfo />
           </Col>
         </Row>
       </div>

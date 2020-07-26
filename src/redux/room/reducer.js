@@ -106,6 +106,11 @@ const updateListUser = (state, { data }) => {
   };
 };
 
+const deleteListUser = (state) => ({
+  ...state,
+  users: [],
+});
+
 export const room = makeReducerCreator(initialState, {
   [RoomTypes.GET_LIST_ROOM]: getListRoom,
   [RoomTypes.GET_LIST_ROOM_SUCCESS]: getListRoomSuccess,
@@ -124,4 +129,5 @@ export const room = makeReducerCreator(initialState, {
   [RoomTypes.ADD_USER_ACTION]: addUser,
   [RoomTypes.REMOVE_USER_ACTION]: removeUser,
   [RoomTypes.UPDATE_LIST_USER_ACTION]: updateListUser,
+  [RoomTypes.DELETE_LIST_USER_ACTION]: deleteListUser,
 });

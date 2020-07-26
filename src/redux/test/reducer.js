@@ -50,6 +50,11 @@ const getListTestFailure = (state) => ({
 });
 
 // ---------------------------------------
+
+const createOneTestAction = (state) => ({
+  ...state,
+  loading: true,
+});
 const createOneTestSuccess = (state, { data }) => {
   return {
     ...state,
@@ -92,6 +97,10 @@ const updateOneTestFailure = (state) => ({
 });
 
 // -----------------------------------------
+const getOneTestAction = (state) => ({
+  ...state,
+  loading: true,
+});
 const getOneTestSuccess = (state, { data }) => ({
   ...state,
   currentTest: data,
@@ -166,6 +175,7 @@ export const test = makeReducerCreator(initialState, {
   [TestTypes.GET_LIST_TEST_SUCCESS]: getListTestSuccess,
   [TestTypes.GET_LIST_TEST_FAILURE]: getListTestFailure,
 
+  [TestTypes.CREATE_ONE_TEST]: createOneTestAction,
   [TestTypes.CREATE_ONE_TEST_SUCCESS]: createOneTestSuccess,
   [TestTypes.CREATE_ONE_TEST_FAILURE]: createOneTestFailure,
 
@@ -173,6 +183,7 @@ export const test = makeReducerCreator(initialState, {
   [TestTypes.UPDATE_ONE_TEST_SUCCESS]: updateOneTestSuccess,
   [TestTypes.UPDATE_ONE_TEST_FAILURE]: updateOneTestFailure,
 
+  [TestTypes.GET_ONE_TEST]: getOneTestAction,
   [TestTypes.GET_ONE_TEST_SUCCESS]: getOneTestSuccess,
   [TestTypes.GET_ONE_TEST_FAILURE]: getOneTestFailure,
 

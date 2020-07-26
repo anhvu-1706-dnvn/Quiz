@@ -39,6 +39,10 @@ const getListTagsFailure = (state) => ({
 });
 
 // ONE TAG
+const getOneTagAction = (state) => ({
+  ...state,
+  loading: true,
+});
 const getOneTagSuccess = (state, { data }) => ({
   ...state,
   currentTag: data,
@@ -77,7 +81,8 @@ export const tag = makeReducerCreator(initialState, {
   [TagTypes.GET_LIST_TAGS]: getListTags,
   [TagTypes.GET_LIST_TAGS_SUCCESS]: getListTagsSuccess,
   [TagTypes.GET_LIST_TAGS_FAILURE]: getListTagsFailure,
-  // [TagTypes.GET_ONE_TAG]: getOneTag,
+
+  [TagTypes.GET_ONE_TAG]: getOneTagAction,
   [TagTypes.GET_ONE_TAG_SUCCESS]: getOneTagSuccess,
   [TagTypes.GET_LIST_TAGS_FAILURE]: getOneTagFailure,
 

@@ -49,7 +49,13 @@ export default function JoinGameContainer() {
       <div className="list-quizzes-section">
         {data.tags.length > 0 &&
           data.tags.map((e) => (
-            <QuizzList key={e.id} id={e.id} nameList={e.name} test={e.test} />
+            <QuizzList
+              key={e.id}
+              id={e.id}
+              nameList={e.name}
+              test={e.test}
+              hideBtnSeeMore
+            />
           ))}
       </div>
     </JoinGameContainerWrapper>

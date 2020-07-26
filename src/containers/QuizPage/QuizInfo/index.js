@@ -8,7 +8,6 @@ import { Modal, Input, Icon, Progress, Checkbox, Upload } from 'antd';
 import TagSubject from '../../../components/quizz/create_quizz/TagSubject';
 import { getListTagsAction } from '../../../redux/tag/action';
 import { updateOneTestAction } from '../../../redux/test/actions';
-import { getListQuestionByTestAction } from '../../../redux/question/actions';
 import { Wrapper } from './styles';
 
 const delayTime = 800;
@@ -35,14 +34,6 @@ export default function QuizInfo() {
 
   useEffect(() => {
     dispatch(getListTagsAction(50, 0));
-    dispatch(
-      getListQuestionByTestAction({
-        limit: 50,
-        offset: 0,
-        filter: JSON.stringify({ testId }),
-        orderBy: 'id',
-      }),
-    );
     setTimeout(() => {
       setLoadingSuccess(true);
       setNameQuiz(currentTest && currentTest.name);
@@ -101,7 +92,7 @@ export default function QuizInfo() {
           userId,
           name: nameQuiz,
           tagIds: chosenTag,
-        }),
+        })
       );
       setVisibleModalNameSubject(false);
       if (errorNameMessage !== '') {
@@ -123,7 +114,7 @@ export default function QuizInfo() {
         userId,
         description: quizDescription,
         isDraft: !quizStatus,
-      }),
+      })
     );
     setVisibleModalOtherInfor(false);
   };
@@ -137,6 +128,7 @@ export default function QuizInfo() {
 
   if (currentTest && currentTest.description) percent += 25;
   if (questionState.questions.length >= 4) percent += 25;
+  if (currentTest && currentTest.image) percent += 25;
 
   return (
     <Wrapper>
@@ -277,9 +269,16 @@ export default function QuizInfo() {
           <Checkbox checked className="checkbox-item">
             Pick a relevant quiz name
           </Checkbox>
-          <Checkbox className="checkbox-item" checked={false}>
-            Add a quiz image
-          </Checkbox>
+          {currentTest && currentTest.image ? (
+            <Checkbox className="checkbox-item" checked>
+              Add a quiz image
+            </Checkbox>
+          ) : (
+            <Checkbox className="checkbox-item" checked={false}>
+              Add a quiz image
+            </Checkbox>
+          )}
+
           {currentTest && currentTest.description ? (
             <Checkbox className="checkbox-item" checked>
               Add a description

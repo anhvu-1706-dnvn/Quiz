@@ -12,6 +12,8 @@ import {
   getOneQuestionFailureAction,
   deleteOneQuestionSuccessAction,
   deleteOneQuestionFailureAction,
+  updateCurrentQuestion,
+  deleteListQuestion,
 } from './actions';
 // import {data} from './tempData'
 import {
@@ -72,19 +74,19 @@ function* getListQuestion({ limit, offset, filter, orderBy, fields }) {
 
 function* createOneQuestion({ payload }) {
   try {
-    yield call(
+    const data = yield call(
       apiWrapper,
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: 'Added Successfully',
+        successDescription: 'Created Successfully',
         errorDescription: 'Error',
       },
       postApi,
       'questions',
       payload
     );
-    yield put(createOneQuestionSuccessAction());
+    yield put(createOneQuestionSuccessAction(data));
   } catch (error) {
     yield put(createOneQuestionFailureAction());
   }
@@ -106,7 +108,7 @@ function* updateOneQuestion({ id, payload }) {
       {
         isShowLoading: true,
         isShowSucceedNoti: true,
-        successDescription: 'Edited Successfully',
+        successDescription: 'Updated Successfully',
         errorDescription: 'Error',
       },
       putApi,
@@ -157,7 +159,8 @@ function* deleteOne({ id }) {
       apiWrapper,
       {
         isShowLoading: true,
-        isShowSucceedNoti: false,
+        isShowSucceedNoti: true,
+        successDescription: 'Deleted Successfully',
         errorDescription: 'Error',
       },
       delApi,
@@ -171,10 +174,20 @@ function* deleteOne({ id }) {
   }
 }
 
+function updateLCurrentQuestionSaga({ data }) {
+  updateCurrentQuestion(data);
+}
+
+function deleteListQuestionSaga() {
+  deleteListQuestion();
+}
+
 export default [
   takeEvery(QuestionTypes.GET_LIST_QUESTION_BY_TEST, getListQuestion),
   takeEvery(QuestionTypes.CREATE_ONE_QUESTION, createOneQuestion),
   takeEvery(QuestionTypes.UPDATE_ONE_QUESTION, updateOneQuestion),
   takeEvery(QuestionTypes.GET_ONE_QUESTION, getOne),
   takeEvery(QuestionTypes.DELETE_ONE_QUESTION, deleteOne),
+  takeEvery(QuestionTypes.UPDATE_CURRENT_QUESTION, updateLCurrentQuestionSaga),
+  takeEvery(QuestionTypes.DELETE_LIST_QUESTION, deleteListQuestionSaga),
 ];

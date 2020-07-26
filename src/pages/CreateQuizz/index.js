@@ -5,6 +5,7 @@ import TagSubject from '../../components/quizz/create_quizz/TagSubject';
 import { history } from '../../redux/store';
 import { getListTagsAction } from '../../redux/tag/action';
 import { createOneTestAction } from '../../redux/test/actions';
+import { deleteListQuestion } from '../../redux/question/actions';
 import Wrapper from './styles';
 
 export default function CreateQuizz() {
@@ -31,8 +32,9 @@ export default function CreateQuizz() {
     }
     if (chosenTag.length > 0 && nameQuiz.length > 0) {
       dispatch(
-        createOneTestAction({ userId, name: nameQuiz, tagIds: chosenTag }),
+        createOneTestAction({ userId, name: nameQuiz, tagIds: chosenTag })
       );
+      dispatch(deleteListQuestion());
       history.push('/quiz');
       setVisible(false);
     }
@@ -86,11 +88,7 @@ export default function CreateQuizz() {
           <div className="title" style={{ marginBottom: '10px' }}>
             1. Name this quiz
             {errorNameMessage.length > 0 && (
-              <div className="error">
-                (
-                {errorNameMessage}
-                )
-              </div>
+              <div className="error">({errorNameMessage})</div>
             )}
           </div>
           <Input value={nameQuiz} onChange={handleChangeNameQuiz} />
@@ -99,11 +97,7 @@ export default function CreateQuizz() {
           <div className="title" style={{ marginBottom: '10px' }}>
             2. Choose relevant subjects
             {errorSubjectMessage.length > 0 && (
-              <div className="error">
-                (
-                {errorSubjectMessage}
-                )
-              </div>
+              <div className="error">({errorSubjectMessage})</div>
             )}
           </div>
           {tagState.tags.length > 0 &&

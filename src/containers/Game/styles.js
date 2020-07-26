@@ -347,7 +347,6 @@ export const LeaderBoardContainerWrapper = styled.div`
   margin-top: 50px;
 
   .rank-section {
-    width: 500px;
     border-radius: 16px;
     color: white;
 
@@ -372,6 +371,8 @@ export const LeaderBoardContainerWrapper = styled.div`
     }
 
     .content-rank-table {
+      display: inline-block;
+
       .divider {
         height: 10px;
         width: 4px;

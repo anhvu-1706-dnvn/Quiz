@@ -12,6 +12,7 @@ import {
   addUserAction,
   removeUserAction,
   updateListUserAction,
+  deleteListUserAction,
 } from './actions';
 import { postApi } from '../../api/common/crud';
 import { apiWrapper } from '../../utils/reduxUtils';
@@ -51,8 +52,8 @@ function* createRoomSaga({ payload }) {
     const results = yield call(
       apiWrapper,
       {
-        isShowLoading: true,
-        isShowSucceedNoti: true,
+        isShowLoading: false,
+        isShowSucceedNoti: false,
         successDescription: 'Created Successfully',
         errorDescription: 'Error',
       },
@@ -102,6 +103,10 @@ function updateListUserSaga({ data }) {
   updateListUserAction(data);
 }
 
+function deleteListUserSaga() {
+  deleteListUserAction();
+}
+
 export default [
   takeEvery(RoomTypes.GET_LIST_ROOM, getListRoomSaga),
   takeEvery(RoomTypes.CREATE_ONE_ROOM_ACTION, createRoomSaga),
@@ -110,4 +115,5 @@ export default [
   takeEvery(RoomTypes.ADD_USER_ACTION, addUserSaga),
   takeEvery(RoomTypes.REMOVE_USER_ACTION, removeUserSaga),
   takeEvery(RoomTypes.UPDATE_LIST_USER_ACTION, updateListUserSaga),
+  takeEvery(RoomTypes.DELETE_LIST_USER_ACTION, deleteListUserSaga),
 ];

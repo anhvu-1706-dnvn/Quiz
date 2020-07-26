@@ -21,6 +21,9 @@ export const QuestionTypes = makeConstantCreator(
   'DELETE_ONE_QUESTION_SUCCESS',
   'DELETE_ONE_QUESTION_FAILURE',
 
+  'UPDATE_CURRENT_QUESTION',
+  'DELETE_LIST_QUESTION',
+
   'UPLOAD_IMAGE_SUCCESS',
   'UPLOAD_IMAGE_FAILURE',
   'REMOVE_IMAGE'
@@ -59,8 +62,8 @@ export const getListQuestionByTestFailureAction = (error) =>
 // Create one question
 export const createOneQuestionAction = (payload) =>
   makeActionCreator(QuestionTypes.CREATE_ONE_QUESTION, { payload });
-export const createOneQuestionSuccessAction = () =>
-  makeActionCreator(QuestionTypes.CREATE_ONE_QUESTION_SUCCESS);
+export const createOneQuestionSuccessAction = (data) =>
+  makeActionCreator(QuestionTypes.CREATE_ONE_QUESTION_SUCCESS, { data });
 export const createOneQuestionFailureAction = (error) =>
   makeActionCreator(QuestionTypes.CREATE_ONE_QUESTION_FAILURE, { error });
 
@@ -95,3 +98,9 @@ export const uploadImageFailureAction = (error) =>
   makeActionCreator(QuestionTypes.UPLOAD_IMAGE_FAILURE, { error });
 export const removeImageAction = (link) =>
   makeActionCreator(QuestionTypes.REMOVE_IMAGE, { link });
+
+export const updateCurrentQuestion = (data) =>
+  makeActionCreator(QuestionTypes.UPDATE_CURRENT_QUESTION, data);
+
+export const deleteListQuestion = () =>
+  makeActionCreator(QuestionTypes.DELETE_LIST_QUESTION);

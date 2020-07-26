@@ -68,3 +68,5 @@ export const updateListUserAction = (data) =>
   makeActionCreator(RoomTypes.UPDATE_LIST_USER_ACTION, data);
 
 // Delete list user
+export const deleteListUserAction = () =>
+  makeActionCreator(RoomTypes.DELETE_LIST_USER_ACTION);

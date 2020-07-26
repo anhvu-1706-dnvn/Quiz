@@ -22,9 +22,6 @@ export default function QuizzBar(props) {
         orderBy: 'id',
       })
     );
-    dispatch(
-      getListRoomAction({ filter: JSON.stringify({ testId: props.id }) })
-    );
     history.push('/quiz');
   };
 

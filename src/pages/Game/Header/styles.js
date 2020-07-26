@@ -21,6 +21,7 @@ export default styled.div`
 
         .ant-progress-bg {
           background-color: ${theme.palette.primary} !important;
+          transition: all 15s cubic-bezier(0.08, 0.82, 0.17, 1) 0s !important;
         }
       }
     }

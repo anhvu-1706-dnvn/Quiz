@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { socket } from '../../../plugins/socket';
 import { history } from '../../../redux/store';
 import UserCard from '../../../components/game/entrance/UserCard';
+import avatar from '../../../assets/images/avatar.svg';
 import { getListQuestionByTestAction } from '../../../redux/question/actions';
 import { createOneSessionAction } from '../../../redux/session/actions';
 import { addUserAction, removeUserAction } from '../../../redux/room/actions';
@@ -102,7 +103,7 @@ export default function EntranceContainer(props) {
       {roomState.users.length > 0 && (
         <div className="user-section">
           {roomState.users.map((e) => (
-            <UserCard image={test && test.image} name={e.fullName} />
+            <UserCard image={avatar} name={e.fullName} />
           ))}
         </div>
       )}
@@ -122,10 +123,7 @@ export default function EntranceContainer(props) {
             </div>
           </div>
           <div className="user-infor">
-            <UserCard
-              image={test && test.image}
-              name={localStorage.getItem('fullName')}
-            />
+            <UserCard image={avatar} name={localStorage.getItem('fullName')} />
           </div>
         </div>
       </div>

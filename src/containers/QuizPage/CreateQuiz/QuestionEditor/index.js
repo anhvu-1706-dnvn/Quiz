@@ -24,12 +24,12 @@ export default function QuestionEditor(props) {
       : [
           { key: 1, content: '', isCorrect: false, isDisabled: true },
           { key: 2, content: '', isCorrect: false, isDisabled: true },
-        ],
+        ]
   );
 
   const [title, setTitle] = useState(props.title || '');
   const [time, setTime] = useState(
-    (props.time && props.time.toString()) || '30',
+    (props.time && props.time.toString()) || '30'
   );
 
   const [minScore, setMinScore] = useState(props.minScore || '');
@@ -104,10 +104,7 @@ export default function QuestionEditor(props) {
     <Wrapper>
       <div className="header">
         <div className="title-wrapper">
-          <div className="title">
-            Question
-            {props.index}
-          </div>
+          <div className="title">Question {props.index}</div>
           <div className="question-type-select">
             <Select
               className="type"
@@ -157,11 +154,12 @@ export default function QuestionEditor(props) {
                 handleDeleteAnswer={() => handleDeleteAnswer(e.key)}
                 handleChangeContentAnswer={handleChangeContentAnswer}
                 handleChangeStatusAnswer={() =>
-                  handleChangeStatusAnswer(e.key, !e.isCorrect)}
+                  handleChangeStatusAnswer(e.key, !e.isCorrect)
+                }
                 content={e.content}
                 isCorrect={e.isCorrect}
               />
-            ),
+            )
         )}
       </div>
       <Button onClick={handleAddAnswer}>Add answer option</Button>

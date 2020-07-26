@@ -12,6 +12,7 @@ import { Redirect } from 'react-router-dom';
 import PrivateLayoutWrapper from './styles';
 import SideBarMenu from './SideBarMenu/index';
 import { logout as logoutAction } from '../../redux/user/actions';
+import avatar from '../../assets/images/avatar.svg';
 import logo from '../../assets/images/logo.png';
 import logoFull from '../../assets/images/logoFull.png';
 import { history } from '../../redux/store';
@@ -41,7 +42,7 @@ class PrivateLayout extends Component {
   };
 
   render() {
-    const { children, logout, isAuthenticated, fullName, avatar } = this.props;
+    const { children, logout, isAuthenticated, fullName } = this.props;
     const path = window.location.pathname;
 
     if (!isAuthenticated) return <Redirect to="/login" />;
@@ -240,5 +241,5 @@ export default connect(
   }),
   {
     logout: logoutAction,
-  },
+  }
 )(PrivateLayout);

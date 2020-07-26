@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
+import { PulseLoader } from 'react-spinners';
+import theme from '../../configs/theme';
 import QuizzCard from '../../components/quizz/item/QuizzCard';
 import { getOneTagAction } from '../../redux/tag/action';
 import { history } from '../../redux/store';
@@ -11,7 +13,7 @@ import Wrapper from './styles';
 
 export default function QuizzesByTag(props) {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.tag.currentTag);
+  const tagState = useSelector((state) => state.tag.currentTag);
   useEffect(() => {
     dispatch(getOneTagAction(props.location.state));
   }, [dispatch]);
@@ -20,16 +22,16 @@ export default function QuizzesByTag(props) {
     const result = [];
     const limit = 5;
     let offset = 0;
-    while (limit * (offset + 1) <= Math.ceil(data.tests.length / 5) * 5) {
+    while (limit * (offset + 1) <= Math.ceil(tagState.tests.length / 5) * 5) {
       const testPerRow = [
-        ...data.tests.slice(limit * offset, limit * (offset + 1)),
+        ...tagState.tests.slice(limit * offset, limit * (offset + 1)),
       ];
       result.push(
         <div className="list-card-row" key={offset}>
           {testPerRow.map((e) => (
             <QuizzCard name={e.name} key={e.id} imageUrl={e.image} />
           ))}
-        </div>,
+        </div>
       );
       offset += 1;
     }
@@ -56,10 +58,20 @@ export default function QuizzesByTag(props) {
           </div>
         </div>
       </div>
-      <div className="list-card-container">
-        {Object.keys(data).length > 0 && handleGenerateListCard()}
-        <Button>Load More</Button>
-      </div>
+      {tagState.loading ? (
+        <div className="loading-container">
+          <PulseLoader
+            color={theme.palette.primary}
+            size={30}
+            loading={tagState.loading}
+          />
+        </div>
+      ) : (
+        <div className="list-card-container">
+          {Object.keys(tagState).length > 0 && handleGenerateListCard()}
+          <Button>Load More</Button>
+        </div>
+      )}
     </Wrapper>
   );
 }
