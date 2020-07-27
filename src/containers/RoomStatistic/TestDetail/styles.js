@@ -2,16 +2,14 @@ import styled from 'styled-components';
 import theme from '../../../configs/theme';
 
 export default styled.div`
-
   .test-info {
-    display:flex;
+    display: flex;
     padding: 20px;
     background: #778beb;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: #fff;
   }
-
 
   .quiz-info-image-wrapper {
     display: flex;
@@ -35,7 +33,7 @@ export default styled.div`
 
   .quiz-info-name-wrapper {
     margin-top: 10px;
-    
+
     .quiz-info-name {
       font-size: 30px;
       margin-right: 10px;
@@ -71,5 +69,11 @@ export default styled.div`
         margin-right: 8px;
       }
     }
+  }
+
+  .total-questions {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 30px;
   }
 `;

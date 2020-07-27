@@ -15,11 +15,18 @@ export default function CreateQuizz() {
   const [errorNameMessage, setErrorNameMessage] = useState('');
   const [nameQuiz, setNameQuiz] = useState('');
   const userId = localStorage.getItem('id');
+  const role = localStorage.getItem('role');
   const dispatch = useDispatch();
 
   const tagState = useSelector((state) => state.tag);
 
   useEffect(() => {
+    if (role === 'admin') {
+      history.push('/admin');
+    }
+    if (role === 'participant') {
+      history.push('/join');
+    }
     dispatch(getListTagsAction(100, 0));
   }, [dispatch]);
 

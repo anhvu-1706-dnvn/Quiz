@@ -24,15 +24,15 @@ class Login extends Component {
 
   render() {
     const { form, isAuthenticated } = this.props;
-    const role = localStorage.getItem('role')
-   
+    const role = localStorage.getItem('role');
+
     if (isAuthenticated) {
-      if(role=== 'admin') {
+      if (role === 'admin') {
         return <Redirect to="/admin" />;
       }
       return <Redirect to="/" />;
     }
-   
+
     const { getFieldDecorator } = form;
     return (
       <Wrapper>
@@ -59,7 +59,7 @@ class Login extends Component {
                 prefix={
                   <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-              />,
+              />
             )}
           </FormItem>
           <FormItem>
@@ -77,15 +77,9 @@ class Login extends Component {
                   <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 type="password"
-              />,
+              />
             )}
           </FormItem>
-          <div className="sub-action-div">
-            <Checkbox>{i18n.t('login.rememberMe')}</Checkbox>
-            {/* <a className="login-form-forgot" href="/forgot-password">
-              {i18n.t("forgotPassword.title")}
-            </a> */}
-          </div>
           <div className="action-div">
             <Button
               type="primary"
@@ -124,5 +118,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login)),
+  connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login))
 );

@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { Table, Card } from 'antd'
-import { connect } from "react-redux";
-import Wrapper from './styles'
-import * as UserAction from '../../../redux/user/actions'
+import React, { Component } from 'react';
+import { Table, Card } from 'antd';
+import { connect } from 'react-redux';
+import Wrapper from './styles';
+import * as UserAction from '../../../redux/user/actions';
 
 class UserTable extends Component {
   constructor(props) {
-    super(props)
-    this.props.retrieveUsers()
+    super(props);
+    this.props.retrieveUsers();
     this.columns = [
       {
         title: 'ID',
@@ -37,7 +37,7 @@ class UserTable extends Component {
         onFilter: (value, record) => record.role.indexOf(value) === 0,
       },
       {
-        title: 'Full name',
+        title: 'Full Name',
         dataIndex: 'fullName',
         key: 'fullName',
       },
@@ -52,12 +52,12 @@ class UserTable extends Component {
         key: 'email',
       },
       {
-        title: 'Total created',
+        title: 'Total Created',
         dataIndex: 'totalTest',
         key: 'totalTest',
       },
       {
-        title: 'Total played',
+        title: 'Total Played',
         dataIndex: 'totalTestPlayed',
         key: 'totalTestPlayed',
         // width: '20%',
@@ -78,16 +78,20 @@ class UserTable extends Component {
     return (
       <Wrapper>
         <Card>
-          <Table columns={this.columns} dataSource={list} pagination={{defaultPageSize: 10}} />
+          <Table
+            columns={this.columns}
+            dataSource={list}
+            pagination={{ defaultPageSize: 10 }}
+          />
         </Card>
       </Wrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   const { user } = state;
-  const {list} = user
+  const { list } = user;
   return {
     list,
   };

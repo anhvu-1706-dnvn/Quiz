@@ -21,6 +21,9 @@ export default function PlayGamePage() {
   const [indexChosenAnswer, setIndexChosenAnswer] = useState(0);
 
   useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
     if (data.questions.length === 0) {
       history.push('/join');
     }

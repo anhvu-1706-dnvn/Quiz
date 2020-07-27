@@ -1,5 +1,5 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import moment from 'moment'
+import moment from 'moment';
 import {
   UserTypes,
   loginSuccessAction,
@@ -24,7 +24,7 @@ function* loginSaga({ params }) {
         isShowSucceedNoti: false,
       },
       loginApi,
-      params,
+      params
     );
     if (response.token) {
       localStorage.setItem('sessionToken', response.token);
@@ -52,7 +52,7 @@ function* registerSaga({ params }) {
         isShowSucceedNoti: false,
       },
       registerApi,
-      params,
+      params
     );
     yield put(registerSuccessAction(response));
   } catch (error) {
@@ -69,7 +69,7 @@ function* verifySaga({ params }) {
         isShowSucceedNoti: false,
       },
       verifyApi,
-      params,
+      params
     );
     yield put(verifySuccessAction(response));
   } catch (error) {
@@ -95,14 +95,18 @@ function* listUserSaga() {
       },
       getAllApi,
       'users',
-      {limit: 500, offset:0, orderBy: 'id'},
+      { limit: 500, offset: 0, orderBy: 'id' }
     );
-    const results = response.results.map((e, idx)=> ({...e, key: idx, role: e.role?.name, createdAt: moment(e.createdAt).format('LL')}))
+    const results = response.results.map((e, idx) => ({
+      ...e,
+      key: idx,
+      role: e.role?.name,
+      createdAt: moment(e.createdAt).format('LL'),
+    }));
     yield put(getListUserSuccessAction(results));
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
-    
   }
 }
 function* getTopContribute() {
@@ -114,16 +118,14 @@ function* getTopContribute() {
         isShowSucceedNoti: false,
       },
       getAllApi,
-      'users/statistic/top',
+      'users/statistic/top'
     );
     yield put(getTopContributeSuccessAction(response));
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
-    
   }
 }
-
 
 export default [
   takeEvery(UserTypes.LOGIN, loginSaga),

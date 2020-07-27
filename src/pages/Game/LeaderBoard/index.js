@@ -20,6 +20,12 @@ export default function LeaderBoardPage() {
   const [currentTime, setCurrentTime] = useState(totalTime);
 
   useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
+    if (localStorage.getItem('role') === 'participant') {
+      history.push('/join');
+    }
     if (roomState.currentRoom === null) {
       history.push('/');
     }

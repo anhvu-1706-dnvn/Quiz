@@ -15,6 +15,9 @@ export default function FindQuizz() {
   const dispatch = useDispatch();
   const tagState = useSelector((state) => state.tag);
   useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
     if (localStorage.getItem('role') === 'participant') {
       history.push('/join');
     }

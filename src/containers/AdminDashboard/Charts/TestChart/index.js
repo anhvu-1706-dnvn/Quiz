@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Card } from 'antd'
+import { Card } from 'antd';
 import { connect } from 'react-redux';
 import Chart from 'react-apexcharts';
+import theme from '../../../../configs/theme';
 import Wrapper from './styles';
 import * as StatisticAction from '../../../../redux/statistic/actions';
 
@@ -17,6 +18,7 @@ class TestChart extends Component {
         id: 'test-bar',
         height: 300,
       },
+      colors: ['#2772FB'],
       xaxis: {
         categories: ['Programming', 'Computer', 'Other', 'Geography'],
       },
@@ -60,16 +62,17 @@ class TestChart extends Component {
       <Wrapper>
         <Card>
           <Chart
-            options={{...this.options,
+            options={{
+              ...this.options,
               xaxis: {
-                type: "string",
+                type: 'string',
                 categories,
-              }}}
+              },
+            }}
             series={series}
-            type="bar" />
-
+            type="bar"
+          />
         </Card>
-        
       </Wrapper>
     );
   }

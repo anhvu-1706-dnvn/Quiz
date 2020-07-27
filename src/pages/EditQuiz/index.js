@@ -8,7 +8,14 @@ import Wrapper from './styles';
 
 export default function EditQuiz() {
   const testState = useSelector((state) => state.test);
+  const role = localStorage.getItem('role');
   useEffect(() => {
+    if (role === 'admin') {
+      history.push('/admin');
+    }
+    if (role === 'participant') {
+      history.push('/join');
+    }
     if (testState.currentTest === null) {
       history.push('/');
     }

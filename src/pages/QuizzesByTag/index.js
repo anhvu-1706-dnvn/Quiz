@@ -15,6 +15,12 @@ export default function QuizzesByTag(props) {
   const dispatch = useDispatch();
   const tagState = useSelector((state) => state.tag.currentTag);
   useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
+    if (localStorage.getItem('role') === 'participant') {
+      history.push('/join');
+    }
     dispatch(getOneTagAction(props.location.state));
   }, [dispatch]);
 

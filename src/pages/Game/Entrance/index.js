@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Layout, Button } from 'antd';
 import { GridLoader } from 'react-spinners';
@@ -16,6 +16,12 @@ export default function EntrancePage() {
   const handleClickExitBtn = () => {
     history.goBack();
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
+  });
 
   return roomState.loadingSetCurrentRoom ? (
     <EntranceGamePageWrapper>

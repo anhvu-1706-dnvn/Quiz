@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../../configs/theme';
 
 export default styled.div`
   .ant-table-tbody > tr > td {
@@ -16,10 +17,14 @@ export default styled.div`
     }
   }
   .ant-table-thead > tr > th {
-    background: #7ed6df;
-    color: #000;
+    background: ${theme.palette.boldPrimary};
+    color: #fff;
     font-weight: bold;
     border-radius: 0 !important;
+
+    &:hover {
+      background: ${theme.palette.boldestPrimary} !important;
+    }
   }
   .ant-card-body {
     padding: 0 !important;

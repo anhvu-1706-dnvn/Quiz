@@ -1,4 +1,5 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
+import moment from 'moment';
 import {
   TestTypes,
   getListTestSuccessAction,
@@ -12,6 +13,7 @@ import {
   deleteOneTestSuccessAction,
   deleteOneTestFailureAction,
 } from './actions';
+
 // import {data} from './tempData'
 import {
   putApi,
@@ -46,7 +48,7 @@ function* getListTest({ limit, offset, filter, orderBy, fields }) {
         filter,
         orderBy,
         fields,
-      },
+      }
     );
     const data = results.map((e) => ({
       name: e.name,
@@ -56,6 +58,7 @@ function* getListTest({ limit, offset, filter, orderBy, fields }) {
       description: e.description,
       isPublic: !e.isDraft,
       totalRoom: e.rooms?.length,
+      createdAt: moment(e.createdAt).format('LL'),
     }));
 
     yield put(getListTestSuccessAction(data, total, limit, offset));
@@ -76,7 +79,7 @@ function* createOneTest({ payload }) {
       },
       postApi,
       'tests',
-      payload,
+      payload
     );
     const tagResponse = yield call(
       apiWrapper,
@@ -119,7 +122,7 @@ function* updateOneTest({ id, payload }) {
       putApi,
       'tests',
       id,
-      payload,
+      payload
     );
     const response = yield call(
       apiWrapper,
@@ -131,7 +134,7 @@ function* updateOneTest({ id, payload }) {
       },
       getDataByIdApi,
       'tests',
-      id,
+      id
     );
     data.tags = response.tags;
     yield put(updateOneTestSuccessAction(data));
@@ -151,7 +154,7 @@ function* getOne({ id }) {
       },
       getDataByIdApi,
       'tests',
-      id,
+      id
     );
 
     const data = {
@@ -182,7 +185,7 @@ function* deleteOne({ id }) {
       },
       delApi,
       'tests',
-      id,
+      id
     );
 
     yield put(deleteOneTestSuccessAction(id));

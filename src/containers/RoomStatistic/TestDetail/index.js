@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
+import { PulseLoader } from 'react-spinners';
 import { TagOutlined } from '@ant-design/icons';
+import theme from '../../../configs/theme';
 import Wrapper from './styles';
 import QuestionDetail from './QuestionDetail';
 
@@ -12,10 +14,20 @@ class TestDetail extends Component {
   };
 
   render() {
-    const { roomDetail } = this.props;
+    const { roomDetail, loading } = this.props;
     const questions = roomDetail?.questions || [];
     const currentTest = roomDetail?.test;
-    return (
+    return loading ? (
+      <Wrapper>
+        <div className="loading-container">
+          <PulseLoader
+            loading={loading}
+            size={30}
+            color={theme.palette.primary}
+          />
+        </div>
+      </Wrapper>
+    ) : (
       <Wrapper>
         <div className="test-info">
           <div className="name-image-wrapper">
@@ -46,6 +58,9 @@ class TestDetail extends Component {
             </div>
           </div>
         </div>
+        <div className="total-questions">
+          {`Total: ${questions?.length} questions`}
+        </div>
         <div className="question-area">
           {questions &&
             questions.map((e, index) => (
@@ -68,7 +83,7 @@ class TestDetail extends Component {
 
 const mapStateToProps = (state) => {
   const { statistic } = state;
-  const { roomDetail } = statistic;
+  const { roomDetail, loading } = statistic;
   return {
     roomDetail,
   };

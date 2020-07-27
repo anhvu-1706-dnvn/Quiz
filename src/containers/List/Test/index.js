@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { Table, Card } from 'antd'
-import { connect } from "react-redux";
-import Wrapper from './styles'
-import * as TestAction from '../../../redux/test/actions'
+import React, { Component } from 'react';
+import { Table, Card } from 'antd';
+import { connect } from 'react-redux';
+import Wrapper from './styles';
+import * as TestAction from '../../../redux/test/actions';
 
 class TestTable extends Component {
   constructor(props) {
-    super(props)
-    this.props.retrieveTests()
+    super(props);
+    this.props.retrieveTests();
     this.columns = [
       {
         title: 'ID',
@@ -21,10 +21,10 @@ class TestTable extends Component {
         dataIndex: 'image',
         key: 'image',
         render: (text) => (
-          <div className="test-img"> 
+          <div className="test-img">
             <img src={text} alt="" />
           </div>
-),
+        ),
       },
       {
         title: 'Name',
@@ -37,10 +37,17 @@ class TestTable extends Component {
         key: 'description',
       },
       {
-        title: 'Total played',
+        title: 'Total Played',
         dataIndex: 'totalRoom',
         key: 'totalRoom',
         sorter: (a, b) => a.totalRoom - b.totalRoom,
+        sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'Created At',
+        dataIndex: 'createdAt',
+        key: 'createdAt',
+        sorter: (a, b) => a.createdAt - b.createdAt,
         sortDirections: ['descend', 'ascend'],
       },
     ];
@@ -51,16 +58,20 @@ class TestTable extends Component {
     return (
       <Wrapper>
         <Card>
-          <Table columns={this.columns} dataSource={tests} pagination={{defaultPageSize: 10}}  />
+          <Table
+            columns={this.columns}
+            dataSource={tests}
+            pagination={{ defaultPageSize: 10 }}
+          />
         </Card>
       </Wrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   const { test } = state;
-  const {tests} = test
+  const { tests } = test;
   return {
     tests,
   };
@@ -68,7 +79,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   retrieveTests: () => {
-    dispatch(TestAction.getListTestAction({limit: 500, offset:0, orderBy: "id"}));
+    dispatch(
+      TestAction.getListTestAction({ limit: 500, offset: 0, orderBy: 'id' })
+    );
   },
 });
 

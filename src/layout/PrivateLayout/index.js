@@ -45,7 +45,7 @@ class PrivateLayout extends Component {
   render() {
     const { children, logout, isAuthenticated, fullName } = this.props;
     const path = window.location.pathname;
-    const role = localStorage.getItem('role')
+    const role = localStorage.getItem('role');
     if (!isAuthenticated) return <Redirect to="/login" />;
     return (
       <PrivateLayoutWrapper>
@@ -85,7 +85,9 @@ class PrivateLayout extends Component {
               </div>
             </div>
             <div className="sidebar-btn-create-wrapper">
-              {role === 'admin'? '' : !this.state.collapsed ? (
+              {role === 'admin' ? (
+                ''
+              ) : !this.state.collapsed ? (
                 <Button
                   className="create-quiz-button"
                   onClick={() => history.push('/create-quizzes')}
@@ -148,7 +150,11 @@ class PrivateLayout extends Component {
                     trigger={['click']}
                   >
                     <div>
-                      <Avatar size="large" src={avatar} />
+                      <Avatar
+                        size="large"
+                        src={avatar}
+                        style={{ marginBottom: '6px' }}
+                      />
                       {'   '}
                       <span>
                         Hi,
@@ -160,37 +166,40 @@ class PrivateLayout extends Component {
               </Header>
             ) : (
               <Header className="header">
-                
                 <div className="leftHeader">
-                  {role === 'admin'? '' : (
+                  {role === 'admin' ? (
+                    ''
+                  ) : (
                     <div>
                       <Icon
                         className="trigger"
-                        type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                        type={
+                          this.state.collapsed ? 'menu-unfold' : 'menu-fold'
+                        }
                         onClick={this.toggle}
                       />
                       <Button
                         className="create-quiz-button"
                         onClick={() => history.push('/create-quizzes')}
-                        >
+                      >
                         <PlusCircleFilled />
                         <span>Create a new quizz</span>
                       </Button>
                     </div>
-           
-                    )}
-
+                  )}
                 </div>
-                    
-                
+
                 <div className="rightHeader">
-                  {role === 'admin'? '' : (
+                  {role === 'admin' ? (
+                    ''
+                  ) : (
                     <Button
                       className="btn-join"
-                      onClick={() => history.push('/join')}>
+                      onClick={() => history.push('/join')}
+                    >
                       Join a game
                     </Button>
-                )}
+                  )}
                   <Dropdown
                     overlay={() => (
                       <Menu style={{ minWidth: '120px' }}>
@@ -208,7 +217,11 @@ class PrivateLayout extends Component {
                     trigger={['click']}
                   >
                     <div>
-                      <Avatar size="large" src={avatar} />
+                      <Avatar
+                        size="large"
+                        src={avatar}
+                        style={{ marginBottom: '6px' }}
+                      />
                       {'   '}
                       <span>
                         Hi,

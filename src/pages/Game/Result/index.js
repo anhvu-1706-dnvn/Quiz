@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
 import { Layout, Button } from 'antd';
 import { history } from '../../../redux/store';
 import { socket } from '../../../plugins/socket';
@@ -12,6 +11,9 @@ const { Header, Content } = Layout;
 export default function ResultPage() {
   const roomState = useSelector((state) => state.room);
   useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
     socket.on('userLeaveRoom', () => {
       socket.emit('leaveRoom', roomState.currentRoom.id);
     });

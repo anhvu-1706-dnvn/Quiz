@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Input, Button, Icon, Menu, Dropdown } from 'antd';
 import { useDispatch } from 'react-redux';
 import JoinGameContainer from '../../../containers/Game/Join';
@@ -16,6 +16,11 @@ export default function JoinGame() {
     dispatch(logoutAction());
     history.push('/login');
   };
+  useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
+  });
 
   return (
     <JoinGamePageWrapper>

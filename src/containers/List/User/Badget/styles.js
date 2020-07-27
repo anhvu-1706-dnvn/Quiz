@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 
 export default styled.div`
-
   .ant-card-body {
     padding: 24px;
   }
-
-  
 
   .badget {
     margin-bottom: 20px;
@@ -20,15 +17,15 @@ export default styled.div`
     transition: scale 0.1s ease-out, box-shadow 0.1s ease-out;
     margin-right: 20px;
     flex-shrink: 0;
-  
+
     .card-header {
       position: relative;
-      
+
       // .quizz-img {
       //   height: 100px;
       //   width: 200px;
       // }
-  
+
       .card-stat-row {
         left: 0;
         right: 0;
@@ -48,7 +45,7 @@ export default styled.div`
         }
       }
     }
-  
+
     .content-wrapper {
       box-sizing: border-box;
       padding: 14px 12px 12px;
@@ -68,13 +65,15 @@ export default styled.div`
   }
 
   .badget-0 {
-    background: #9b59b6;
+    background-color: #a4508b;
+    background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
   }
   .badget-1 {
-    background: #3498db;
+    background-color: #0abcf9;
+    background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
   }
   .badget-2 {
-    background: #2ecc71;
+    background-color: #63d471;
+    background-image: linear-gradient(315deg, #63d471 0%, #518364 74%);
   }
-
-`
+`;

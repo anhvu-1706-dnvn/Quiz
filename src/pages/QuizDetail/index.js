@@ -16,11 +16,14 @@ export default function QuizDetail() {
   const currentUserId = Number(localStorage.getItem('id'));
   const [visible, setVisible] = useState(false);
 
-  // useEffect(() => {
-  //   if (testState.currentTest === null) {
-  //     history.goBack();
-  //   }
-  // });
+  useEffect(() => {
+    if (localStorage.getItem('role') === 'admin') {
+      history.push('/admin');
+    }
+    if (localStorage.getItem('role') === 'participant') {
+      history.push('/join');
+    }
+  });
 
   const handleClickBtnEdit = () => {
     history.push('/quiz/edit');
