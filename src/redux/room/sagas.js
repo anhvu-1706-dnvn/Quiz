@@ -77,7 +77,7 @@ function* checkRoomSaga({ payload }) {
       apiWrapper,
       {
         isShowLoading: true,
-        isShowSucceedNoti: true,
+        isShowSucceedNoti: false,
         successDescription: 'Created Successfully',
         errorDescription: 'Error',
       },

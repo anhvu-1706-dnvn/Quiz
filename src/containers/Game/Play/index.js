@@ -18,7 +18,6 @@ export default function PlayGameContainer(props) {
                 <AnswerButton
                   content={ReactHtmlParser(e.content)}
                   index={index + 1}
-                  onClick={() => props.handleChooseAnswer(index)}
                   key={e.id}
                   isCorrect
                 />
@@ -26,7 +25,6 @@ export default function PlayGameContainer(props) {
                 <AnswerButton
                   content={ReactHtmlParser(e.content)}
                   index={index + 1}
-                  onClick={() => props.handleChooseAnswer(index)}
                   key={e.id}
                   isChosenInCorrect
                 />
@@ -34,7 +32,6 @@ export default function PlayGameContainer(props) {
                 <AnswerButton
                   content={ReactHtmlParser(e.content)}
                   index={index + 1}
-                  onClick={() => props.handleChooseAnswer(index)}
                   key={e.id}
                   isInCorrect
                 />
